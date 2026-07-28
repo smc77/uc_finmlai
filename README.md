@@ -1,11 +1,14 @@
 # Financial Machine Learning and AI — Course Materials
 
-Student repository for **Financial Machine Learning and AI** (FIN 70xx), Carl H.
+Student repository for **Financial Machine Learning and AI** (FIN 7057), Carl H.
 Lindner College of Business, University of Cincinnati.
 
 Everything you need to run the course code lives here: the weekly lecture
 notebooks and the homework assignments. **The lectures are self-contained** —
 this repository is simply where you run the code they walk through.
+
+**Start here:** run `notebooks/week01_setup.ipynb` (the Week 0 setup check), and read
+`syllabus.pdf` for the schedule, grading, and policies.
 
 ## Getting started
 
@@ -39,10 +42,12 @@ For reference, the badge link format is
 
 ```
 uc_finmlai/
-  notebooks/        # weekly lecture notebooks (released each week)
+  syllabus.pdf           # course schedule, grading, policies
+  notebooks/             # weekly lecture notebooks (released each week)
+    week01_setup.ipynb   # start here: environment + data check
     weekNN_*.ipynb
-  homework/         # homework assignments (released on the syllabus schedule)
-    hwN/
+  homework/              # homework assignments (released on the syllabus schedule)
+    hw1/                 # starter notebook + README
   README.md
 ```
 
