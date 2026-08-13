@@ -57,9 +57,12 @@ uc_finmlai/
       reading.md
   homework/              # homework assignments (released on the syllabus schedule)
     hw1/                 # starter notebook + README
-  materials/             # large bundles (full course-materials ZIP)
   README.md
 ```
+
+The full **course-materials bundle** — textbook PDF, syllabus, and every lecture
+deck in one ZIP — is too large for the repository tree, so it is attached to
+[Releases](https://github.com/smc77/uc_finmlai/releases) rather than committed here.
 
 ## The textbook is optional
 
