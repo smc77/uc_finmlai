@@ -1,6 +1,6 @@
 # HW1 — Financial Data Audit & Leakage-Free Feature Engineering
 
-**FIN 70xx · Due after Week 3 · 100 points**
+**FIN 7057 · Due after Week 3 · 100 points**
 
 This first assignment establishes the habits the whole course depends on: *understand your data
 before you model it, and never let the future leak into the past.* It is deliberately light on
@@ -55,7 +55,7 @@ Run and **interpret** (a sentence each, not just plots):
 
 ### Part D — Baseline & reflection (20 pts)
 1. Compute a naive baseline on the test period (majority class, or "predict up"). (5)
-2. Write 250–400 words: Which Week 2 stylized facts did your data exhibit? Where could leakage
+2. Write 250–400 words: Which Week 1 stylized facts did your data exhibit? Where could leakage
    have crept in, and how did you prevent it? What would make a model on this data fail in reality?
    (15)
 
