@@ -10,7 +10,7 @@ notebook are expected. Claude Code or Codex is optional.
   visibility to **Private**. You commit and push your work there; add the course
   repository as an `upstream` remote to pull each week's material. At the end of
   the course you can flip it to public as your portfolio.
-- Open `notebooks/week01_setup.ipynb`.
+- Open `lectures/week00/setup.ipynb`.
 - Decide whether Colab or local Python will be your first notebook route.
 
 ## Readiness evidence
