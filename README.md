@@ -10,6 +10,10 @@ this repository is simply where you run the code they walk through.
 **Start here:** run `notebooks/week01_setup.ipynb` (the Week 0 setup check), and read
 `syllabus.pdf` for the schedule, grading, and policies.
 
+**What the course covers:** [`docs/COURSE_MAP.md`](docs/COURSE_MAP.md) — one row
+per week, with both lecture parts, what that week leaves you able to do, and
+what is due.
+
 ## Getting started
 
 1. **Clone the repository** (once):
@@ -43,6 +47,8 @@ For reference, the badge link format is
 ```
 uc_finmlai/
   syllabus.pdf           # course schedule, grading, policies
+  docs/
+    COURSE_MAP.md        # what each week covers, week by week
   notebooks/             # weekly lecture notebooks (released each week)
     week01_setup.ipynb   # start here: environment + data check
     weekNN_*.ipynb
