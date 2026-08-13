@@ -7,10 +7,11 @@ Everything you need to run the course code lives here: the weekly lecture
 notebooks and the homework assignments. **The lectures are self-contained** —
 this repository is simply where you run the code they walk through.
 
-**Start here:** run `notebooks/week01_setup.ipynb` (the Week 0 setup check), and read
-`syllabus.pdf` for the schedule, grading, and policies.
+**Start here:** run [`lectures/week00/setup.ipynb`](lectures/week00/setup.ipynb)
+(the Week 0 setup check), and read `syllabus.pdf` for the schedule, grading, and
+policies.
 
-**What the course covers:** [`docs/COURSE_MAP.md`](docs/COURSE_MAP.md) — one row
+**What the course covers:** [`docs/course_map.md`](docs/course_map.md) — one row
 per week, with both lecture parts, what that week leaves you able to do, and
 what is due.
 
@@ -48,12 +49,15 @@ For reference, the badge link format is
 uc_finmlai/
   syllabus.pdf           # course schedule, grading, policies
   docs/
-    COURSE_MAP.md        # what each week covers, week by week
-  notebooks/             # weekly lecture notebooks (released each week)
-    week01_setup.ipynb   # start here: environment + data check
-    weekNN_*.ipynb
+    course_map.md        # what each week covers, week by week
+  lectures/              # one folder per week, released as the term progresses
+    week00/              # slides, the week's notebook, optional reading
+      slides_a.pdf
+      setup.ipynb        # start here: environment + data check
+      reading.md
   homework/              # homework assignments (released on the syllabus schedule)
     hw1/                 # starter notebook + README
+  materials/             # large bundles (full course-materials ZIP)
   README.md
 ```
 
