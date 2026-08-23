@@ -9,8 +9,8 @@ and their slides are delivered through Canvas; this repository holds the files
 you read or run alongside them.
 
 **Start here:** run [`lectures/week00/setup.ipynb`](lectures/week00/setup.ipynb)
-(the Week 0 setup check), and read `syllabus.pdf` for the schedule, grading, and
-policies.
+(the Week 0 setup check), and read [`docs/syllabus.pdf`](docs/syllabus.pdf) for
+the schedule, grading, and policies.
 
 **What the course covers:** [`docs/course_map.md`](docs/course_map.md) — one row
 per week, with both lecture parts, what that week leaves you able to do, and
@@ -45,8 +45,8 @@ For reference, the badge link format is
 
 ```
 uc_finmlai/
-  syllabus.pdf           # course schedule, grading, policies
   docs/
+    syllabus.pdf         # course schedule, grading, policies
     course_map.md        # what each week covers, week by week
   lectures/              # one folder per week, released as the term progresses
     week00/

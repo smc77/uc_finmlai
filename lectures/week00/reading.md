@@ -3,6 +3,11 @@
 Week 0 is one ungraded 60-minute orientation. Repository access and a working
 notebook are expected. Claude Code or Codex is optional.
 
+## Accompanying textbook chapters
+
+- None. Week 0 is a practical setup and orientation session. The textbook
+  begins with the financial-machine-learning ideas introduced in Week 1.
+
 ## Before the lecture
 
 - Sign in to GitHub and open <https://github.com/smc77/uc_finmlai>.

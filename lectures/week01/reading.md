@@ -5,6 +5,22 @@ useful, and what should we believe after seeing an attractive financial result?
 The lecture and notebook are self-contained. Use the papers below when you want
 the original argument, evidence, or a deeper treatment.
 
+## Accompanying textbook chapters
+
+**Lecture 1A — algorithms, financial questions, and research method**
+
+- Chapter 1, *The Financial Machine Learning Mindset*
+- Chapter 2, *The Research Workflow & Tools*
+
+**Lecture 1B — returns, stationarity, and market memory**
+
+- Chapter 3, *Returns, Prices, and Stationarity*
+- Chapter 4, *Stylized Facts and Why You Cannot Shuffle*
+
+The textbook is optional. These chapters provide fuller explanations,
+derivations, and additional examples; the lectures and notebook remain
+self-contained.
+
 ## Best short route
 
 If you read two papers, choose these:
