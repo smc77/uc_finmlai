@@ -3,9 +3,10 @@
 Student repository for **Financial Machine Learning and AI** (FIN 7057), Carl H.
 Lindner College of Business, University of Cincinnati.
 
-Everything you need to run the course code lives here: the weekly lecture
-notebooks and the homework assignments. **The lectures are self-contained** —
-this repository is simply where you run the code they walk through.
+Everything you need to run the course code lives here: each week's reading
+guide, lecture notebook, and released homework assignment. Recorded lectures
+and their slides are delivered through Canvas; this repository holds the files
+you read or run alongside them.
 
 **Start here:** run [`lectures/week00/setup.ipynb`](lectures/week00/setup.ipynb)
 (the Week 0 setup check), and read `syllabus.pdf` for the schedule, grading, and
@@ -33,12 +34,9 @@ what is due.
 
 ## Running notebooks in Google Colab
 
-Every example notebook carries an **"Open in Colab"** badge at the top. Because
-this repository is private, authorize Colab to read your GitHub the first time:
-
-- In Colab, choose **File → Open notebook → GitHub**, tick
-  **"Include private repositories,"** and authorize when prompted.
-- After that, the Colab badge on each notebook opens it directly.
+Every example notebook carries an **"Open in Colab"** badge at the top. Click
+the badge to open the public notebook directly; no private-repository
+authorization is required.
 
 For reference, the badge link format is
 `https://colab.research.google.com/github/smc77/uc_finmlai/blob/main/<path-to-notebook>`.
@@ -51,22 +49,20 @@ uc_finmlai/
   docs/
     course_map.md        # what each week covers, week by week
   lectures/              # one folder per week, released as the term progresses
-    week00/              # slides, the week's notebook, optional reading
-      slides_a.pdf
+    week00/
       setup.ipynb        # start here: environment + data check
       reading.md
+    week01/
+      week1_demos.ipynb  # notebook used during the lecture breaks
+      reading.md         # this week's reading guide
   homework/              # homework assignments (released on the syllabus schedule)
     hw1/                 # starter notebook + README
   README.md
 ```
 
-The full **course-materials bundle** — textbook PDF, syllabus, and every lecture
-deck in one ZIP — is too large for the repository tree, so it is attached to
-[Releases](https://github.com/smc77/uc_finmlai/releases) rather than committed here.
-
 ## The textbook is optional
 
-The lectures teach everything required for the homework and quizzes. The textbook,
+The recorded lectures teach everything required for the homework and quizzes. The textbook,
 *Financial Machine Learning and AI: Simulation, Signals, and Evaluation*, is
 **optional** further reading for going deeper — it is not required, and no
 assignment depends on it.

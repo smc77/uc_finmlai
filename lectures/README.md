@@ -2,11 +2,17 @@
 
 One folder per week, released as the term progresses. Run `git pull` each week.
 
-Each week's folder holds what you need for that week:
+Each week's folder holds what you use alongside the Canvas lecture:
 
-- `slides_a.pdf` / `slides_b.pdf` — the two recorded lecture parts (Week 0 has one)
-- the week's Jupyter notebook — the work you do during the lecture breaks
-- `reading.md` — optional background, never required for homework or quizzes
+- the week's Jupyter notebook — the demonstrations and mini-projects used during
+  the lecture breaks;
+- `reading.md` — a short guide explaining which readings align with each lecture
+  part and which are optional. Reading guides link to papers on the authors',
+  publishers', or working-paper repositories' sites rather than redistributing
+  copies here.
 
-Notebooks carry an **Open in Colab** badge; see the repository README for the
-one-time Colab authorization this private repository needs.
+Lecture recordings and slide PDFs are posted in Canvas rather than duplicated
+here.
+
+Notebooks carry an **Open in Colab** badge and can be opened directly from this
+public repository.

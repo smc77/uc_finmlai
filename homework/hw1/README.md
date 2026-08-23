@@ -41,11 +41,11 @@ Run and **interpret** (a sentence each, not just plots):
 ### Part C — Leakage-free feature engineering (35 pts) — *the heart of the assignment*
 1. Build **at least 6 features** from these families, each using only past data:
    lagged returns; rolling momentum (≥2 windows); rolling volatility; a normalized/z-scored feature;
-   and one of your choice (e.g., RSI, range, calendar dummy). Include a compact feature-contract
+   and one of your choice (e.g., RSI, range, calendar dummy). Include a compact feature-definition
    table for every column: source, availability, transformation, memory, unit, and hypothesis. (15)
 2. Define a prediction **target** (e.g., next-day return sign, or next-day return) and align it
    correctly so no feature can see the target's period. Leave the final unavailable outcome
-   missing; do not convert it to a class label. Include a target-contract table stating decision
+   missing; do not convert it to a class label. Include a target-definition table stating decision
    time, execution assumption, horizon, return convention, and missing-label policy. (8)
 3. **Prove there is no look-ahead:** run the provided `assert_no_lookahead` check (it *scrambles the
    future* and verifies your past feature values don't change) and report the max change (should be
@@ -71,7 +71,7 @@ The tasks above are the **required core** — that is what is graded, and the se
 - Run the **Self-check** cell at the end of the notebook; every item must print **PASS** before
   you submit. It verifies selected mechanical invariants, not every possible source of leakage.
 - Your completed notebook (start from `hw1_starter.ipynb`), run top-to-bottom.
-- Your feature- and target-contract tables. These remain part of the audit trail when later
+- Your feature- and target-definition tables. These remain part of the audit trail when later
   assignments add models or change the decision.
 - The notebook must satisfy the **reproducibility checklist**: fixed seed, explicit dates,
   documented data source, package list, runs with *Restart & Run All*.
