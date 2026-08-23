@@ -9,7 +9,7 @@ before you model it, and never let the future leak into the past.* It is deliber
 ## Learning goals
 
 - Acquire a financial dataset and document **what it is and when it would have been available**.
-- Compute returns correctly and run the Week 2 diagnostics (stationarity, autocorrelation,
+- Compute returns correctly and run the Week 1 diagnostics (stationarity, autocorrelation,
   volatility clustering, heavy tails).
 - Engineer a set of predictive features that use **only past information** — and *prove* they do.
 - Define a target and build a **time-ordered** (never shuffled) train/test split.

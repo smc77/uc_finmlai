@@ -41,25 +41,6 @@ authorization is required.
 For reference, the badge link format is
 `https://colab.research.google.com/github/smc77/uc_finmlai/blob/main/<path-to-notebook>`.
 
-## Layout
-
-```
-uc_finmlai/
-  docs/
-    syllabus.pdf         # course schedule, grading, policies
-    course_map.md        # what each week covers, week by week
-  lectures/              # one folder per week, released as the term progresses
-    week00/
-      setup.ipynb        # start here: environment + data check
-      reading.md
-    week01/
-      week1_demos.ipynb  # notebook used during the lecture breaks
-      reading.md         # this week's reading guide
-  homework/              # homework assignments (released on the syllabus schedule)
-    hw1/                 # starter notebook + README
-  README.md
-```
-
 ## The textbook is optional
 
 The recorded lectures teach everything required for the homework and quizzes. The textbook,
