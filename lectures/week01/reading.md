@@ -15,7 +15,8 @@ If you read two papers, choose these:
    pricing example that opens the course: examples can teach a flexible model a
    nonlinear pricing function.
 2. **Lecture B:** Cont (2001), [“Empirical Properties of Asset Returns: Stylized
-   Facts and Statistical Issues”](https://rama.cont.perso.math.cnrs.fr/pdf/empirical.pdf).
+   Facts and Statistical Issues”](http://rama.cont.perso.math.cnrs.fr/pdf/empirical.pdf),
+   *Quantitative Finance* 1(2), 223–236 ([DOI](https://doi.org/10.1080/713665670)).
    Focus on
    the empirical regularities: weak linear dependence in raw returns, heavy
    tails, and persistence in return magnitude.
