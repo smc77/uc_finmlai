@@ -6,7 +6,9 @@ used throughout the course.
 
 Read [`STARTUP_GUIDE.md`](STARTUP_GUIDE.md) for a plain-English walkthrough of
 the complete research setup, including GitHub, Colab, local Python, research
-records, Codex, Claude Code, and safe use of coding agents.
+records, Codex, Claude Code, and safe use of coding agents. A typeset
+[`STARTUP_GUIDE.pdf`](STARTUP_GUIDE.pdf) is available for reading or printing;
+it is generated directly from the same Markdown source with Quarto.
 
 The [`examples/`](examples/) folder contains matching `AGENTS.md` and
 `CLAUDE.md` templates for a quantitative-research repository. Copy them to the

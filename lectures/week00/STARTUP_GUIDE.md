@@ -1,4 +1,81 @@
-# A Startup Guide for Quantitative Financial Research
+---
+title: "A Startup Guide for Quantitative Financial Research"
+subtitle: "A practical research environment for Financial Machine Learning and AI"
+author: Shane Conway
+abstract: |
+  Quantitative financial research requires more than a model and a dataset. A
+  credible result also needs a reproducible computing environment, a record of
+  data availability and research choices, a meaningful benchmark, and a clear
+  separation between development and assessment. This guide presents a compact
+  workflow for beginning that work with GitHub, Colab or local Python, Jupyter,
+  and optional coding agents. Its purpose is not to prescribe elaborate
+  infrastructure, but to establish a durable evidence trail: what question was
+  asked, what could have been known at the time, what procedure produced the
+  result, and whether another researcher can reconstruct it.
+keywords:
+  - quantitative finance
+  - machine learning
+  - reproducible research
+  - research workflow
+lang: en-US
+shift-heading-level-by: -1
+format:
+  pdf:
+    documentclass: scrartcl
+    classoption:
+      - abstract=on
+    pdf-engine: xelatex
+    papersize: letter
+    fontsize: 11pt
+    mainfont: "Palatino"
+    sansfont: "Avenir Next"
+    monofont: "Menlo"
+    geometry:
+      - top=1in
+      - bottom=1in
+      - left=1.05in
+      - right=1.05in
+      - headheight=16pt
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    linkcolor: CourseNavy
+    urlcolor: CourseBlue
+    citecolor: CourseNavy
+    code-block-bg: "#F4F6F8"
+    code-block-border-left: "#315A7D"
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    include-in-header:
+      text: |
+        \usepackage{microtype}
+        \usepackage{booktabs}
+        \usepackage{longtable}
+        \usepackage{array}
+        \usepackage{enumitem}
+        \usepackage[automark]{scrlayer-scrpage}
+        \definecolor{CourseNavy}{HTML}{173B57}
+        \definecolor{CourseBlue}{HTML}{236A93}
+        \clearpairofpagestyles
+        \ihead{\small\textsc{Financial Machine Learning and AI}}
+        \ohead{\small\textsc{Startup Guide}}
+        \cfoot{\pagemark}
+        \setkomafont{pageheadfoot}{\normalfont}
+        \setkomafont{section}{\color{CourseNavy}\normalfont\Large\bfseries}
+        \setkomafont{subsection}{\color{CourseNavy}\normalfont\large\bfseries}
+        \setkomafont{disposition}{\normalfont\bfseries}
+        \setlength{\parindent}{1.25em}
+        \setlength{\parskip}{0.25em}
+        \setlist{itemsep=0.2em, topsep=0.4em}
+        \AtBeginEnvironment{longtable}{\small}
+    include-before-body:
+      text: |
+        \thispagestyle{plain}
+    keep-tex: false
+---
+
+<!-- Render from this folder with: quarto render STARTUP_GUIDE.md --to pdf -->
 
 Quantitative research can look complicated because the finished product may
 contain market data, statistical models, machine learning, backtests, and a
@@ -750,7 +827,7 @@ You are ready when you can produce four pieces of evidence:
 That is enough infrastructure. The next step is not another installation. It is
 a financial question worth answering.
 
-## Current official references
+## Current official references {.unnumbered}
 
 Setup instructions change, so prefer these maintained sources over commands in
 an old recording:

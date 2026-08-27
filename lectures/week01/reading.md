@@ -1,68 +1,91 @@
-# Week 1 — Reading Guide
+# Week 1 — Optional Background Reading
 
-Week 1 asks two broad questions: when can flexible models learn something
-useful, and what should we believe after seeing an attractive financial result?
-The lecture and notebook are self-contained. Use the papers below when you want
-the original argument, evidence, or a deeper treatment.
+The lectures and their task notebooks are self-contained. Nothing below is
+required for the homework or quizzes; use it for more depth, derivations, and
+additional worked examples.
 
-## Accompanying textbook chapters
+## Lecture A background — Ch 1 + Ch 2
 
-**Lecture 1A — algorithms, financial questions, and research method**
+**Aligned chapters:**
+- `../../books/ch01/chapter.md` — The Financial Machine Learning Mindset
+- `../../books/ch02/chapter.md` — The Research Workflow & Tools
 
-- Chapter 1, *The Financial Machine Learning Mindset*
-- Chapter 2, *The Research Workflow & Tools*
+**Useful sections:**
+- How machine learning's emphasis on generalization and representation
+  overlaps with statistical inference, uncertainty, and study design
+- What the major model families add, and the problems each can represent
+- The four-backtest case study: judge the development evidence before seeing
+  the later period
+- The insurance example: flexible interactions in a higher-signal setting
+- The research path: *data → features → models → evaluation → decisions → risk*
+- The manifest, versioned environment, and test-set protocol that make a
+  result reproducible
 
-**Lecture 1B — returns, stationarity, and market memory**
+**Optional exercises:**
+- Ch 1 exercises 1, 3, 5
+- Ch 2 exercises 2, 4
 
-- Chapter 3, *Returns, Prices, and Stationarity*
-- Chapter 4, *Stylized Facts and Why You Cannot Shuffle*
+**Rule earned:** Rule 1 — *Be most skeptical when the result looks best.*
 
-The textbook is optional. These chapters provide fuller explanations,
-derivations, and additional examples; the lectures and notebook remain
-self-contained.
+---
 
-## Best short route
+## Lecture B background — Ch 3 + Ch 4 (returns, stationarity, stylized facts)
 
-If you read two papers, choose these:
+**Aligned chapters:**
+- `../../books/ch03/chapter.md` — Returns, Prices, and Stationarity
+- `../../books/ch04/chapter.md` — Stylized Facts of Returns *(the descriptive
+  facts — fat tails, volatility clustering, ACF; GARCH/VaR modeling is taken up
+  with risk in Week 6)*
 
-1. **Lecture A:** Hutchinson, Lo, and Poggio (1994), [“A Nonparametric Approach
-   to Pricing and Hedging Derivative Securities via Learning
-   Networks”](https://www.nber.org/papers/w4718). This is the option-
-   pricing example that opens the course: examples can teach a flexible model a
-   nonlinear pricing function.
-2. **Lecture B:** Cont (2001), [“Empirical Properties of Asset Returns: Stylized
-   Facts and Statistical Issues”](http://rama.cont.perso.math.cnrs.fr/pdf/empirical.pdf),
-   *Quantitative Finance* 1(2), 223–236 ([DOI](https://doi.org/10.1080/713665670)).
-   Focus on
-   the empirical regularities: weak linear dependence in raw returns, heavy
-   tails, and persistence in return magnitude.
+**Useful sections:**
+- Why returns rather than prices (Ch 3 §1)
+- Stationarity, a compact ADF diagnostic, and persistence half-life (Ch 3)
+- Random walk vs. martingale; the forms of EMH (Ch 3 §4–5)
+- ACF memory fingerprints; AR, MA, ARMA/ARIMA, and justified seasonality;
+  univariate versus cross-sectional prediction (Ch 4)
+- Two kinds of predictability; ACF of returns vs. squared returns; heavy tails
+  (Ch 4 — descriptive facts only)
 
-## Additional Week 1 readings
+**Optional exercises:**
+- Ch 3 exercises 1, 2, 4, 5
 
-- Arnott, Harvey, and Markowitz (2019), [“A Backtesting Protocol in the Era of
-  Machine Learning”](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3275654)
-  — why an attractive curve must be accompanied by a credible research and
-  evaluation procedure.
-- McLean and Pontiff, [working-paper version of “Does Academic Research Destroy
-  Stock Return Predictability?”](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2156623)
-  — evidence that publication and trading can change an anomaly's later return.
-- Lo and MacKinlay (1988), [“Stock Market Prices Do Not Follow Random Walks:
-  Evidence from a Simple Specification
-  Test”](https://www.nber.org/papers/w2168) — a canonical example of
-  turning a market-efficiency claim into a testable benchmark.
-- Gu, Kelly, and Xiu (2020), [“Empirical Asset Pricing via Machine
-  Learning”](https://www.nber.org/papers/w25398) — a modern large-scale
-  comparison of machine-learning methods for cross-sectional return prediction.
-- Lo (2004), [“The Adaptive Markets Hypothesis”](https://web.mit.edu/Alo/www/Papers/JPM2004.html)
-  — optional perspective on why market relationships can change as participants
-  and environments adapt.
+**Further reading (stylized facts):**
+- Cont (2001), “Empirical Properties of Asset Returns: Stylized Facts and
+  Statistical Issues.”
 
-## What to retain
+**Rule earned:** Rule 2 — *Model returns, not prices.*
 
-Do not try to memorize every method or result. Ask four questions of each
-reading:
+---
 
-1. What financial object is being predicted or explained?
-2. Why might it contain learnable structure?
-3. What benchmark or later evidence makes the result meaningful?
-4. What does the evidence still not establish?
+## Optional supplementary reading
+
+- McLean & Pontiff (2016), "Does academic research destroy stock return
+  predictability?", J. of Finance — for the anomaly-decay backdrop to
+  Rule 1.
+- Granger & Newbold (1974), "Spurious regressions in econometrics",
+  J. of Econometrics — the canonical demonstration of why
+  non-stationary regression goes wrong.
+- Hutchinson, Lo & Poggio (1994), "A Nonparametric Approach to Pricing and
+  Hedging Derivative Securities via Learning Networks", J. of Finance — the
+  learning-networks study that opens Lecture A. Full text:
+  <https://www.nber.org/papers/w4718>.
+
+```bibtex
+@article{hutchinson1994nonparametric,
+  author  = {Hutchinson, James M. and Lo, Andrew W. and Poggio, Tomaso},
+  title   = {A Nonparametric Approach to Pricing and Hedging Derivative
+             Securities via Learning Networks},
+  journal = {The Journal of Finance},
+  volume  = {49},
+  number  = {3},
+  pages   = {851--889},
+  year    = {1994},
+  month   = jul,
+  note    = {NBER Working Paper 4718, \url{https://doi.org/10.3386/w4718}}
+}
+```
+
+## Suggested route
+
+Start with the lecture slides and mini-projects. Return to the aligned chapter
+only where you want a fuller derivation, another example, or further reading.
