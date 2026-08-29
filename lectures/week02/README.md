@@ -5,6 +5,8 @@ Use these files alongside the Week 2 recordings and slides in Canvas:
 - [`week2_demos.ipynb`](week2_demos.ipynb) — the demonstrations and
   mini-projects for both lecture parts, with links at the top that jump directly
   to every demo;
+- [`week2_summary.md`](week2_summary.md) — a concise review of the core ideas,
+  vocabulary, and Quiz 2 study checks;
 - [`reading.md`](reading.md) — the aligned textbook chapters, optional exercises,
   and supplementary reading route.
 

@@ -4,6 +4,8 @@ Use these files alongside the Week 1 recordings in Canvas:
 
 - [`week1_demos.ipynb`](week1_demos.ipynb) — demonstrations and mini-projects
   for both lecture parts;
+- [`week1_summary.md`](week1_summary.md) — a concise review of the core ideas,
+  vocabulary, and Quiz 1 study checks;
 - [`reading.md`](reading.md) — the reading route and a short explanation of how
   each paper connects to the lecture and links to its legitimate source.
 
