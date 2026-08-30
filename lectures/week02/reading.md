@@ -6,9 +6,10 @@ depends on completing them.
 
 ## Aligned book chapters
 
-- `../../books/ch06/chapter.md` — *Building Features: Families, Normalization,
-  and Target Alignment*
-- `../../books/ch05/chapter.md` — *The Leakage Taxonomy and Point-in-Time Data*
+- Chapter 6 of *Financial Machine Learning and AI* — Building Features:
+  Families, Normalization, and Target Alignment
+- Chapter 5 of *Financial Machine Learning and AI* — The Leakage Taxonomy and
+  Point-in-Time Data
 
 ### Chapter 6 focus
 

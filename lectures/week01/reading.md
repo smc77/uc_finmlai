@@ -7,8 +7,10 @@ additional worked examples.
 ## Lecture A background — Ch 1 + Ch 2
 
 **Aligned chapters:**
-- `../../books/ch01/chapter.md` — The Financial Machine Learning Mindset
-- `../../books/ch02/chapter.md` — The Research Workflow & Tools
+- Chapter 1 of *Financial Machine Learning and AI* — The Financial Machine
+  Learning Mindset
+- Chapter 2 of *Financial Machine Learning and AI* — The Research Workflow &
+  Tools
 
 **Useful sections:**
 - How machine learning's emphasis on generalization and representation
@@ -32,8 +34,10 @@ additional worked examples.
 ## Lecture B background — Ch 3 + Ch 4 (returns, stationarity, stylized facts)
 
 **Aligned chapters:**
-- `../../books/ch03/chapter.md` — Returns, Prices, and Stationarity
-- `../../books/ch04/chapter.md` — Stylized Facts of Returns *(the descriptive
+- Chapter 3 of *Financial Machine Learning and AI* — Returns, Prices, and
+  Stationarity
+- Chapter 4 of *Financial Machine Learning and AI* — Stylized Facts of Returns
+  *(the descriptive
   facts — fat tails, volatility clustering, ACF; GARCH/VaR modeling is taken up
   with risk in Week 6)*
 
