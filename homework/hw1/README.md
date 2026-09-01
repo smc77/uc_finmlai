@@ -9,7 +9,7 @@ before you model it, and never let the future leak into the past.* It is deliber
 ## Learning goals
 
 - Acquire a financial dataset and document **what it is and when it would have been available**.
-- Compute returns correctly and run the Week 1 diagnostics (stationarity, autocorrelation,
+- Compute returns correctly and run the Week 1 diagnostics (unit-root evidence, autocorrelation,
   volatility clustering, heavy tails).
 - Engineer a set of predictive features that use **only past information** — and *prove* they do.
 - Define a target and build a **time-ordered** (never shuffled) train/test split.
@@ -33,12 +33,19 @@ Ken French data library, or any documented source. Do **not** commit large data 
 
 ### Part B — Time-series diagnostics (20 pts)
 Run and **interpret** (a sentence each, not just plots):
-1. ADF stationarity test on prices vs. returns. (5)
+1. An ADF unit-root diagnostic on prices vs. returns. State the null and do not treat rejection
+   as a general certificate of stationarity. (5)
 2. ACF of returns vs. ACF of squared/absolute returns (volatility clustering). (5)
 3. Heavy tails: excess kurtosis, a normality test, and a Q-Q plot. (5)
 4. A rolling-volatility plot showing regimes. (5)
 
 ### Part C — Leakage-free feature engineering (35 pts) — *the heart of the assignment*
+
+**The clock for this assignment.** A feature dated day *t* must be known *before* the day-*t*
+return is observed, so every price-derived feature uses data through *t−1*. That is why the
+solution shifts each rolling statistic by one day. Later in the course we also use the
+convention "decide at the close of *t*, forecast *t+1*"; both are defensible, but mixing them
+inside one dataset is not. State which one you are using and hold to it.
 1. Build **at least 6 features** from these families, each using only past data:
    lagged returns; rolling momentum (≥2 windows); rolling volatility; a normalized/z-scored feature;
    and one of your choice (e.g., RSI, range, calendar dummy). Include a compact feature-definition
@@ -47,25 +54,34 @@ Run and **interpret** (a sentence each, not just plots):
    correctly so no feature can see the target's period. Leave the final unavailable outcome
    missing; do not convert it to a class label. Include a target-definition table stating decision
    time, execution assumption, horizon, return convention, and missing-label policy. (8)
-3. **Prove there is no look-ahead:** run the provided `assert_no_lookahead` check (it *scrambles the
-   future* and verifies your past feature values don't change) and report the max change (should be
-   ~0). Explain in one paragraph *why* your features pass. (7)
+3. **Probe and then test the information boundary:** first predict how the supplied trailing,
+   shifted, centered, and full-sample feature examples will behave. Run the detector and explain
+   why an unshifted trailing feature can pass the detector while still violating this assignment's
+   prior-day clock. Then run `assert_no_lookahead` on your own builder, report the maximum change
+   (approximately zero), and explain why your features pass. The detector *scrambles the future*
+   and verifies that past feature values do not change; it is necessary evidence, not a complete
+   proof that every timing assumption is correct. (7)
 4. Make a **time-ordered, disjoint** train/test split (e.g., 70/30 by date). State the split
    dates and verify `train.index.max() < test.index.min()`. (5)
 
 ### Part D — Baseline & reflection (20 pts)
-1. Compute a naive baseline on the test period (majority class, or "predict up"). (5)
-2. Write 250–400 words: Which Week 1 stylized facts did your data exhibit? Where could leakage
-   have crept in, and how did you prevent it? What would make a model on this data fail in reality?
-   (15)
+1. Compute a **feasible** baseline on the test period: fix the rule using the training data
+   only — the training-period majority class, or a plain "always predict up" — then apply it
+   unchanged to the test rows. A majority class computed from the *test* outcomes is not a
+   forecast anyone could have made at the split, and will not earn the points. (5)
+2. Write 250–400 words in three short labeled paragraphs, aiming for roughly one-third of the
+   response on each topic: **what the data showed** from Week 1, **where leakage could occur and
+   how you prevented it**, and **why a model could still fail in reality**. (15)
 
 ## Required core & optional extensions
 
 The tasks above are the **required core** — that is what is graded, and the self-check verifies it. Do them well before reaching for anything fancier; maximal sophistication is not the implicit norm. If you have time and want to go further, pick an **optional extension** (encouraged, not required for full marks):
 
 - Add a second feature family (calendar/seasonality, or a range/RSI variant) and confirm it passes the look-ahead check.
-- Repeat the Week-2 stylized-facts diagnostics on a second instrument and compare.
-- Swap the 70/30 split for a purged/embargoed split and note what changes.
+- Repeat the Week-1 stylized-facts diagnostics on a second instrument and compare.
+- Move the chronological cutoff—for example, compare 60/40 and 70/30 splits. Before rerunning,
+  predict how the training majority class, test composition, and measured baseline accuracy might
+  change. Explain why neither cutoff is automatically the correct estimate of future performance.
 
 ## Deliverables
 - Run the **Self-check** cell at the end of the notebook; every item must print **PASS** before
@@ -97,3 +113,6 @@ this assignment is about the pipeline, not the alpha.
   ask: "to compute this feature for day *t*, what is the latest day's data I touched?" It must be
   ≤ *t−1* (or *t* only for genuinely point-in-time data).
 - Run `assert_no_lookahead` *early and often*, not just at the end.
+- Remember what the detector proves: changing future prices did not move earlier features. A
+  feature can still violate your declared clock, use a revised vintage, or inherit fitted state
+  from outside the function. Pair the test with the feature and target definitions.
