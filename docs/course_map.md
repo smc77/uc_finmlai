@@ -5,7 +5,7 @@
 |---:|:--|:--|:--|:--|:--|
 | 0<br>— | Setup | Get ready to work — GitHub, coding agents, Colab/Python | — | clone the repo, run a notebook from a clean kernel, review what an agent proposes | — |
 | 1<br>8/24 | Research method | Applied financial ML — algorithms, the questions they open, a research method | Returns, stationarity, and what markets remember | run a baseline and split by time; tell a faint real edge from a strong misleading backtest | — |
-| 2<br>8/31 | Features| From data to features — memories, transforms, timestamps | Leakage, point-in-time data, and why you cannot shuffle | assemble point-in-time rows; purge and embargo splits | Q1 |
+| 2<br>8/31 | Feature Engineering| From data to features — memories, transforms, timestamps | Leakage, point-in-time data, and why you cannot shuffle | assemble point-in-time rows; purge and embargo splits | Q1 |
 | 3<br>9/7 | OLS | OLS and the regression family — selection, shrinkage, robust alternatives | Forecast evaluation and the first long-short | fit, select, shrink, score, and reconcile a forecast into a trading ledger | HW1, Q2 |
 | 4<br>9/14 | Classification | Classification and calibration — score → probability → decision | Forward validation and model selection | calibrate a classifier and set a cost-based threshold; build purged forward splits | Q3 |
 | 5<br>9/21 | Trees | Decision trees and random forests — interactions, overfitting, no extrapolation | Gradient boosting and tuning — early stopping, finance style | fit trees, forests, and boosting; read importance without believing it is mechanism | HW2, Q4 |
