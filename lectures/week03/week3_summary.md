@@ -30,10 +30,12 @@ only be evaluated **ex post**, after the outcome arrives.
    correlated, training fit can improve while future performance becomes less
    stable.
 3. **Selection and shrinkage solve related but different problems.** Selection
-   chooses columns and therefore creates a search. Ridge keeps all coefficients
-   but pulls them toward zero; lasso can set some exactly to zero; elastic net
-   combines the two penalties. Validation chooses complexity. A final untouched
-   test assesses the complete procedure.
+   chooses columns and therefore creates a search. A norm is a rule for measuring
+   the size of the coefficient vector. Ridge penalizes squared $L_2$ size and
+   smoothly pulls coefficients toward zero; lasso penalizes $L_1$ size and can
+   set some coefficients exactly to zero; elastic net combines both penalties.
+   Validation chooses complexity. A final untouched test assesses the complete
+   procedure.
 4. **Sparsity is not discovery.** A lasso coefficient of zero does not prove that
    a feature is useless, and a nonzero coefficient does not prove a stable
    mechanism. Correlated features can substitute for one another, so selected
@@ -104,9 +106,10 @@ spreads, nonlinear market impact, financing, borrow, and capacity limits.
 | **Multicollinearity** | Features carry very similar information, making their individual coefficient allocation unstable. |
 | **Ill-conditioned design** | Small changes in data can create large coefficient changes because some feature directions are weakly supported. |
 | **Regularization** | Constraining coefficients to reduce the damage caused by noisy estimation. |
-| **Ridge** | Squared-coefficient penalty that shrinks all coefficients toward zero. |
-| **Lasso** | Absolute-coefficient penalty that can set some coefficients exactly to zero. |
-| **Elastic net** | A blend of ridge and lasso penalties. |
+| **Norm** | A rule for measuring the size of a vector. For coefficients, $L_1$ adds absolute values and $L_2$ is ordinary Euclidean length. |
+| **Ridge** | Penalizes squared $L_2$ size, $\sum_j\beta_j^2$, and smoothly shrinks coefficients toward zero. |
+| **Lasso** | Penalizes $L_1$ size, $\sum_j|\beta_j|$, and can set some coefficients exactly to zero. |
+| **Elastic net** | A weighted blend of the $L_1$ and squared-$L_2$ penalties. |
 | **Hyperparameter** | A choice such as penalty strength that must be selected outside the final test set. |
 
 ### Loss, noise, and distributional targets
