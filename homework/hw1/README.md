@@ -69,9 +69,10 @@ inside one dataset is not. State which one you are using and hold to it.
    only — the training-period majority class, or a plain "always predict up" — then apply it
    unchanged to the test rows. A majority class computed from the *test* outcomes is not a
    forecast anyone could have made at the split, and will not earn the points. (5)
-2. Write 250–400 words in three short labeled paragraphs, aiming for roughly one-third of the
-   response on each topic: **what the data showed** from Week 1, **where leakage could occur and
-   how you prevented it**, and **why a model could still fail in reality**. (15)
+2. Write three short labeled paragraphs, giving each topic enough attention to be accurate and
+   complete: **what the data showed** from Week 1, **where leakage could occur and how you
+   prevented it**, and **why a model could still fail in reality**. There is no graded word-count
+   requirement. (15)
 
 ## Required core & optional extensions
 
@@ -93,6 +94,24 @@ The tasks above are the **required core** — that is what is graded, and the se
   documented data source, package list, runs with *Restart & Run All*.
 - An **AI-use disclosure** cell following the syllabus policy: state what materially assisted
   you, what you incorporated, and how you verified it. You remain responsible for the analysis.
+
+## Submission
+
+Submit **one file** to the Canvas assignment: your executed notebook, renamed
+`hw1_lastname.ipynb`.
+
+Before you submit:
+
+1. **Restart & Run All**, so the saved outputs match the code that produced them.
+2. Confirm every line of the **Self-check** cell prints **PASS**.
+3. **Save the notebook with its outputs visible.** A notebook submitted with cleared
+   outputs cannot be graded as it stands — the self-check result and the look-ahead
+   detector's maximum change are part of what is being assessed.
+
+Submit the `.ipynb` itself, not a PDF, an HTML export, or a link to a Colab or Drive
+file. A shared link can change after the deadline and may not be readable by the
+grader; the uploaded file is what is graded, and its Canvas timestamp is what meets
+the deadline.
 
 ## Grading rubric (100 pts)
 
