@@ -29,6 +29,11 @@ They are identical on purpose — Codex reads one filename, Claude Code the othe
 per week, with both lecture parts, what that week leaves you able to do, and
 what is due.
 
+**Final project:** [`project/README.md`](project/README.md) contains the full
+brief, milestones, and worked example. In Week 6, begin with
+[`project/WEEK6_CHECKPOINT.md`](project/WEEK6_CHECKPOINT.md) and copy the
+research-record template into your own project repository.
+
 ## Getting started
 
 1. **Clone the repository** (once):
