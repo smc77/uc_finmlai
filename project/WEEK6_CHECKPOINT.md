@@ -66,18 +66,25 @@ For this checkpoint, complete at least:
 Then commit the file. The plan is allowed to change before the final lockbox is
 opened, but material changes must remain visible in the decision log.
 
+The closest prior work may still be unknown at this checkpoint. Record a
+provisional research area or search question in the Identity section rather
+than inventing a contribution. The literature map is developed during Weeks
+7–9 and synthesized for Homework 6.
+
 ## What comes next
 
 - **Weeks 7–9:** investigate data feasibility and refine the information
-  contract while continuing the course exercises.
-- **Weeks 10–11 / Homework 6:** submit the full proposal, runnable baseline,
-  updated research record, and a committed pre-analysis plan.
+  contract while beginning a literature map of the closest research.
+- **Weeks 10–11 / Homework 6:** submit the full proposal, literature synthesis,
+  runnable baseline, updated research record, and a committed pre-analysis plan.
 - **Before the final test:** freeze the selection rule and keep the final
   assessment lockbox closed.
 - **Week 15:** submit the presentation, reproducible analysis, written report,
   and completed research record.
 
 See the [full project brief](README.md) for tracks, required components,
-deliverables, and grading emphasis. The [`example/`](example/) directory shows
-the expected final structure; it is a model of scope and documentation, not a
-topic that must be copied.
+deliverables, and grading emphasis. The
+[report-pathways guide](REPORT_PATHWAYS.md) explains the integrated-notebook and
+separate-paper options. The [`example/`](example/) directory demonstrates both
+paths with one analysis; it is a model of scope and documentation, not a topic
+that must be copied.

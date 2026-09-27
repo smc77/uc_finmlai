@@ -1,0 +1,213 @@
+---
+title: "A Timestamp Audit of Filing-Tone Signals"
+subtitle: "A known-truth worked example of a finance research paper"
+author: "FIN 7057 worked example"
+date: today
+bibliography: references.bib
+format:
+  html:
+    toc: true
+    embed-resources: true
+    code-fold: true
+  docx:
+    toc: true
+---
+
+## Abstract
+
+Financial language models can classify sentiment more accurately than simple
+word lists, but a better text classifier does not necessarily produce a better
+financial decision. This known-truth study constructs 1,200 synthetic filings
+with a 45-day publication lag, a tone-related announcement return, and a much
+weaker post-publication drift. We compare a transparent finance-style lexicon
+with a richer contextual-reader proxy and evaluate both on the final 30 percent
+of the dated sample. Aligning the signal to the fiscal period end produces an
+information coefficient of 0.548 because the outcome improperly includes the
+announcement response. Aligning it to the filing date reduces the corresponding
+coefficient to 0.106. On the honest later sample, the richer reader records an
+information coefficient of 0.140 versus 0.136 for the lexicon, with only a small
+advantage in the net tercile spread. The experiment therefore supports a
+methodological conclusion rather than an investment claim: timestamp discipline
+can matter more than model complexity. Because the filings and returns are
+synthetic and the executed fallback is not FinBERT itself, the study does not
+establish profitability in real SEC filings.
+
+## 1. Introduction
+
+Corporate filings contain language that may help investors, creditors, and
+other decision makers assess firms. Modern language models promise a more
+context-sensitive reading of that language than a dictionary can provide. The
+financial question, however, is not whether a model assigns plausible sentiment
+labels. It is whether the resulting score improves a decision using information
+that was actually available at the decision time.
+
+This paper asks a deliberately narrow question: **does a richer reader of filing
+tone rank post-filing returns better than a simple finance-specific lexicon once
+the filing timestamp and trading costs are respected?** The intended decision is
+to rank newly public filings and form a top-minus-bottom position after
+publication. The comparison is designed as a known-truth teaching experiment,
+not as evidence about the profitability of actual SEC filings.
+
+The contribution is twofold. First, the experiment isolates a common timing
+error by constructing fiscal-period and filing dates separately. Second, it
+separates upstream text-reading quality from downstream return predictability.
+The headline result is that an inadmissible period-end alignment makes the
+signal appear roughly five times stronger, while the richer reader only
+marginally improves on the lexicon under the admissible clock.
+
+## 2. Related literature
+
+Quantitative financial text analysis predates modern language models.
+@tetlock_2007 links measured media pessimism to market outcomes, establishing
+that text-derived signals can be evaluated against financial consequences.
+Domain-specific language also matters. @loughran_mcdonald_2011
+show that ordinary dictionaries can misclassify words whose meaning differs in
+financial contexts and develop finance-oriented word lists for 10-K analysis.
+@jegadeesh_wu_2013 further shows that the way words are weighted can materially
+affect a document-tone measure. Together, that evidence motivates the simple,
+transparent lexicon used as the baseline and makes clear that even a baseline
+score is a modeling choice.
+
+Contextual language models address a different limitation. @araci_2019 adapts
+BERT to financial sentiment analysis, while @huang_wang_yang_2023 develops and
+evaluates a finance-specific language model across labeled financial-text
+tasks. Those studies support the proposition that a contextual model can read
+financial language more accurately than bag-of-words methods. They do not imply
+that a more accurate sentiment label must improve a later return forecast.
+
+The downstream question is plausible because filing language can contain
+market-relevant information. @cohen_malloy_nguyen_2020 document associations
+between changes in 10-K language and later corporate outcomes and returns. The
+present experiment does not attempt to replicate that historical result.
+Instead, it uses known truth to demonstrate two design requirements for such a
+study: the filing must be aligned to its public availability date, and a complex
+text reader must be compared with a feasible domain-specific baseline on the
+actual downstream outcome.
+
+## 3. Data and information clock
+
+The analysis uses 1,200 synthetic filing records generated with a fixed random
+seed. Each record has a latent tone, a short document whose sentence mix reflects
+that tone, a fiscal period end, and a filing date 45 days later. The data-
+generating process produces two subsequent returns:
+
+1. a relatively strong announcement response associated with tone; and
+2. a much weaker 20-day drift after the filing becomes public.
+
+The distinction creates the information contract. A decision made after the
+filing may use its text and may evaluate the later drift. It may not claim the
+announcement response that occurred as the information became public. The
+period-end outcome used below is therefore a deliberate failure control.
+
+Because the records are synthetic, there are no revisions, missing filings,
+delistings, or survivorship effects. That simplicity makes the clock test clear
+but also limits external validity.
+
+## 4. Research design
+
+The baseline is a small finance-style lexicon that reports normalized positive
+minus negative word hits. The candidate is a richer text reader. The pipeline
+can call `ProsusAI/finbert` when its optional dependencies are installed; the
+committed worked result uses a deterministic richer-lexicon proxy so that the
+example runs offline. Accordingly, this paper treats the candidate as a
+contextual-reader **proxy** and does not claim to measure FinBERT's empirical
+performance.
+
+The primary comparison is rank information coefficient on the last 30 percent
+of the time-ordered records. A secondary decision ledger forms a long position
+in the top sentiment tercile and a short position in the bottom tercile, then
+subtracts 10 basis points from each leg. No hyperparameter search is conducted.
+The timestamp diagnostic compares the admissible post-filing return with an
+inadmissible label that includes the announcement return.
+
+The original worked example predates the course research-record convention, so
+its plan was not committed before the results were observed. The accompanying
+`RESEARCH_RECORD.md` discloses that defect. A student project must preserve a
+genuine pre-lockbox commit.
+
+## 5. Results
+
+Figure 1 reports the timing diagnostic. When the text score is aligned to a
+period-end label that includes the announcement response, its rank information
+coefficient is 0.548. When the target begins after the filing is public, the
+coefficient falls to 0.106. The difference does not show that filing tone is
+useless. It shows that most of the apparent result in the first construction
+comes from a return that was unavailable to the proposed decision.
+
+![The same text score appears roughly five times stronger when the outcome improperly includes the announcement response. Data are 1,200 seeded synthetic filings generated by `_pipeline.py`.](figures/01_leakage.png){#fig-leakage width=75%}
+
+Figure 2 compares the two readers on the final 30 percent of records using the
+honest post-filing target. The richer proxy records an information coefficient
+of 0.140, compared with 0.136 for the lexicon. Its net top-minus-bottom tercile
+spread is 0.22 percent versus 0.14 percent. These point estimates slightly favor
+the candidate, but the experiment supplies no repeated-sample or formal
+uncertainty analysis sufficient to call the difference reliable.
+
+![Later-sample information coefficient and net tercile spread for the richer reader and the lexicon baseline. The net spread subtracts 10 basis points from each leg.](figures/02_finbert_vs_lexicon.png){#fig-model-comparison width=90%}
+
+The defensible result is therefore narrower than “the richer reader wins.” The
+complex method produces only a small incremental difference after the clock is
+repaired, and the available evidence does not establish that this difference is
+stable.
+
+## 6. Decision, robustness, and alternative explanations
+
+The diagnostic decision ranks filings after publication, takes equal-weighted
+long and short terciles, and applies a stylized two-leg cost. This makes the
+economic use visible, but it is not a complete implementable portfolio. Filings
+arrive asynchronously, holding periods overlap, capital must be allocated
+across concurrent positions, and market impact may be concentrated around
+publication events.
+
+The strongest robustness check is structural rather than numerical: changing
+only the target clock removes the announcement return and sharply reduces the
+measured association. A fuller empirical project would additionally prespecify
+subperiod, sector, alternative-horizon, and cost sensitivities; compare several
+random seeds or resamples where model fitting is stochastic; and retain an
+untouched final test period.
+
+Two alternative explanations remain. First, the richer proxy may simply encode
+more of the planted vocabulary rather than context. Second, a small difference
+in the final block can arise from sampling variation. Neither explanation is
+resolved by the current experiment.
+
+## 7. Limitations
+
+The principal limitation is that this is a known-truth simulation. It validates
+an experimental design but says nothing about the magnitude of tone-based
+predictability in real markets. The committed result also uses a deterministic
+stand-in rather than an executed transformer, so it cannot support a statement
+about FinBERT's incremental value. The cost model is stylized, the tercile rule
+is only one policy, and the project lacks uncertainty intervals and a true
+pre-result plan freeze.
+
+These limitations are not peripheral qualifications. They define the warranted
+claim: **the example demonstrates how an availability error can dominate an
+apparently sophisticated text comparison.** It does not demonstrate a trading
+strategy.
+
+## 8. Conclusion
+
+The experiment began with a model comparison but ended with a research-design
+result. A richer text reader marginally outperformed a simple lexicon on the
+declared later block, yet that difference was small relative to the inflation
+created by using the wrong timestamp. The practical lesson is that better
+language representation and better financial evidence are separate achievements.
+The model reads the document; the research design determines whether its score
+could have supported the claimed decision.
+
+## Reproducibility and disclosure
+
+`analysis.ipynb` and `_pipeline.py` generate the data, metrics, and figures used
+here. The seed is `20260718`; core dependencies are NumPy and Matplotlib, with
+Transformers and PyTorch optional. The executed artifact used the deterministic
+fallback described above. No external or proprietary data are required.
+
+This paper is a course-authored worked example. Any AI assistance used by a
+student must follow the course disclosure policy; students remain responsible
+for verifying citations and writing their own analysis and conclusions.
+
+## References {.unnumbered}
+
+::: {#refs}
+:::

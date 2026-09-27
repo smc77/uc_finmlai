@@ -17,6 +17,7 @@ data manifests, figures, and commits rather than pasting large outputs here.
 - **Record ID:**
 - **Question:**
 - **Intended decision or use:**
+- **Closest prior work and provisional contribution:**
 - **Owner:**
 - **Created / last changed:**
 - **Repository and current commit:**
@@ -88,6 +89,9 @@ earlier choice after seeing a result.
 | Artifact | Path, version, or commit | What it establishes |
 |---|---|---|
 | Analysis notebook or script |  |  |
+| Written report |  |  |
+| Literature map and bibliography |  |  |
+| Presentation |  |  |
 | Data manifest or acquisition code |  |  |
 | Environment file |  |  |
 | Pre-analysis-plan commit |  |  |

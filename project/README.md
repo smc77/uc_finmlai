@@ -1,8 +1,10 @@
 # Final Project
 
-Develop an **end-to-end machine-learning solution to a financial problem** and present it as a
-*research story*. Worth **35%** of the course grade. The bar is rigorous, reproducible, skeptical work
-— **a well-executed negative result earns full credit.**
+Conduct and communicate a **credible empirical investigation of a financial
+problem**. Machine learning is part of the research design, but the final
+product is a piece of research rather than a model demonstration. Worth **35%**
+of the course grade. The bar is rigorous, reproducible, skeptical work — **a
+well-executed negative result earns full credit.**
 
 **Starting in Week 6?** Follow the focused
 [`WEEK6_CHECKPOINT.md`](WEEK6_CHECKPOINT.md) prompt first. It identifies exactly
@@ -50,13 +52,26 @@ and carries a built-in way to be wrong — a strong *negative* result on any of 
 ## Required components (every project, either track)
 
 1. **Research question** — what financial question are you answering?
-2. **Data pipeline** — what data, and *when would it actually have been available* (point-in-time)?
-3. **Feature engineering** — what predictors, and why? (leak-free)
-4. **Baseline model** — a simple linear/naive benchmark to beat.
-5. **ML model** — at least one modern method.
-6. **Out-of-sample evaluation** — time-aware validation, with the right metric for your track (Week 6).
-7. **Decision layer** — translate predictions into a portfolio, classification decision, risk flag, or action.
-8. **Limitations** — what would make this fail in reality?
+2. **Prior evidence and contribution** — what has already been studied, what
+   was found, and does this project replicate, extend, compare, or stress-test
+   that work?
+3. **Data pipeline** — what data, and *when would it actually have been available* (point-in-time)?
+4. **Feature engineering** — what predictors, and why? (leak-free)
+5. **Baseline model** — a simple linear/naive benchmark to beat.
+6. **ML model** — at least one course-relevant method meaningfully more flexible
+   than the baseline and appropriate to the data and sample size.
+7. **Out-of-sample evaluation** — time-aware validation, with the right metric for your track (Week 6).
+8. **Decision layer** — translate predictions into a portfolio, classification decision, risk flag, or action.
+9. **Uncertainty and robustness** — how stable is the comparison, and which
+   prespecified alternative explanations or changed-world conditions were tested?
+10. **Limitations** — what would make this fail in reality, and what does the
+    evidence not establish?
+
+The project does not need to claim academic novelty. A careful replication,
+extension, comparison, audit, or negative result can make a strong contribution.
+Use prior literature to shape the design rather than adding citations after the
+analysis is complete. See [`REPORT_PATHWAYS.md`](REPORT_PATHWAYS.md) for the
+literature standard and the two permitted report formats.
 
 ## The Research Audit
 
@@ -110,32 +125,68 @@ decision relevance, limitations, and reproducibility. See the completed
 ## Milestones
 - **Week 6:** one-paragraph project idea and initialized project-root `RESEARCH_RECORD.md` (so
   data-availability problems surface early).
-- **Weeks 10–11:** full proposal + working baseline checkpoint — this is **HW6** (`homework/hw6/`).
-  Submit the updated record with the pre-analysis plan and lockbox rule committed.
+- **Weeks 7–9:** test data feasibility and build a compact literature map of the
+  closest work.
+- **Weeks 10–11:** full proposal + literature synthesis + working baseline
+  checkpoint — this is **HW6** (`homework/hw6/`). Submit the updated record with
+  the pre-analysis plan and lockbox rule committed.
+- **Week 14:** complete a paper draft and use the course review checklist before
+  finalizing the presentation.
 - **Week 15:** final presentation + report with code.
 
 ## Deliverables
 
-Four artifacts, submitted together:
+Choose one of the two formats in [`REPORT_PATHWAYS.md`](REPORT_PATHWAYS.md):
 
-1. **Presentation** — a **10–12 minute** talk, **12–16 slides**, built in Quarto (→ reveal.js or
-   Beamer). One idea per slide; tell the *research story*, don't tour code. Suggested arc: research
-   question (1) · data & point-in-time availability (1–2) · features (1) · baseline (1) · model (1–2)
-   · out-of-sample results (2–3) · decision layer (1) · limitations (1) · takeaway (1).
-2. **Analysis notebook** — one reproducible Jupyter notebook (or Quarto `.qmd`) that runs top to
-   bottom from a clean environment: data → features → baseline → model → OOS evaluation → decision →
-   limitations. Fixed seeds, a `requirements.txt`/environment file, and documented data sources.
-3. **Written report** — **6–10 pages** (the analysis notebook's narrative counts if it stands on its
-   own) covering the eight components, with the limitations section carrying real weight.
+- **Pathway 1 — integrated Jupyter research report.** One executed notebook
+  contains both the analysis and paper-quality exposition. It requires no
+  Quarto, LaTeX, or local publishing setup and can be completed in Colab.
+- **Pathway 2 — analysis plus separate paper.** Jupyter or scripts produce the
+  analysis and figures; Quarto, Microsoft Word, Google Docs, Typst, LaTeX, or
+  another editor produces the standalone paper. A genuinely professional
+  paper/slides/repository package is eligible for up to **2 bonus points on the
+  final-project score**, capped at 100 and counted within the syllabus bonus
+  limit. The bonus rewards the package, not the software used.
+
+Four core artifacts are submitted together:
+
+1. **Presentation** — a **10–12 minute** talk, **12–16 slides**, built in any
+   appropriate tool. One idea per slide; tell the research argument rather than
+   touring code. Suggested arc: question and prior evidence (1–2) · data and
+   point-in-time availability (1–2) · baseline and design (1–2) · results and
+   uncertainty (2–3) · decision layer (1) · limitations (1) · takeaway (1).
+2. **Reproducible analysis** — an executed Jupyter notebook or documented
+   scripts that run from a clean environment: data → features → baseline → model
+   → OOS evaluation → decision → robustness. Include fixed seeds, an environment
+   file or package list, and documented data sources.
+3. **Written report** — either the integrated notebook under Pathway 1 or a
+   separate **6–10 page** paper under Pathway 2. In either form it must include
+   an abstract, introduction, related literature, data and information clock,
+   research design, results, decision implications, robustness, limitations,
+   conclusion, and references. Code output without sustained exposition does
+   not satisfy the report requirement.
 4. **Research record** — `RESEARCH_RECORD.md` at the repository root, including the information
    contract, frozen plan and its commit, decision log, final evidence, limitations, and artifact
    index. This remains a separate inspectable file even when the report adapts parts of it.
 
-A worked example — Quarto slides + analysis notebook + filled research record — is provided in
-`project/example/` as a model of the expected scope and structure.
+The worked repository in `project/example/` demonstrates both routes with the
+same analysis: its expanded notebook illustrates Pathway 1, while its Quarto
+paper and slide deck illustrate Pathway 2. Quarto is used for the demonstration
+because it works well, not because students are required to install it.
 
 ## Grading emphasis
-Judged on the eight components, weighted toward **rigorous out-of-sample evaluation, a real baseline
-comparison net of costs/frictions, and a clear-eyed limitations section** — not raw backtest Sharpe.
-The research record has no separate percentage. Instructors use it as evidence when scoring the
-existing rubric; unsupported or unrecoverable claims reduce the relevant component scores.
+
+| Component | Weight |
+|---|---:|
+| Question, motivation, prior literature, and contribution | 15% |
+| Data provenance and point-in-time integrity | 15% |
+| Baseline, model, and validation design | 20% |
+| Results, uncertainty, and robustness | 20% |
+| Decision relevance and implementation | 10% |
+| Interpretation, limitations, and conclusion | 10% |
+| Reproducibility and communication | 10% |
+
+The project is not graded on whether the sophisticated model wins. The research
+record has no separate percentage; instructors use it as evidence when applying
+the rubric. Unsupported or unrecoverable claims reduce the relevant component
+scores.

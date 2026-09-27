@@ -8,7 +8,8 @@ The sentiment model is **FinBERT** when `transformers`+`torch` are installed; ot
 deterministic text-reader stand-in, so the notebook always runs. The baseline is a small
 Loughran-McDonald-style lexicon.
 
-Imported by analysis.ipynb; not meant to be edited by students — the point is the notebook.
+Imported by analysis.ipynb; not meant to be edited by students. The notebook
+produces the evidence used by both the integrated report and the separate paper.
 """
 from __future__ import annotations
 

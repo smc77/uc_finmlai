@@ -18,6 +18,10 @@ worked analysis in this directory and shows the expected level of specificity.
   trading costs are respected?
 - **Intended decision or use:** Rank newly public filings and decide whether the
   transformer warrants replacing the cheap lexicon in a long-short signal.
+- **Closest prior work and provisional contribution:** Financial-dictionary,
+  FinBERT, and filing-language studies summarized in `LITERATURE_MAP.md`. The
+  example is a known-truth timing audit and baseline comparison, not a claim of
+  new empirical evidence about SEC filings.
 - **Owner:** FIN 7057 worked example.
 - **Created / last changed:** Original example 2026-07-18; record reconstructed
   2026-08-15.
@@ -151,10 +155,12 @@ The following is the protocol the example implements. Its timing is
 |---|---|---|
 | Analysis notebook | `analysis.ipynb` | Executed pipeline, comparisons, results, limitations |
 | Shared pipeline | `_pipeline.py` | Seed, data-generating process, text readers, metrics |
+| Research paper | `paper.qmd` and `paper.html` | Standalone argument, related literature, results, and warranted claim |
+| Literature map | `LITERATURE_MAP.md`; `references.bib` | Prior evidence and its role in the design |
 | Presentation | `slides.qmd` and `slides.html` | Concise research story |
 | Leakage figure | `figures/01_leakage.png` | Consequence of the wrong information clock |
 | Model comparison | `figures/02_finbert_vs_lexicon.png` | Honest later-block comparison net of costs |
-| Environment | `../../requirements.txt`; notebook Python 3.12.2 metadata | Core software route |
+| Environment | `project/example/README.md`; notebook Python 3.12.2 metadata | Core software route |
 
 ## Submission Check
 
