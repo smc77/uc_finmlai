@@ -11,6 +11,11 @@ format:
     embed-resources: true
     fig-align: center
     incremental: false
+  beamer:
+    theme: default
+    slide-level: 2
+    fig-align: center
+    pdf-engine: xelatex
 ---
 
 ## The research question

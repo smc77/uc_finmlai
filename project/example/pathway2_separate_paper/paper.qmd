@@ -11,6 +11,11 @@ format:
     code-fold: true
   docx:
     toc: true
+  pdf:
+    toc: true
+    number-sections: true
+    geometry: margin=1in
+    colorlinks: true
 ---
 
 ## Abstract
