@@ -153,7 +153,7 @@ The following is the protocol the example implements. Its timing is
 
 | Artifact | Path or version | What it establishes |
 |---|---|---|
-| Analysis notebook | `analysis.ipynb` | Executed pipeline, comparisons, results, limitations |
+| Analysis notebook | `analysis.ipynb` and `analysis.html` | Executed pipeline, comparisons, results, limitations, and static report export |
 | Shared pipeline | `_pipeline.py` | Seed, data-generating process, text readers, metrics |
 | Research paper | `paper.qmd` and `paper.html` | Standalone argument, related literature, results, and warranted claim |
 | Literature map | `LITERATURE_MAP.md`; `references.bib` | Prior evidence and its role in the design |

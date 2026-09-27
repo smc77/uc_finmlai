@@ -130,8 +130,9 @@ decision relevance, limitations, and reproducibility. See the completed
 - **Weeks 10–11:** full proposal + literature synthesis + working baseline
   checkpoint — this is **HW6** (`homework/hw6/`). Submit the updated record with
   the pre-analysis plan and lockbox rule committed.
-- **Week 14:** complete a paper draft and use the course review checklist before
-  finalizing the presentation.
+- **Week 14:** complete a paper draft and use the
+  [`PAPER_REVIEW_CHECKLIST.md`](PAPER_REVIEW_CHECKLIST.md) before finalizing the
+  presentation.
 - **Week 15:** final presentation + report with code.
 
 ## Deliverables
