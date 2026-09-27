@@ -28,7 +28,7 @@ worked analysis in this directory and shows the expected level of specificity.
 - **Repository and artifact commit:** The original notebook, pipeline, and slides
   are recoverable at commit `6f745b5950ddea93d58e96b1ae253353e9a8db0a`.
 - **Code, data, model, prompt, and environment versions:** `analysis.ipynb` calls
-  `_pipeline.py`; notebook metadata records Python 3.12.2; data generation uses
+  `_pipeline.py`; both pathway notebooks record their Python environment; data generation uses
   NumPy RNG seed `20260718`; the primary path requests `ProsusAI/finbert`; the
   committed output used the deterministic lexicon stand-in because
   `transformers` and `torch` were not installed.
@@ -153,11 +153,12 @@ The following is the protocol the example implements. Its timing is
 
 | Artifact | Path or version | What it establishes |
 |---|---|---|
-| Analysis notebook | `analysis.ipynb` and `analysis.html` | Executed pipeline, comparisons, results, limitations, and static report export |
+| Integrated notebook report | `pathway1_integrated_notebook/analysis.ipynb` and `analysis.html` | Executed pipeline, exposition, comparisons, limitations, and static report export |
+| Separate-paper analysis | `pathway2_separate_paper/analysis.ipynb` | Concise generation of the metrics and figures used by the paper |
 | Shared pipeline | `_pipeline.py` | Seed, data-generating process, text readers, metrics |
-| Research paper | `paper.qmd` and `paper.html` | Standalone argument, related literature, results, and warranted claim |
+| Research paper | `pathway2_separate_paper/paper.qmd`, `paper.html`, and `paper.docx` | Standalone argument, related literature, results, and warranted claim |
 | Literature map | `LITERATURE_MAP.md`; `references.bib` | Prior evidence and its role in the design |
-| Presentation | `slides.qmd` and `slides.html` | Concise research story |
+| Presentation | `pathway2_separate_paper/slides.qmd` and `slides.html` | Concise research story |
 | Leakage figure | `figures/01_leakage.png` | Consequence of the wrong information clock |
 | Model comparison | `figures/02_finbert_vs_lexicon.png` | Honest later-block comparison net of costs |
 | Environment | `project/example/README.md`; notebook Python 3.12.2 metadata | Core software route |

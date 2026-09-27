@@ -3,7 +3,7 @@ title: "A Timestamp Audit of Filing-Tone Signals"
 subtitle: "A known-truth worked final-project example"
 author: "FIN 7057"
 date: today
-bibliography: references.bib
+bibliography: ../references.bib
 format:
   revealjs:
     theme: simple
@@ -67,7 +67,7 @@ Align tone to the **period-end** date and the return window swallows the announc
 a move you could never have traded. Align to the **filing date** and you keep only the
 honest, post-public drift.
 
-![](figures/01_leakage.png)
+![](../figures/01_leakage.png)
 
 The same score and text produce roughly **five times the measured association**
 under the inadmissible timestamp.
@@ -77,7 +77,7 @@ under the inadmissible timestamp.
 Evaluate out of sample (never shuffle time). Compare the **information coefficient** and a
 top-minus-bottom **tercile spread**, net of a 10 bp cost.
 
-![](figures/02_finbert_vs_lexicon.png)
+![](../figures/02_finbert_vs_lexicon.png)
 
 ## The result
 

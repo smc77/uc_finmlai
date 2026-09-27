@@ -15,26 +15,33 @@ FinBERT profitability.
 
 ## How the two pathways appear here
 
-- **Pathway 1 — integrated Jupyter report:** `analysis.ipynb` combines the
-  written argument, analysis, figures, limitations, references, and disclosure.
-  A student may complete this route entirely in JupyterLab or Colab.
-- **Pathway 2 — analysis plus separate paper:** `analysis.ipynb` produces the
-  evidence, while `paper.qmd` turns it into a standalone paper and `slides.qmd`
-  turns it into a presentation. A student may use Word, Google Docs, or another
+- **Pathway 1 — integrated Jupyter report:**
+  `pathway1_integrated_notebook/` contains a notebook that combines the written
+  argument, analysis, figures, limitations, references, and disclosure. A
+  student may complete this route entirely in JupyterLab or Colab.
+- **Pathway 2 — analysis plus separate paper:**
+  `pathway2_separate_paper/` contains a concise analysis notebook, a standalone
+  paper, and a slide deck. A student may use Word, Google Docs, or another
   editor instead; Quarto is the demonstration tool, not a requirement.
+
+Both pathways import the same root-level `_pipeline.py` and write the same
+root-level `figures/`. This deliberately keeps the data-generating process and
+final numerical evidence common while making the two communication formats easy
+to compare.
 
 ## Files
 
 | File | What it is |
 |------|-----------|
-| `analysis.ipynb` / `analysis.html` | The integrated-notebook route and its static, employer-readable export: exposition plus data → baseline → model → OOS evaluation → decision → limitations. |
-| `paper.qmd` | The separate-paper route, with abstract, related work, data/clock, design, results, robustness, limitations, conclusion, and references. |
-| `paper.html` | Self-contained rendered paper; no Quarto installation is needed to read it. |
-| `paper.docx` | Editable Word rendering of the same Quarto paper; no LaTeX installation is involved. |
+| `pathway1_integrated_notebook/` | Full notebook report plus a static, employer-readable HTML export. |
+| `pathway2_separate_paper/analysis.ipynb` | Concise analysis companion that produces the evidence used in the paper. |
+| `pathway2_separate_paper/paper.qmd` | Separate-paper source, including abstract, related work, data/clock, design, results, robustness, limitations, conclusion, and references. |
+| `pathway2_separate_paper/paper.html` | Self-contained rendered paper; no Quarto installation is needed to read it. |
+| `pathway2_separate_paper/paper.docx` | Editable Word rendering of the same Quarto paper; no LaTeX installation is involved. |
 | `references.bib` | Verified bibliography used by the paper. |
 | `LITERATURE_MAP.md` | Development notes showing how each source affects the research design. |
 | `RESEARCH_RECORD.md` | A filled evidence trail: information clock, protocol, decision log, results, limitations, and artifact links. |
-| `slides.qmd` / `slides.html` | The Quarto presentation source and self-contained rendered slides. |
+| `pathway2_separate_paper/slides.qmd` / `slides.html` | The Quarto presentation source and self-contained rendered slides. |
 | `_pipeline.py` | Shared data generator + the two sentiment readers + metrics (imported by the notebook). |
 | `figures/` | Figures written by the notebook and embedded in the slides. |
 
@@ -45,15 +52,18 @@ pip install numpy pandas matplotlib scikit-learn jupyter
 # optional, for the real model instead of the built-in fallback:
 pip install transformers torch
 
-cd project/example
-jupyter lab analysis.ipynb                   # or: jupyter nbconvert --to notebook --execute --inplace analysis.ipynb
-quarto render paper.qmd --to html            # demonstration only; students are not required to use Quarto
-quarto render slides.qmd --to revealjs       # produces slides.html
+cd project/example/pathway1_integrated_notebook
+jupyter lab analysis.ipynb
+
+cd ../pathway2_separate_paper
+jupyter nbconvert --to notebook --execute --inplace analysis.ipynb
+quarto render paper.qmd --to html            # demonstration only; Quarto is not required
+quarto render slides.qmd --to revealjs
 ```
 
-Quarto can also render the paper to Word with `quarto render paper.qmd --to
-docx`. PDF output may require an additional PDF engine; it is not necessary for
-the course's integrated-notebook pathway.
+From `pathway2_separate_paper/`, Quarto can also render the paper to Word with
+`quarto render paper.qmd --to docx`. PDF output may require an additional PDF
+engine; it is not necessary for the course's integrated-notebook pathway.
 
 ## Two honest caveats (that make it a *model*, not a shortcut)
 
@@ -63,7 +73,8 @@ the course's integrated-notebook pathway.
   transfers, not the data.
 - **FinBERT is optional.** With `transformers`+`torch` installed the notebook uses the real
   `ProsusAI/finbert`; without them it falls back to a deterministic text-reader stand-in so
-  it always runs. The pipeline and the conclusion are the same either way.
+  it always runs. The research pipeline is the same, but the numerical results
+  may change; rerender the paper and slides if the backend changes.
 
 The interesting part is not the model — it is the **filing timestamp** (leakage inflates the
 apparent signal ~5×) and whether any edge **survives out of sample, net of costs**.
