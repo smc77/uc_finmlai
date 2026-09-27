@@ -3076,18 +3076,18 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a></li>
-  <li><a href="#related-literature" id="toc-related-literature" class="nav-link" data-scroll-target="#related-literature">2. Related literature</a></li>
-  <li><a href="#data-and-information-clock" id="toc-data-and-information-clock" class="nav-link" data-scroll-target="#data-and-information-clock">3. Data and information clock</a></li>
-  <li><a href="#research-design" id="toc-research-design" class="nav-link" data-scroll-target="#research-design">4. Research design</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">5. Results</a></li>
-  <li><a href="#decision-robustness-and-alternative-explanations" id="toc-decision-robustness-and-alternative-explanations" class="nav-link" data-scroll-target="#decision-robustness-and-alternative-explanations">6. Decision, robustness, and alternative explanations</a></li>
-  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">7. Limitations</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">8. Conclusion</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#related-literature" id="toc-related-literature" class="nav-link" data-scroll-target="#related-literature"><span class="header-section-number">2</span> Related literature</a></li>
+  <li><a href="#data-and-information-clock" id="toc-data-and-information-clock" class="nav-link" data-scroll-target="#data-and-information-clock"><span class="header-section-number">3</span> Data and information clock</a></li>
+  <li><a href="#research-design" id="toc-research-design" class="nav-link" data-scroll-target="#research-design"><span class="header-section-number">4</span> Research design</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">5</span> Results</a></li>
+  <li><a href="#decision-robustness-and-alternative-explanations" id="toc-decision-robustness-and-alternative-explanations" class="nav-link" data-scroll-target="#decision-robustness-and-alternative-explanations"><span class="header-section-number">6</span> Decision, robustness, and alternative explanations</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">7</span> Limitations</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8</span> Conclusion</a></li>
   <li><a href="#reproducibility-and-disclosure" id="toc-reproducibility-and-disclosure" class="nav-link" data-scroll-target="#reproducibility-and-disclosure">Reproducibility and disclosure</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -3123,24 +3123,24 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="abstract" class="level2">
-<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<section id="abstract" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="abstract">Abstract</h2>
 <p>Financial language models can classify sentiment more accurately than simple word lists, but a better text classifier does not necessarily produce a better financial decision. This known-truth study constructs 1,200 synthetic filings with a 45-day publication lag, a tone-related announcement return, and a much weaker post-publication drift. We compare a transparent finance-style lexicon with a richer contextual-reader proxy and evaluate both on the final 30 percent of the dated sample. Aligning the signal to the fiscal period end produces an information coefficient of 0.548 because the outcome improperly includes the announcement response. Aligning it to the filing date reduces the corresponding coefficient to 0.106. On the honest later sample, the richer reader records an information coefficient of 0.140 versus 0.136 for the lexicon, with only a small advantage in the net tercile spread. The experiment therefore supports a methodological conclusion rather than an investment claim: timestamp discipline can matter more than model complexity. Because the filings and returns are synthetic and the executed fallback is not FinBERT itself, the study does not establish profitability in real SEC filings.</p>
 </section>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<section id="introduction" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p>Corporate filings contain language that may help investors, creditors, and other decision makers assess firms. Modern language models promise a more context-sensitive reading of that language than a dictionary can provide. The financial question, however, is not whether a model assigns plausible sentiment labels. It is whether the resulting score improves a decision using information that was actually available at the decision time.</p>
 <p>This paper asks a deliberately narrow question: <strong>does a richer reader of filing tone rank post-filing returns better than a simple finance-specific lexicon once the filing timestamp and trading costs are respected?</strong> The intended decision is to rank newly public filings and form a top-minus-bottom position after publication. The comparison is designed as a known-truth teaching experiment, not as evidence about the profitability of actual SEC filings.</p>
 <p>The contribution is twofold. First, the experiment isolates a common timing error by constructing fiscal-period and filing dates separately. Second, it separates upstream text-reading quality from downstream return predictability. The headline result is that an inadmissible period-end alignment makes the signal appear roughly five times stronger, while the richer reader only marginally improves on the lexicon under the admissible clock.</p>
 </section>
-<section id="related-literature" class="level2">
-<h2 class="anchored" data-anchor-id="related-literature">2. Related literature</h2>
+<section id="related-literature" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="related-literature"><span class="header-section-number">2</span> Related literature</h2>
 <p>Quantitative financial text analysis predates modern language models. <span class="citation" data-cites="tetlock_2007">Tetlock (<a href="#ref-tetlock_2007" role="doc-biblioref">2007</a>)</span> links measured media pessimism to market outcomes, establishing that text-derived signals can be evaluated against financial consequences. Domain-specific language also matters. <span class="citation" data-cites="loughran_mcdonald_2011">Loughran and McDonald (<a href="#ref-loughran_mcdonald_2011" role="doc-biblioref">2011</a>)</span> show that ordinary dictionaries can misclassify words whose meaning differs in financial contexts and develop finance-oriented word lists for 10-K analysis. <span class="citation" data-cites="jegadeesh_wu_2013">Jegadeesh and Wu (<a href="#ref-jegadeesh_wu_2013" role="doc-biblioref">2013</a>)</span> further shows that the way words are weighted can materially affect a document-tone measure. Together, that evidence motivates the simple, transparent lexicon used as the baseline and makes clear that even a baseline score is a modeling choice.</p>
 <p>Contextual language models address a different limitation. <span class="citation" data-cites="araci_2019">Araci (<a href="#ref-araci_2019" role="doc-biblioref">2019</a>)</span> adapts BERT to financial sentiment analysis, while <span class="citation" data-cites="huang_wang_yang_2023">Huang, Wang, and Yang (<a href="#ref-huang_wang_yang_2023" role="doc-biblioref">2023</a>)</span> develops and evaluates a finance-specific language model across labeled financial-text tasks. Those studies support the proposition that a contextual model can read financial language more accurately than bag-of-words methods. They do not imply that a more accurate sentiment label must improve a later return forecast.</p>
 <p>The downstream question is plausible because filing language can contain market-relevant information. <span class="citation" data-cites="cohen_malloy_nguyen_2020">Cohen, Malloy, and Nguyen (<a href="#ref-cohen_malloy_nguyen_2020" role="doc-biblioref">2020</a>)</span> document associations between changes in 10-K language and later corporate outcomes and returns. The present experiment does not attempt to replicate that historical result. Instead, it uses known truth to demonstrate two design requirements for such a study: the filing must be aligned to its public availability date, and a complex text reader must be compared with a feasible domain-specific baseline on the actual downstream outcome.</p>
 </section>
-<section id="data-and-information-clock" class="level2">
-<h2 class="anchored" data-anchor-id="data-and-information-clock">3. Data and information clock</h2>
+<section id="data-and-information-clock" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="data-and-information-clock"><span class="header-section-number">3</span> Data and information clock</h2>
 <p>The analysis uses 1,200 synthetic filing records generated with a fixed random seed. Each record has a latent tone, a short document whose sentence mix reflects that tone, a fiscal period end, and a filing date 45 days later. The data- generating process produces two subsequent returns:</p>
 <ol type="1">
 <li>a relatively strong announcement response associated with tone; and</li>
@@ -3149,14 +3149,14 @@ vertical-align: -.125em;
 <p>The distinction creates the information contract. A decision made after the filing may use its text and may evaluate the later drift. It may not claim the announcement response that occurred as the information became public. The period-end outcome used below is therefore a deliberate failure control.</p>
 <p>Because the records are synthetic, there are no revisions, missing filings, delistings, or survivorship effects. That simplicity makes the clock test clear but also limits external validity.</p>
 </section>
-<section id="research-design" class="level2">
-<h2 class="anchored" data-anchor-id="research-design">4. Research design</h2>
+<section id="research-design" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="research-design"><span class="header-section-number">4</span> Research design</h2>
 <p>The baseline is a small finance-style lexicon that reports normalized positive minus negative word hits. The candidate is a richer text reader. The pipeline can call <code>ProsusAI/finbert</code> when its optional dependencies are installed; the committed worked result uses a deterministic richer-lexicon proxy so that the example runs offline. Accordingly, this paper treats the candidate as a contextual-reader <strong>proxy</strong> and does not claim to measure FinBERT’s empirical performance.</p>
 <p>The primary comparison is rank information coefficient on the last 30 percent of the time-ordered records. A secondary decision ledger forms a long position in the top sentiment tercile and a short position in the bottom tercile, then subtracts 10 basis points from each leg. No hyperparameter search is conducted. The timestamp diagnostic compares the admissible post-filing return with an inadmissible label that includes the announcement return.</p>
 <p>The original worked example predates the course research-record convention, so its plan was not committed before the results were observed. The accompanying <code>RESEARCH_RECORD.md</code> discloses that defect. A student project must preserve a genuine pre-lockbox commit.</p>
 </section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">5. Results</h2>
+<section id="results" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="results"><span class="header-section-number">5</span> Results</h2>
 <p>Figure 1 reports the timing diagnostic. When the text score is aligned to a period-end label that includes the announcement response, its rank information coefficient is 0.548. When the target begins after the filing is public, the coefficient falls to 0.106. The difference does not show that filing tone is useless. It shows that most of the apparent result in the first construction comes from a return that was unavailable to the proposed decision.</p>
 <div id="fig-leakage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -3181,23 +3181,23 @@ Figure 2: Later-sample information coefficient and net tercile spread for the r
 </div>
 <p>The defensible result is therefore narrower than “the richer reader wins.” The complex method produces only a small incremental difference after the clock is repaired, and the available evidence does not establish that this difference is stable.</p>
 </section>
-<section id="decision-robustness-and-alternative-explanations" class="level2">
-<h2 class="anchored" data-anchor-id="decision-robustness-and-alternative-explanations">6. Decision, robustness, and alternative explanations</h2>
+<section id="decision-robustness-and-alternative-explanations" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="decision-robustness-and-alternative-explanations"><span class="header-section-number">6</span> Decision, robustness, and alternative explanations</h2>
 <p>The diagnostic decision ranks filings after publication, takes equal-weighted long and short terciles, and applies a stylized two-leg cost. This makes the economic use visible, but it is not a complete implementable portfolio. Filings arrive asynchronously, holding periods overlap, capital must be allocated across concurrent positions, and market impact may be concentrated around publication events.</p>
 <p>The strongest robustness check is structural rather than numerical: changing only the target clock removes the announcement return and sharply reduces the measured association. A fuller empirical project would additionally prespecify subperiod, sector, alternative-horizon, and cost sensitivities; compare several random seeds or resamples where model fitting is stochastic; and retain an untouched final test period.</p>
 <p>Two alternative explanations remain. First, the richer proxy may simply encode more of the planted vocabulary rather than context. Second, a small difference in the final block can arise from sampling variation. Neither explanation is resolved by the current experiment.</p>
 </section>
-<section id="limitations" class="level2">
-<h2 class="anchored" data-anchor-id="limitations">7. Limitations</h2>
+<section id="limitations" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="limitations"><span class="header-section-number">7</span> Limitations</h2>
 <p>The principal limitation is that this is a known-truth simulation. It validates an experimental design but says nothing about the magnitude of tone-based predictability in real markets. The committed result also uses a deterministic stand-in rather than an executed transformer, so it cannot support a statement about FinBERT’s incremental value. The cost model is stylized, the tercile rule is only one policy, and the project lacks uncertainty intervals and a true pre-result plan freeze.</p>
 <p>These limitations are not peripheral qualifications. They define the warranted claim: <strong>the example demonstrates how an availability error can dominate an apparently sophisticated text comparison.</strong> It does not demonstrate a trading strategy.</p>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">8. Conclusion</h2>
+<section id="conclusion" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">8</span> Conclusion</h2>
 <p>The experiment began with a model comparison but ended with a research-design result. A richer text reader marginally outperformed a simple lexicon on the declared later block, yet that difference was small relative to the inflation created by using the wrong timestamp. The practical lesson is that better language representation and better financial evidence are separate achievements. The model reads the document; the research design determines whether its score could have supported the claimed decision.</p>
 </section>
-<section id="reproducibility-and-disclosure" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility-and-disclosure">Reproducibility and disclosure</h2>
+<section id="reproducibility-and-disclosure" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="reproducibility-and-disclosure">Reproducibility and disclosure</h2>
 <p><code>analysis.ipynb</code> in this folder and <code>../_pipeline.py</code> generate the data, metrics, and figures used here. The seed is <code>20260718</code>; core dependencies are NumPy and Matplotlib, with Transformers and PyTorch optional. The executed artifact used the deterministic fallback described above. No external or proprietary data are required.</p>
 <p>This paper is a course-authored worked example. Any AI assistance used by a student must follow the course disclosure policy; students remain responsible for verifying citations and writing their own analysis and conclusions.</p>
 </section>

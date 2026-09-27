@@ -4,6 +4,7 @@ subtitle: "A known-truth worked example of a finance research paper"
 author: "FIN 7057 worked example"
 date: today
 bibliography: ../references.bib
+number-sections: true
 format:
   html:
     toc: true
@@ -13,12 +14,11 @@ format:
     toc: true
   pdf:
     toc: true
-    number-sections: true
     geometry: margin=1in
     colorlinks: true
 ---
 
-## Abstract
+## Abstract {.unnumbered}
 
 Financial language models can classify sentiment more accurately than simple
 word lists, but a better text classifier does not necessarily produce a better
@@ -37,7 +37,7 @@ can matter more than model complexity. Because the filings and returns are
 synthetic and the executed fallback is not FinBERT itself, the study does not
 establish profitability in real SEC filings.
 
-## 1. Introduction
+## Introduction
 
 Corporate filings contain language that may help investors, creditors, and
 other decision makers assess firms. Modern language models promise a more
@@ -60,7 +60,7 @@ The headline result is that an inadmissible period-end alignment makes the
 signal appear roughly five times stronger, while the richer reader only
 marginally improves on the lexicon under the admissible clock.
 
-## 2. Related literature
+## Related literature
 
 Quantitative financial text analysis predates modern language models.
 @tetlock_2007 links measured media pessimism to market outcomes, establishing
@@ -89,7 +89,7 @@ study: the filing must be aligned to its public availability date, and a complex
 text reader must be compared with a feasible domain-specific baseline on the
 actual downstream outcome.
 
-## 3. Data and information clock
+## Data and information clock
 
 The analysis uses 1,200 synthetic filing records generated with a fixed random
 seed. Each record has a latent tone, a short document whose sentence mix reflects
@@ -108,7 +108,7 @@ Because the records are synthetic, there are no revisions, missing filings,
 delistings, or survivorship effects. That simplicity makes the clock test clear
 but also limits external validity.
 
-## 4. Research design
+## Research design
 
 The baseline is a small finance-style lexicon that reports normalized positive
 minus negative word hits. The candidate is a richer text reader. The pipeline
@@ -130,7 +130,7 @@ its plan was not committed before the results were observed. The accompanying
 `RESEARCH_RECORD.md` discloses that defect. A student project must preserve a
 genuine pre-lockbox commit.
 
-## 5. Results
+## Results
 
 Figure 1 reports the timing diagnostic. When the text score is aligned to a
 period-end label that includes the announcement response, its rank information
@@ -155,7 +155,7 @@ complex method produces only a small incremental difference after the clock is
 repaired, and the available evidence does not establish that this difference is
 stable.
 
-## 6. Decision, robustness, and alternative explanations
+## Decision, robustness, and alternative explanations
 
 The diagnostic decision ranks filings after publication, takes equal-weighted
 long and short terciles, and applies a stylized two-leg cost. This makes the
@@ -176,7 +176,7 @@ more of the planted vocabulary rather than context. Second, a small difference
 in the final block can arise from sampling variation. Neither explanation is
 resolved by the current experiment.
 
-## 7. Limitations
+## Limitations
 
 The principal limitation is that this is a known-truth simulation. It validates
 an experimental design but says nothing about the magnitude of tone-based
@@ -191,7 +191,7 @@ claim: **the example demonstrates how an availability error can dominate an
 apparently sophisticated text comparison.** It does not demonstrate a trading
 strategy.
 
-## 8. Conclusion
+## Conclusion
 
 The experiment began with a model comparison but ended with a research-design
 result. A richer text reader marginally outperformed a simple lexicon on the
@@ -201,7 +201,7 @@ language representation and better financial evidence are separate achievements.
 The model reads the document; the research design determines whether its score
 could have supported the claimed decision.
 
-## Reproducibility and disclosure
+## Reproducibility and disclosure {.unnumbered}
 
 `analysis.ipynb` in this folder and `../_pipeline.py` generate the data, metrics,
 and figures used here. The seed is `20260718`; core dependencies are NumPy and Matplotlib, with
