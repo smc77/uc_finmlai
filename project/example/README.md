@@ -27,7 +27,7 @@ FinBERT profitability.
 
 | File | What it is |
 |------|-----------|
-| `analysis.ipynb` | The integrated-notebook route: exposition plus data → baseline → model → OOS evaluation → decision → limitations. Runs top to bottom. |
+| `analysis.ipynb` / `analysis.html` | The integrated-notebook route and its static, employer-readable export: exposition plus data → baseline → model → OOS evaluation → decision → limitations. |
 | `paper.qmd` | The separate-paper route, with abstract, related work, data/clock, design, results, robustness, limitations, conclusion, and references. |
 | `paper.html` | Self-contained rendered paper; no Quarto installation is needed to read it. |
 | `paper.docx` | Editable Word rendering of the same Quarto paper; no LaTeX installation is involved. |
