@@ -5,7 +5,7 @@ The seven assignments accumulate a **research workflow**, not one compulsory dat
 | Assignment | Data relationship | Evidence rule |
 |---|---|---|
 | HW1 | Student-chosen univariate market series | Build and audit the initial pipeline |
-| HW2 | Reuse or adopt the corrected HW1 pipeline | Spend one declared HW2 assessment block |
+| HW2 | Reuse or adopt the corrected HW1 pipeline | Spend one declared HW2 test block |
 | HW3 | Extend the series with a new forward window | Do not relabel the spent HW2 block as test data |
 | HW4 | New multi-asset panel | Descriptive structure; do not force a market-factor conclusion |
 | HW5 | Reuse the HW4 panel or use the supplied known-truth panel | Evaluate portfolio decisions and costs |
