@@ -110,7 +110,8 @@ The short research-record cells in the weekly lecture notebooks are practice. Th
 notebooks and are not merged into the project file. Your project record documents only your final
 project.
 
-The record is required at the project milestones and in the final submission. It is not a new grading
+The record is collected from Homework 6 onward and in the final submission; initialize it in Week 6
+even though it is not submitted then. It is not a new grading
 bucket: it is evidence for the existing rubric rows, including provenance, design, validation,
 decision relevance, limitations, and reproducibility. See the completed
 [`example/RESEARCH_RECORD.md`](example/RESEARCH_RECORD.md) for the expected level of detail.
@@ -123,8 +124,9 @@ decision relevance, limitations, and reproducibility. See the completed
 - **AI use:** allowed for code with disclosure; not for your analysis/conclusions (see syllabus).
 
 ## Milestones
-- **Week 6:** one-paragraph project idea and initialized project-root `RESEARCH_RECORD.md` (so
-  data-availability problems surface early).
+- **Week 6:** one-paragraph project idea (so data-availability problems surface early). Also
+  initialize your project-root `RESEARCH_RECORD.md` this week — it is not submitted until
+  Homework 6, but its value depends on timestamps that cannot be created retroactively.
 - **Weeks 7–9:** test data feasibility and build a compact literature map of the
   closest work.
 - **Weeks 10–11:** full proposal + literature synthesis + working baseline

@@ -6,12 +6,23 @@ clock, comparison, and intended decision concrete enough to investigate.
 
 ## What to submit
 
-Submit both of the following through Canvas:
+Submit **one project paragraph** through Canvas, containing the six elements
+below. That is the only deliverable for this checkpoint.
 
-1. **One project paragraph** containing the six elements below.
-2. **An initialized `RESEARCH_RECORD.md`** copied from
-   [`RESEARCH_RECORD_TEMPLATE.md`](RESEARCH_RECORD_TEMPLATE.md), placed at the
-   root of your project repository, and committed to Git.
+## What to start, but not submit
+
+Also begin your **`RESEARCH_RECORD.md`**: copy
+[`RESEARCH_RECORD_TEMPLATE.md`](RESEARCH_RECORD_TEMPLATE.md) to the root of
+your project repository, rename it exactly `RESEARCH_RECORD.md`, and commit it
+to Git. It is first collected with **Homework 6 in Weeks 10–11**, not now.
+
+Start it this week anyway, because the record's value is in its timestamps. A
+pre-analysis plan is only evidence that you committed to something in advance
+if the commit history shows when you wrote it, and that history cannot be
+created after the fact. Initializing the Identity and Information Contract
+sections, the feasible baseline and primary metric, the lockbox rule, and one
+dated decision-log entry costs little now and is what the later milestones
+build on.
 
 Unknown details do not need to be invented. Write `not applicable yet` or
 `provisional` and identify what must be learned next.
