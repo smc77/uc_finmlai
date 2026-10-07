@@ -128,7 +128,7 @@ decision relevance, limitations, and reproducibility. See the completed
   initialize your project-root `RESEARCH_RECORD.md` this week — it is not submitted until
   Homework 6, but its value depends on timestamps that cannot be created retroactively.
 - **Weeks 7–9:** test data feasibility and build a compact literature map of the
-  closest work.
+  closest work — see [`WEEKS7_9_CHECKPOINT.md`](WEEKS7_9_CHECKPOINT.md).
 - **Weeks 10–11:** full proposal + literature synthesis + working baseline
   checkpoint — this is **HW6** (`homework/hw6/`). Submit the updated record with
   the pre-analysis plan and lockbox rule committed.

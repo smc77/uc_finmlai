@@ -85,7 +85,8 @@ than inventing a contribution. The literature map is developed during Weeks
 ## What comes next
 
 - **Weeks 7–9:** investigate data feasibility and refine the information
-  contract while beginning a literature map of the closest research.
+  contract while beginning a literature map of the closest research — see
+  [`WEEKS7_9_CHECKPOINT.md`](WEEKS7_9_CHECKPOINT.md).
 - **Weeks 10–11 / Homework 6:** submit the full proposal, literature synthesis,
   runnable baseline, updated research record, and a committed pre-analysis plan.
 - **Before the final test:** freeze the selection rule and keep the final

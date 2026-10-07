@@ -56,7 +56,7 @@ stories told after the fact).
 ## Optional supplementary reading
 
 - Michaud, R. (1989), "The Markowitz Optimization Enigma" — the foundational
-  diagnosis of the error-amplification problem we previewed for Wk 8A.
+  diagnosis of the error-amplification problem developed in Lecture 7A.
 - López de Prado, *Advances in Financial Machine Learning*, Ch. 2 — denoising
   covariance matrices via random-matrix theory.
 - Ledoit & Wolf, "Honey, I Shrunk the Sample Covariance Matrix" — the
@@ -70,9 +70,9 @@ stories told after the fact).
 | Day        | Activity                                                |
 |------------|---------------------------------------------------------|
 | Day 1      | Read Ch 19; sketch the optimization template for OLS    |
-| Day 2      | Attend Lecture A; run `week7_demos.ipynb` Demos 1–3     |
+| Day 2      | Attend Lecture A; run `week7_demos.ipynb` Demos 1–4     |
 | Day 3      | Read Ch 20; trace the scree-plot logic                  |
 | Day 4      | Read Ch 21; focus on the tradeability caveat            |
-| Day 5      | Attend Lecture B; run `week7_demos.ipynb` Demos 4–6     |
+| Day 5      | Attend Lecture B; run `week7_demos.ipynb` Demos 5–9     |
 | Day 6–7    | Pick one of: build a clustered-sector view of a basket  |
 |            | of ETFs, or apply MP filtering to a sample covariance   |
