@@ -30,6 +30,14 @@ Three principles organize the week:
    claims.** A pattern can be visible, above a noise benchmark, and still too
    unstable or too late to support the intended action.
 
+For a fixed-income application, the optional example at the end of
+`week7_demos.ipynb` fits PCA to daily Treasury yield changes, 1961 to the present,
+and shows the leading components becoming level-, slope-, and curvature-like risk
+directions. It also checks whether those names survive a refit on a different era,
+which is the evidence a name requires. Explaining the curve is still not the same
+as trading it: translating these directions into portfolio P&L needs key-rate
+durations, which the example notes but does not compute.
+
 ## Core ideas
 
 1. **An optimization problem has a variable, objective, and feasible set.** The

@@ -55,6 +55,9 @@ stories told after the fact).
 
 ## Optional supplementary reading
 
+- Course research note, [“PCA on the yield curve”](../yield_curve_pca_note.pdf) — an
+  applied treatment of yield changes, level/slope/curvature, regime dependence, and
+  component-based interest-rate hedging.
 - Michaud, R. (1989), "The Markowitz Optimization Enigma" — the foundational
   diagnosis of the error-amplification problem developed in Lecture 7A.
 - López de Prado, *Advances in Financial Machine Learning*, Ch. 2 — denoising
