@@ -32,7 +32,9 @@ Three principles organize the week:
    job. Flexibility in a hedging policy must still beat a transparent rule on
    held-out paths.
 
-## Core ideas — learning a pricing function (Part A)
+## Core ideas
+
+### Learning a pricing function (Part A)
 
 1. **Implied volatility is a quote coordinate, not a physical observation.** It
    is the number that makes Black–Scholes reproduce a market price. A smile or
@@ -87,7 +89,7 @@ Three principles organize the week:
     Judge the frozen policy's value on independent paths, not the
     continuation regression score; training-path value is optimistic.
 
-## Core ideas — learning a hedging policy (Part B)
+### Learning a hedging policy (Part B)
 
 14. **Replication holds only under its assumptions.** Black–Scholes delta
     replicates the option under continuous trading, no costs, constant-volatility
