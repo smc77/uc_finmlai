@@ -1,7 +1,8 @@
 # Week 10 — Reading
 
-The local podcast research packet is indexed in
-[`papers/README.md`](papers/README.md).
+The lecture, notebook, and weekly summary are self-contained. The papers named
+under optional supplementary reading provide routes for deeper study; they are
+not required and are not bundled in the public student repository.
 
 ## Before Lecture A — Ch 28 (Text as Data)
 
@@ -64,9 +65,9 @@ clothing.
 | Day        | Activity                                                   |
 |------------|------------------------------------------------------------|
 | Day 1      | Read Ch 28; attempt Ch 28 exercises 1–2                    |
-| Day 2      | Watch Lecture A; run `week10_demos.ipynb` Demos 1–3       |
+| Day 2      | Watch Lecture A; run `week10_demos.ipynb` Demos 1–4       |
 | Day 3      | Read Ch 29 §1–3; sketch the four leakage paths             |
 | Day 4      | Read Ch 29 §4–6; watch Lecture B                            |
-| Day 5      | Run `week10_demos.ipynb` Demos 4–7; reproduce the timing collapse |
+| Day 5      | Run `week10_demos.ipynb` Demos 5–8; reproduce the timing collapse |
 | Day 6      | Complete Quiz 9 and freeze the HW6 question, split, metric  |
 | Day 7      | Run the first HW6 baseline and save one result table        |
