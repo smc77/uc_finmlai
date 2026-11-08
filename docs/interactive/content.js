@@ -32,6 +32,230 @@ window.COURSE_ATLAS = {
     }
   ],
 
+  courseMap: [
+    {
+      week: "00",
+      date: "Before class",
+      theme: "Setup",
+      phase: 0,
+      sessions: ["Get ready to work — GitHub, coding agents, Colab, and Python"],
+      outcome: "Clone the repository, run a notebook from a clean kernel, and review what a coding agent proposes.",
+      due: "",
+      materials: "lectures/week00",
+      atlas: []
+    },
+    {
+      week: "01",
+      date: "Aug 24",
+      theme: "Research method",
+      phase: 0,
+      sessions: [
+        "Applied financial ML — algorithms, the questions they open, and a research method",
+        "Returns, stationarity, and what markets remember"
+      ],
+      outcome: "Run a baseline and split by time; tell a faint real edge from a strong misleading backtest.",
+      due: "",
+      materials: "lectures/week01",
+      atlas: ["research-path", "six-words"]
+    },
+    {
+      week: "02",
+      date: "Aug 31",
+      theme: "Feature engineering",
+      phase: 0,
+      sessions: [
+        "From data to features — memories, transformations, and timestamps",
+        "Leakage, point-in-time data, and why you cannot shuffle"
+      ],
+      outcome: "Assemble point-in-time rows; purge and embargo chronological splits.",
+      due: "Q1",
+      materials: "lectures/week02",
+      atlas: ["information-clock"]
+    },
+    {
+      week: "03",
+      date: "Sep 7",
+      theme: "Regression",
+      phase: 1,
+      sessions: [
+        "OLS and the regression family — selection, shrinkage, and robust alternatives",
+        "Forecast evaluation and the first long–short strategy"
+      ],
+      outcome: "Fit, select, shrink, and score a forecast; reconcile it into a trading ledger.",
+      due: "HW1 · Q2",
+      materials: "lectures/week03",
+      atlas: ["regression-classification", "metrics"]
+    },
+    {
+      week: "04",
+      date: "Sep 14",
+      theme: "Classification",
+      phase: 1,
+      sessions: [
+        "Classification and calibration — score to probability to decision",
+        "Forward validation and model selection"
+      ],
+      outcome: "Calibrate a classifier, set a cost-based threshold, and build purged forward splits.",
+      due: "Q3",
+      materials: "lectures/week04",
+      atlas: ["regression-classification", "train-validate-test"]
+    },
+    {
+      week: "05",
+      date: "Sep 21",
+      theme: "Trees",
+      phase: 1,
+      sessions: [
+        "Decision trees and random forests — interactions, overfitting, and no extrapolation",
+        "Gradient boosting and tuning — early stopping, finance style"
+      ],
+      outcome: "Fit trees, forests, and boosting; read importance without mistaking it for mechanism.",
+      due: "HW2 · Q4",
+      materials: "lectures/week05",
+      atlas: ["trees"]
+    },
+    {
+      week: "06",
+      date: "Sep 28",
+      theme: "Evaluation",
+      phase: 1,
+      sessions: [
+        "Metrics, costs, and the deflated Sharpe ratio",
+        "Double descent and the virtue of complexity"
+      ],
+      outcome: "Compute rank IC, net-of-cost Sharpe, and deflated Sharpe; explain what search did to the best number.",
+      due: "Q5 · Project idea",
+      materials: "lectures/week06",
+      atlas: ["train-validate-test", "metrics"]
+    },
+    {
+      week: "07",
+      date: "Oct 5",
+      theme: "Optimization",
+      phase: 1,
+      sessions: [
+        "Optimization — convexity, gradient descent, and the optimizer as amplifier",
+        "PCA and clustering — structure without labels, with a tradeability caveat"
+      ],
+      outcome: "Fit under a chosen loss; use PCA and clusters as dated, refittable objects.",
+      due: "HW3 · Q6",
+      materials: "lectures/week07",
+      atlas: ["optimization-unsupervised"]
+    },
+    {
+      week: "08",
+      date: "Oct 12",
+      theme: "Portfolio decisions and neural networks",
+      phase: 2,
+      sessions: [
+        "From scores to positions, and mean–variance fragility",
+        "Neural-network foundations, and the verdict on tabular returns"
+      ],
+      outcome: "Turn scores into weights, volatility-target a portfolio, and judge when a network earns its cost.",
+      due: "HW4 · Q7",
+      materials: "lectures/week08",
+      atlas: ["portfolio", "neural-networks"]
+    },
+    {
+      week: "09",
+      date: "Oct 19",
+      theme: "Neural pricing and hedging",
+      phase: 2,
+      sessions: [
+        "Learning a pricing function — options, surfaces, and four error ledgers",
+        "Learning a hedging policy — replication, frictions, and changed worlds"
+      ],
+      outcome: "Train and audit a pricing surrogate; separate model, numerical, and calibration error.",
+      due: "HW5 · Q8",
+      materials: "lectures/week09",
+      atlas: ["pricing-hedging"]
+    },
+    {
+      week: "10",
+      date: "Oct 26",
+      theme: "Textual analysis",
+      phase: 3,
+      sessions: [
+        "Turning financial text into features — counts, embeddings, and the finance lexicon",
+        "Sentiment, retrieval, and the document clock"
+      ],
+      outcome: "Build TF–IDF and embedding features; date a document to what could have existed.",
+      due: "Q9",
+      materials: "lectures/week10",
+      atlas: ["financial-text"]
+    },
+    {
+      week: "11",
+      date: "Nov 2",
+      theme: "LLM systems",
+      phase: 3,
+      sessions: [
+        "LLMs and retrieval-augmented generation — decoder, reading room, and authority map",
+        "Evaluating LLM systems — claims, abstention, injection, and lifecycle"
+      ],
+      outcome: "Assemble a dated context packet; label claims, fix denominators, and freeze a threshold.",
+      due: "HW6 · Q10",
+      materials: "lectures/week11",
+      atlas: ["llm-systems"]
+    },
+    {
+      week: "12",
+      date: "Nov 9",
+      theme: "Execution and reinforcement learning",
+      phase: 3,
+      sessions: [
+        "Market microstructure and optimal execution — order book, impact, and schedules",
+        "Reinforcement-learning foundations — MDPs, exact values, and Q-learning"
+      ],
+      outcome: "Read and stress an Almgren–Chriss schedule; write an environment contract.",
+      due: "Q11",
+      materials: "",
+      atlas: ["execution", "reinforcement-learning"]
+    },
+    {
+      week: "13",
+      date: "Nov 16",
+      theme: "Policies and causal inference",
+      phase: 3,
+      sessions: [
+        "Learning a policy — recorded paths, responsive environments, and bounded authority",
+        "Learning an intervention effect — the missing counterfactual and difference-in-differences"
+      ],
+      outcome: "Run a tabular policy; work a difference-in-differences design and state what identifies it.",
+      due: "HW7 · Q12",
+      materials: "",
+      atlas: ["reinforcement-learning", "causal-policy"]
+    },
+    {
+      week: "14",
+      date: "Nov 23",
+      theme: "Governance",
+      phase: 4,
+      sessions: [
+        "From result to governed decision — fairness, model risk, reasons, monitoring, and retirement",
+        "Final-project clinic and synthesis"
+      ],
+      outcome: "Compute group rates and a fairness criterion; carry a result into a governed decision.",
+      due: "Q13",
+      materials: "",
+      atlas: ["governance", "evidence-chain"]
+    },
+    {
+      week: "15",
+      date: "Nov 30",
+      theme: "Capstone",
+      phase: 4,
+      sessions: [
+        "Student presentations — a 10–12 minute research result",
+        "Final review — what the methods make possible, and how results travel"
+      ],
+      outcome: "Present a defensible result from question to decision.",
+      due: "Final · Q14",
+      materials: "",
+      atlas: ["research-path", "evidence-chain"]
+    }
+  ],
+
   topics: [
     {
       id: "research-path",
@@ -790,28 +1014,5 @@ window.COURSE_ATLAS = {
     }
   ],
 
-  glossary: [
-    ["Baseline", "A simple, feasible procedure used as the minimum credible opponent for a more complex method."],
-    ["Calibration", "Agreement between stated probabilities and observed event frequencies among comparable cases."],
-    ["Counterfactual", "The outcome that would have occurred under an action or condition not observed for the same case."],
-    ["Decision rule", "The mapping from model output to an action, threshold, or position size."],
-    ["Embedding", "A learned vector representation that preserves selected aspects of similarity or structure."],
-    ["Feature", "Information supplied to a model and admissible at the historical decision time."],
-    ["Implementation shortfall", "A stated comparison between an implemented order and a decision-price benchmark, including a treatment of unfilled quantity."],
-    ["Leakage", "Use of information, labels, fitted transformations, or choices that would not have been available at the historical decision time."],
-    ["Model", "A fitted rule that maps inputs to an output such as a number, score, probability, representation, or action."],
-    ["Point-in-time data", "Values and versions reconstructed as they were actually available at each historical moment."],
-    ["Policy", "A rule that maps a state or information set to an action."],
-    ["Purging", "Removing training observations whose label windows overlap an evaluation boundary."],
-    ["Rank IC", "A cross-sectional correlation between model scores and later outcomes, commonly computed separately by date."],
-    ["Retrieval", "The process of finding and ranking records or passages relevant to a query."],
-    ["Row", "One defined case at one defined decision time."],
-    ["Score", "A model output useful for ordering cases but not necessarily interpretable as a probability."],
-    ["Support", "The presence of historical examples for the actions a proposed policy would take in comparable states."],
-    ["Target", "The later label or outcome a supervised procedure is trained to estimate."],
-    ["Test data", "Observations kept outside fitting and selection and used to judge the frozen procedure."],
-    ["Validation data", "Development observations used to choose among features, models, settings, thresholds, prompts, or stopping rules."],
-    ["Walk-forward evaluation", "A chronological procedure that repeatedly fits on eligible history and predicts a later block."],
-    ["Volatility targeting", "Scaling portfolio exposure toward a declared risk target rather than directly toward expected return."]
-  ]
+  glossary: []
 };

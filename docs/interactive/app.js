@@ -11,6 +11,9 @@
   const glossaryToggle = document.getElementById("glossary-toggle");
   const glossaryClose = document.getElementById("glossary-close");
   const glossarySearch = document.getElementById("glossary-search");
+  const glossaryScope = document.getElementById("glossary-scope");
+  const glossaryCategory = document.getElementById("glossary-category");
+  const glossaryCount = document.getElementById("glossary-count");
   const glossaryList = document.getElementById("glossary-list");
   const scrim = document.getElementById("scrim");
 
@@ -72,16 +75,19 @@
     currentTopic = null;
     renderNavigation();
     document.title = "Financial Machine Learning — A Course Atlas";
+    const sessionCount = atlas.courseMap.reduce((total, week) => total + week.sessions.length, 0);
+    const courseMapUrl = "https://github.com/smc77/uc_finmlai/blob/main/docs/course_map.md";
     app.innerHTML = `
       <section class="overview-hero">
         <div>
           <p class="kicker">FIN 7057 · Financial Machine Learning and AI</p>
-          <h1 class="display-title">From dated<br>information to a<br><em>defensible decision.</em></h1>
-          <p class="hero-deck">An interactive map of the course's central argument: models matter, but the evidence chain around them matters more.</p>
+          <h1 class="display-title">The course,<br>mapped from<br><em>data to decision.</em></h1>
+          <p class="hero-deck">A week-by-week guide to the methods, decisions, and standards of evidence that make financial machine learning useful.</p>
         </div>
         <aside class="hero-note">
-          <p>Use this atlas as a review, a project checklist, or a way to locate a method inside the full research process.</p>
-          <small>18 ideas · 5 chapters · one recurring decision</small>
+          <p>Start with the calendar below, then open an atlas topic when you want the larger argument, an interactive demonstration, or a project checklist.</p>
+          <button class="hero-map-link" type="button" data-course-map-jump>Browse all weeks ↓</button>
+          <small>16 weeks including setup · ${sessionCount} sessions · ${atlas.topics.length} interactive deep dives</small>
         </aside>
       </section>
 
@@ -102,26 +108,74 @@
         <p class="pipeline-detail" id="pipeline-detail">${pipelineNotes[overviewStage]}</p>
       </section>
 
-      <section class="chapters" aria-label="Course chapters">
-        ${atlas.chapters.map((chapter) => `
-          <article class="chapter-overview">
-            <div class="chapter-index">${chapter.number}</div>
-            <div class="chapter-heading">
-              <h2>${esc(chapter.title)}</h2>
-              <p>${esc(chapter.description)}</p>
-              <div class="chapter-topic-list">
-                ${chapter.topics.map((id) => {
-                  const { topic, index } = topicById.get(id);
-                  return `
-                    <a class="chapter-topic" href="#${topic.id}">
-                      <span class="topic-number">${String(index + 1).padStart(2, "0")}</span>
-                      <strong>${esc(topic.title)}</strong>
-                      <small>${esc(topic.week)}</small>
-                    </a>`;
-                }).join("")}
+      <section class="course-map-home" aria-labelledby="course-map-heading">
+        <div class="course-map-intro">
+          <p class="kicker">The complete course map</p>
+          <div>
+            <h2 id="course-map-heading">What the course covers, week by week.</h2>
+            <p>Each week adds a method and a burden of proof. The sequence moves from point-in-time data to fitted models, implemented decisions, and claims that can survive scrutiny.</p>
+            <a href="${courseMapUrl}">Open the repository course map ↗</a>
+          </div>
+        </div>
+
+        <div class="course-map-toolbar">
+          <div class="course-map-toolbar-label">
+            <label class="kicker" for="course-topic-search">Find a topic</label>
+            <p id="course-search-status" aria-live="polite">${atlas.courseMap.length} weeks · ${sessionCount} sessions</p>
+          </div>
+          <div>
+            <input id="course-topic-search" class="course-topic-search" type="search" data-course-search aria-describedby="course-search-status" placeholder="Try “calibration,” “PCA,” or “governance”" autocomplete="off">
+            <nav class="course-phase-nav" aria-label="Jump to a course phase">
+              ${atlas.chapters.map((chapter, phaseIndex) => `<button type="button" data-course-phase-jump="${phaseIndex}"><span>${chapter.number}</span>${esc(chapter.title)}</button>`).join("")}
+            </nav>
+          </div>
+        </div>
+
+        ${atlas.chapters.map((chapter, phaseIndex) => {
+          const weeks = atlas.courseMap.filter((week) => week.phase === phaseIndex);
+          return `<section class="course-phase" data-course-phase-section="${phaseIndex}" aria-labelledby="phase-${phaseIndex}">
+            <header class="course-phase-heading">
+              <span>${chapter.number}</span>
+              <div>
+                <h2 id="phase-${phaseIndex}">${esc(chapter.title)}</h2>
+                <p>${esc(chapter.description)}</p>
               </div>
+            </header>
+            <div class="course-weeks">
+              ${weeks.map((week) => {
+                const materialsUrl = week.materials ? lectureUrl(week.materials) : courseMapUrl;
+                return `<article class="course-week" id="week-${week.week}" data-course-week>
+                  <div class="week-stamp">
+                    <span>Week ${week.week}</span>
+                    <small>${esc(week.date)}</small>
+                  </div>
+                  <div class="week-content">
+                    <h3>${esc(week.theme)}</h3>
+                    <ol class="week-sessions">
+                      ${week.sessions.map((session, sessionIndex) => `<li><span>${String.fromCharCode(65 + sessionIndex)}</span><strong>${esc(session)}</strong></li>`).join("")}
+                    </ol>
+                    <div class="week-outcome">
+                      <span>You leave able to</span>
+                      <p>${esc(week.outcome)}</p>
+                    </div>
+                  </div>
+                  <footer class="week-footer">
+                    <div class="week-atlas-links">
+                      ${week.atlas.map((id) => {
+                        const match = topicById.get(id);
+                        return match ? `<a href="#${id}">${esc(match.topic.title)}</a>` : "";
+                      }).join("")}
+                    </div>
+                    <div class="week-admin">
+                      ${week.due ? `<span>${esc(week.due)}</span>` : ""}
+                      <a href="${materialsUrl}">${week.materials ? "Weekly materials" : "Course map"} ↗</a>
+                    </div>
+                  </footer>
+                </article>`;
+              }).join("")}
             </div>
-          </article>`).join("")}
+          </section>`;
+        }).join("")}
       </section>
       <p class="site-credit">University of Cincinnati · Carl H. Lindner College of Business · Conceptual examples, not investment advice</p>`;
     window.scrollTo(0, 0);
@@ -141,6 +195,8 @@
     const titleParts = topic.title.split(" ");
     const lastWord = titleParts.pop();
     const styledTitle = `${esc(titleParts.join(" "))} <em>${esc(lastWord)}</em>`;
+    const relatedTerms = atlas.glossary.filter((entry) => entry.topics.includes(topic.id));
+    const visibleTerms = relatedTerms.slice(0, 12);
 
     app.innerHTML = `
       <article>
@@ -170,6 +226,17 @@
                 <span>${esc(label)}</span>
                 <strong>${esc(text)}</strong>
               </div>`).join("")}
+          </section>
+
+          <section class="topic-glossary" aria-label="Vocabulary used in this topic">
+            <div>
+              <p class="kicker">Vocabulary in this topic</p>
+              <p>Open a definition without leaving the argument.</p>
+            </div>
+            <div class="topic-term-list">
+              ${visibleTerms.map((entry) => `<button type="button" data-glossary-term="${esc(entry.term)}">${esc(entry.term)}</button>`).join("")}
+              ${relatedTerms.length > visibleTerms.length ? `<button class="topic-term-more" type="button" data-glossary-topic>All ${relatedTerms.length} terms →</button>` : ""}
+            </div>
           </section>
 
           <section class="interactive-figure" aria-labelledby="figure-title">
@@ -217,6 +284,32 @@
 
     renderFigure(topic);
     window.scrollTo(0, 0);
+  }
+
+  function filterCourseMap(query = "") {
+    const courseMap = document.querySelector(".course-map-home");
+    if (!courseMap) return;
+    const normalized = query.trim().toLowerCase();
+    let visibleWeeks = 0;
+    let visibleSessions = 0;
+    courseMap.querySelectorAll("[data-course-week]").forEach((week) => {
+      const matches = !normalized || week.textContent.toLowerCase().includes(normalized);
+      week.hidden = !matches;
+      if (matches) {
+        visibleWeeks += 1;
+        visibleSessions += week.querySelectorAll(".week-sessions li").length;
+      }
+    });
+    courseMap.querySelectorAll("[data-course-phase-section]").forEach((phase) => {
+      const visible = [...phase.querySelectorAll("[data-course-week]")].some((week) => !week.hidden);
+      phase.hidden = !visible;
+      const phaseButton = courseMap.querySelector(`[data-course-phase-jump="${phase.dataset.coursePhaseSection}"]`);
+      if (phaseButton) phaseButton.hidden = !visible;
+    });
+    const status = document.getElementById("course-search-status");
+    if (!normalized) status.textContent = `${visibleWeeks} weeks · ${visibleSessions} sessions`;
+    else if (visibleWeeks) status.textContent = `${visibleWeeks} matching week${visibleWeeks === 1 ? "" : "s"} · ${visibleSessions} sessions shown`;
+    else status.textContent = `No weeks match “${query.trim()}”`;
   }
 
   function svgOpen(label) {
@@ -496,15 +589,47 @@
       </div>`;
   }
 
-  function renderGlossary(query = "") {
+  function renderGlossary(query = glossarySearch.value) {
     const normalized = query.trim().toLowerCase();
-    const entries = atlas.glossary.filter(([term, definition]) => `${term} ${definition}`.toLowerCase().includes(normalized));
+    const scope = glossaryScope.value;
+    const category = glossaryCategory.value;
+    const entries = atlas.glossary.filter((entry) => {
+      const searchable = [entry.term, ...entry.aliases, entry.definition, entry.example, entry.category, ...entry.seeAlso].join(" ").toLowerCase();
+      const matchesQuery = searchable.includes(normalized);
+      const matchesCategory = category === "all" || entry.category === category;
+      const matchesScope = scope === "all" || (scope === "core" && entry.core) || (scope === "topic" && currentTopic && entry.topics.includes(currentTopic.id));
+      return matchesQuery && matchesCategory && matchesScope;
+    });
+    glossaryCount.textContent = `${entries.length} of ${atlas.glossary.length} terms`;
     glossaryList.innerHTML = entries.length
-      ? entries.map(([term, definition]) => `<div class="glossary-entry"><dt>${esc(term)}</dt><dd>${esc(definition)}</dd></div>`).join("")
+      ? entries.map((entry) => {
+        const topicLinks = entry.topics
+          .map((id) => topicById.get(id))
+          .filter(Boolean)
+          .map(({ topic }) => `<a href="#${topic.id}">${esc(topic.title)}</a>`)
+          .join("");
+        return `<div class="glossary-entry">
+          <div class="glossary-entry-heading">
+            <dt>${esc(entry.term)}</dt>
+            <span>${entry.core ? "Core" : "Method"}</span>
+          </div>
+          ${entry.aliases.length ? `<dd class="glossary-aliases">Also: ${entry.aliases.map(esc).join(" · ")}</dd>` : ""}
+          <dd>${esc(entry.definition)}</dd>
+          ${entry.example ? `<dd class="glossary-example"><strong>Example</strong>${esc(entry.example)}</dd>` : ""}
+          <dd class="glossary-meta"><span>${esc(entry.category)}</span>${topicLinks ? `<span class="glossary-topics">Used in ${topicLinks}</span>` : ""}</dd>
+          ${entry.seeAlso.length ? `<dd class="glossary-see-also"><span>See also</span>${entry.seeAlso.map((related) => `<button type="button" data-glossary-query="${esc(related)}">${esc(related)}</button>`).join("")}</dd>` : ""}
+        </div>`;
+      }).join("")
       : `<div class="glossary-entry"><dd>No matching term.</dd></div>`;
   }
 
-  function openGlossary() {
+  function openGlossary(query = "", scope = null) {
+    if (query) glossarySearch.value = query;
+    const topicOption = glossaryScope.querySelector('option[value="topic"]');
+    topicOption.disabled = !currentTopic;
+    if (!currentTopic && glossaryScope.value === "topic") glossaryScope.value = "all";
+    if (scope && (scope !== "topic" || currentTopic)) glossaryScope.value = scope;
+    renderGlossary();
     glossary.classList.add("open");
     glossary.setAttribute("aria-hidden", "false");
     glossaryToggle.setAttribute("aria-expanded", "true");
@@ -537,6 +662,27 @@
   });
 
   app.addEventListener("click", (event) => {
+    const courseMapJump = event.target.closest("[data-course-map-jump]");
+    if (courseMapJump) {
+      document.getElementById("course-map-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    const phaseJump = event.target.closest("[data-course-phase-jump]");
+    if (phaseJump) {
+      document.getElementById(`phase-${phaseJump.dataset.coursePhaseJump}`).scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    const glossaryTerm = event.target.closest("[data-glossary-term]");
+    if (glossaryTerm) {
+      openGlossary(glossaryTerm.dataset.glossaryTerm);
+      return;
+    }
+    const topicGlossary = event.target.closest("[data-glossary-topic]");
+    if (topicGlossary) {
+      glossarySearch.value = "";
+      openGlossary("", "topic");
+      return;
+    }
     const overviewButton = event.target.closest("[data-overview-stage]");
     if (overviewButton) {
       overviewStage = Number(overviewButton.dataset.overviewStage);
@@ -552,6 +698,10 @@
   });
 
   app.addEventListener("input", (event) => {
+    if (event.target.matches("[data-course-search]")) {
+      filterCourseMap(event.target.value);
+      return;
+    }
     if (event.target.matches("[data-figure-range]") && currentTopic) {
       getVisualState(currentTopic).value = Number(event.target.value);
       renderFigure(currentTopic);
@@ -571,13 +721,29 @@
     localStorage.setItem("finml-atlas-mode", condensed ? "condensed" : "expanded");
   });
 
-  glossaryToggle.addEventListener("click", openGlossary);
+  glossaryToggle.addEventListener("click", () => openGlossary());
   glossaryClose.addEventListener("click", closeOverlays);
   glossarySearch.addEventListener("input", () => renderGlossary(glossarySearch.value));
+  glossaryScope.addEventListener("change", () => renderGlossary());
+  glossaryCategory.addEventListener("change", () => renderGlossary());
+  glossaryList.addEventListener("click", (event) => {
+    const related = event.target.closest("[data-glossary-query]");
+    if (!related) return;
+    glossarySearch.value = related.dataset.glossaryQuery;
+    glossaryScope.value = "all";
+    glossaryCategory.value = "all";
+    renderGlossary();
+    glossarySearch.focus();
+  });
   scrim.addEventListener("click", closeOverlays);
 
   window.addEventListener("hashchange", route);
   window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && event.target.matches?.("[data-course-search]") && event.target.value) {
+      event.target.value = "";
+      filterCourseMap();
+      return;
+    }
     if (event.key === "Escape") closeOverlays();
   });
 
@@ -586,6 +752,9 @@
     readingMode.textContent = "Expand";
   }
 
+  [...new Set(atlas.glossary.map((entry) => entry.category))].sort().forEach((category) => {
+    glossaryCategory.insertAdjacentHTML("beforeend", `<option value="${esc(category)}">${esc(category)}</option>`);
+  });
   renderGlossary();
   renderNavigation();
   route();

@@ -23,7 +23,7 @@ s+=rect(475,215,205,68,"#efe4d5")+tx(578,240,"Usable version")+tx(578,265,hasRev
 return {html:svg(s),note:hasRevised?"The revised observation can now be used. Before March, it would be future information.":hasOriginal?"The first filing is available, but its later revision is not.":"The fiscal period may have ended, but its reported value is not yet available."}
 }
 function trees(){
-let s=tx(350,25,mode==="tree"?"A tree learns decision regions":mode==="forest"?"Independent trees → average prediction":"Boosting adds corrections in sequence",colors.ink,18);
+let s=tx(350,25,mode==="tree"?"A tree learns decision regions":mode==="forest"?"Randomized trees → average prediction":"Boosting adds corrections in sequence",colors.ink,18);
 s+=rect(24,45,395,225,"#f8f7f3");
 for(let i=0;i<57;i++){let x=39+(i*73)%366,y=59+(i*53+9*i*i)%196;let positive=(x<218&&y<158)||(x>=218&&y>139);s+=dot(x,y,4,positive?colors.blue:"#cf8665")}
 if(mode==="tree"){
@@ -34,7 +34,7 @@ s+=tx(221,300,step===0?"Blue and orange examples":step<3?"First split: momentum 
 } else if(mode==="forest"){
 const p=[0.9,1.5,0.6,1.2,0.8,1.1,0.7],n=Math.min(step,p.length),mean=n?p.slice(0,n).reduce((a,b)=>a+b,0)/n:0;
 for(let i=0;i<n;i++){let X=442+(i%2)*118,Y=50+Math.floor(i/2)*45;s+=rect(X,Y,106,38,"#d6e2df",colors.teal)+tx(X+53,Y+24,"Tree "+(i+1)+": "+p[i].toFixed(1)+"%",colors.ink,12)}
-s+=tx(555,268,n?"Average: "+mean.toFixed(2)+"%":"Build independent trees",colors.teal,17)
+s+=tx(555,268,n?"Average: "+mean.toFixed(2)+"%":"Build randomized trees",colors.teal,17)
 }else{
 const p=[0.40,0.28,0.17,0.09,0.05,0.02,0.01],n=Math.min(step,p.length),sum=p.slice(0,n).reduce((a,b)=>a+b,0);
 for(let i=0;i<n;i++){let X=440+(i%2)*119,Y=49+Math.floor(i/2)*46;s+=rect(X,Y,109,38,i===n-1?"#f1ddbc":"#e9e4d8")+tx(X+54,Y+24,(i===0?"Base":"Fix "+i)+" +"+p[i].toFixed(2),colors.ink,11)}
@@ -43,13 +43,13 @@ s+=tx(560,271,n?"Sum: "+sum.toFixed(2):"Fit first learner",colors.amber,17)
 return {html:svg(s),note:mode==="tree"?"Each new split partitions the feature space into smaller regions.":mode==="forest"?"Trees are trained separately on randomized data/features and combined by averaging.":"Each learner adds a correction to the current prediction, reducing the remaining loss in this illustrative sequence."}
 }
 function split(){
-let k=step,trainEnd=3+k;let s=tx(350,28,"Chronological walk-forward evaluation",colors.ink,18);
+let k=step,trainEnd=3+k;let s=tx(350,28,"Nested chronological evaluation",colors.ink,18);
 for(let i=0;i<15;i++){let x=28+i*43,col=i<trainEnd?colors.teal:i<trainEnd+2?colors.amber:i===trainEnd+2?colors.blue:"#d6d1c7";s+=rect(x,74,38,86,col,col)+tx(x+19,124,String(i+1).padStart(2,"0"),i<=trainEnd+2?"white":colors.ink,12)}
-s+=tx(155,193,"Green: fit the model",colors.teal,14)+tx(350,193,"Amber: choose settings",colors.amber,14)+tx(570,193,"Blue: untouched test",colors.blue,14);
+s+=tx(155,193,"Green: refit parameters",colors.teal,14)+tx(350,193,"Amber: inner validation",colors.amber,14)+tx(570,193,"Blue: outer evaluation",colors.blue,14);
 s+=rect(30,214,640,77,bad?"#ead4cd":"#d6e2df",bad?colors.red:colors.teal);
-s+=tx(350,244,bad?"TEST REUSED TO PICK THE WINNER":"TRAIN → VALIDATE → FREEZE → TEST",bad?colors.red:colors.teal,18);
-s+=tx(350,271,bad?"That period is development data, not independent test evidence.":"Advance the origin and repeat the forward experiment.",colors.ink,13);
-return {html:svg(s),note:bad?"Bad workflow: using final test performance to select a model destroys the independent assessment.":"The boundary moves forward; training, selection, and later assessment remain distinct."}
+s+=tx(350,244,bad?"OUTER RESULT USED TO REDESIGN":"FREEZE OUTER PROTOCOL → WALK FORWARD",bad?colors.red:colors.teal,18);
+s+=tx(350,271,bad?"That block is now development evidence, not untouched test evidence.":"Record each blue result; never redesign the protocol from it.",colors.ink,13);
+return {html:svg(s),note:bad?"Bad workflow: once an outer result changes features, settings, or rules, it becomes development evidence.":"Valid workflow: selection occurs inside the amber window, while the complete outer walk-forward protocol is frozen before the first blue result."}
 }
 function execution(){
 const ask=[{p:100.01,q:100},{p:100.02,q:120},{p:100.04,q:180},{p:100.07,q:220},{p:100.11,q:250}];
@@ -57,11 +57,11 @@ const target=qty,rate=25+urgency*1.2,fill=Math.min(target,Math.round(step*rate))
 let rem=fill,notional=0,filled=[];
 for(const a of ask){let f=Math.min(rem,a.q);rem-=f;filled.push(f);notional+=f*a.p}
 if(rem>0)notional+=rem*100.16;
-const avg=fill?notional/fill:0,cost=fill?(notional-100*fill):0;
-let s=tx(350,27,"Market buy order consumes the cheapest asks first",colors.ink,18)+tx(88,53,"ASK PRICE","#626964",12)+tx(329,53,"VISIBLE DEPTH → FILLED","#626964",12);
+const avg=fill?notional/fill:0,impact=fill?(notional-100*fill):0,unfilled=target-fill,opportunity=unfilled*.06,total=impact+opportunity;
+let s=tx(350,27,"Urgency exchanges impact for non-completion risk",colors.ink,18)+tx(88,53,"ASK PRICE","#626964",12)+tx(329,53,"VISIBLE DEPTH → FILLED","#626964",12);
 ask.forEach((a,i)=>{let y=65+i*41;s+=rect(27,y,115,33,"#e8e3da")+tx(85,y+23,"$"+a.p.toFixed(2),colors.ink,14)+rect(164,y,408,33,"#e5e3df");s+=`<rect x="164" y="${y}" width="${a.q*1.48}" height="33" rx="3" fill="#b1c6c4"/>`;s+=`<rect x="164" y="${y}" width="${filled[i]*1.48}" height="33" rx="3" fill="${colors.teal}"/>`;s+=tx(633,y+22,filled[i]+"/"+a.q,colors.ink,12)});
-s+=tx(121,299,"Filled "+fill+" / "+target,colors.teal,14)+tx(348,299,"Avg "+(fill?"$"+avg.toFixed(3):"—"),colors.ink,14)+tx(577,299,"Cost $"+cost.toFixed(2),colors.red,14);
-return {html:svg(s),note:"Illustrative fixed order book. Unfilled quantity: "+(target-fill)+" shares. The displayed cost is slippage against a $100 benchmark for filled shares only; it excludes opportunity cost on unfilled shares."}
+s+=tx(82,299,"Filled "+fill+" / "+target,colors.teal,13)+tx(245,299,"Impact $"+impact.toFixed(2),colors.red,13)+tx(425,299,"Unfilled proxy $"+opportunity.toFixed(2),colors.amber,13)+tx(614,299,"Total $"+total.toFixed(2),colors.ink,14);
+return {html:svg(s),note:"Illustrative convention: filled-share impact is measured against $100; each of the "+unfilled+" unfilled shares carries a $0.06 non-completion proxy. Average fill price: "+(fill?"$"+avg.toFixed(3):"not available")+". Change urgency and compare both channels."}
 }
 function draw(){
 const stage=document.getElementById("hero-visual"),note=document.getElementById("hero-note");if(!stage||!note)return;
@@ -77,8 +77,8 @@ stop();active=kind;step=0;mode="tree";bad=false;qty=500;urgency=50;
 target.innerHTML=`<div class="figure-stage" id="hero-visual" tabindex="0" aria-label="Animated teaching visualization; use the controls below to advance it"></div><div class="figure-controls"><div class="hero-controls"><button id="hero-play" type="button" data-hero="play">Play animation</button><button type="button" data-hero="step">Step →</button><button type="button" data-hero="reset">Reset</button><label>Scrub <input id="hero-step" type="range" min="0" max="${max[kind]}" value="0" data-hero-range="step"></label><small id="hero-step-label"></small></div><div class="hero-controls" id="hero-extras"></div><p class="figure-note" id="hero-note" aria-live="polite"></p><p class="lab-disclosure">Deterministic teaching simulation · values are illustrative, not empirical estimates or investment advice.</p></div>`;
 const extra=document.getElementById("hero-extras");
 if(kind==="trees")extra.innerHTML='<button type="button" data-hero-mode="tree" aria-pressed="true">Decision tree</button><button type="button" data-hero-mode="forest">Random forest</button><button type="button" data-hero-mode="boost">Gradient boosting</button>';
-if(kind==="split")extra.innerHTML='<button type="button" data-hero="bad" aria-pressed="false">Show test reuse (bad workflow)</button>';
-if(kind==="execution")extra.innerHTML='<label>Order size <select data-hero-select="qty"><option value="300">300 shares</option><option value="500" selected>500 shares</option><option value="800">800 shares</option></select></label><label>Urgency <input type="range" min="10" max="100" value="50" data-hero-range="urgency"> <span id="hero-urgency">50%</span></label>';
+if(kind==="split")extra.innerHTML='<button type="button" data-hero="bad" aria-pressed="false">Show outer-result reuse (bad workflow)</button>';
+if(kind==="execution")extra.innerHTML='<label>Order size <select data-hero-select="qty"><option value="300">300 shares</option><option value="500" selected>500 shares</option><option value="800">800 shares</option></select></label><label>Urgency / fill rate <input type="range" min="10" max="100" value="50" data-hero-range="urgency"> <span id="hero-urgency">50%</span></label>';
 draw();return true
 }
 document.addEventListener("click",event=>{

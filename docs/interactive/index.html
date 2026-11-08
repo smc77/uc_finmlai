@@ -52,13 +52,29 @@
       </div>
       <button class="icon-button" id="glossary-close" type="button" aria-label="Close glossary">×</button>
     </div>
-    <label class="search-label" for="glossary-search">Find a term</label>
-    <input class="search-input" id="glossary-search" type="search" placeholder="Try “leakage” or “calibration”" autocomplete="off">
+    <label class="search-label" for="glossary-search">Find a term, alias, or example</label>
+    <input class="search-input" id="glossary-search" type="search" placeholder="Try “look-ahead” or “final test”" autocomplete="off">
+    <div class="glossary-tools">
+      <label>Scope
+        <select id="glossary-scope">
+          <option value="all">All terms</option>
+          <option value="core">Core vocabulary</option>
+          <option value="topic">This topic</option>
+        </select>
+      </label>
+      <label>Category
+        <select id="glossary-category">
+          <option value="all">All categories</option>
+        </select>
+      </label>
+    </div>
+    <p class="glossary-count" id="glossary-count" aria-live="polite"></p>
     <dl id="glossary-list"></dl>
   </aside>
   <div class="scrim" id="scrim" hidden></div>
 
   <script src="content.js"></script>
+  <script src="glossary-data.js"></script>
   <script src="hero-labs.js"></script>
   <script src="computational-labs.js"></script>
   <script src="app.js"></script>
