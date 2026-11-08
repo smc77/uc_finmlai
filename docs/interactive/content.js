@@ -183,8 +183,8 @@ window.COURSE_ATLAS = {
       ],
       figure: {
         type: "comparison",
-        title: "Keep the output and action separate",
-        description: "Compare three answers produced from the same information.",
+        title: "Fit the function, then choose the action",
+        description: "Step through gradient updates. In classification, move the threshold independently of the fitted probability curve.",
         modes: ["Magnitude", "Score", "Probability"],
         panels: [
           ["Regression", "+1.4%", "An estimate of next-month return; useful when magnitude affects sizing."],
@@ -349,8 +349,8 @@ window.COURSE_ATLAS = {
       ],
       figure: {
         type: "scatter",
-        title: "Rotate the representation",
-        description: "The highlighted axis summarizes variation; it does not know the return target.",
+        title: "Watch unsupervised structure being fitted",
+        description: "Use power iteration to learn a principal axis, or alternate K-means assignment and center updates.",
         min: 0,
         max: 65,
         value: 24
@@ -388,8 +388,8 @@ window.COURSE_ATLAS = {
       ],
       figure: {
         type: "allocation",
-        title: "One ranking, three sizing rules",
-        description: "Switch the policy while holding the stock order fixed.",
+        title: "Move along the efficient frontier",
+        description: "Change the price placed on variance and watch the selected portfolio and its asset weights respond.",
         modes: ["Equal", "Score-sized", "Risk-sized"],
         weights: [[34, 33, 33], [58, 28, 14], [24, 43, 33]],
         notes: [
@@ -431,8 +431,8 @@ window.COURSE_ATLAS = {
       ],
       figure: {
         type: "network",
-        title: "Add capacity, not information",
-        description: "Increase hidden layers and watch the function class grow while the inputs stay the same.",
+        title: "Follow a prediction forward and a gradient backward",
+        description: "Step through an actual two-layer network, then train it on a deterministic XOR problem.",
         min: 1,
         max: 4,
         value: 2
@@ -636,8 +636,8 @@ window.COURSE_ATLAS = {
       ],
       figure: {
         type: "comparison",
-        title: "One state or changing states?",
-        description: "The difference determines whether continuation value matters.",
+        title: "Explore a bandit, then propagate Bellman value",
+        description: "Compare one-state exploration and cumulative regret with value updates across changing states.",
         modes: ["Bandit", "MDP"],
         panels: [
           ["Bandit", "choose → reward → repeat", "Actions reveal uncertain immediate rewards in a recurring decision state."],
@@ -677,8 +677,8 @@ window.COURSE_ATLAS = {
       ],
       figure: {
         type: "causal",
-        title: "Expose the missing branch",
-        description: "Toggle between the observed path and the counterfactual question.",
+        title: "Construct the missing counterfactual",
+        description: "Reveal a difference-in-differences estimate in stages, then break parallel trends and watch the bias appear.",
         modes: ["Observed", "Counterfactual"],
         notes: [
           "The historical record shows the selected action and one realized outcome.",

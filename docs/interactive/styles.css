@@ -945,10 +945,181 @@ body.condensed .topic-body { padding-top: 40px; }
 }
 
 /* Animated learning labs */
-.hero-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0}
-.hero-controls button,.hero-controls select{font:inherit;font-size:13px;padding:9px 13px;border:1px solid var(--rule-dark);border-radius:5px;background:var(--paper);color:var(--ink);cursor:pointer}
-.hero-controls button:hover,.hero-controls button[aria-pressed="true"]{background:var(--teal);color:white;border-color:var(--teal)}
-.hero-controls input[type="range"]{accent-color:var(--teal);max-width:160px}
-.hero-controls label{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
-#hero-visual{width:100%;overflow:hidden}#hero-visual svg{width:100%;height:auto;min-height:270px;max-height:440px}
-@media(prefers-reduced-motion:reduce){#hero-visual *{animation:none!important;transition:none!important}}
+.hero-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.hero-controls button,
+.hero-controls select,
+.lab-toolbar button,
+.lab-toolbar select {
+  min-height: 40px;
+  padding: 8px 13px;
+  border: 1px solid var(--rule-dark);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+
+.hero-controls button:hover,
+.hero-controls button[aria-pressed="true"],
+.lab-toolbar button:hover,
+.lab-toolbar button[aria-pressed="true"] {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: white;
+}
+
+.hero-controls input[type="range"],
+.lab-toolbar input[type="range"] {
+  max-width: 170px;
+  accent-color: var(--teal);
+}
+
+.hero-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#hero-visual {
+  width: 100%;
+  overflow: hidden;
+}
+
+#hero-visual svg {
+  width: 100%;
+  height: auto;
+  min-height: 270px;
+  max-height: 440px;
+}
+
+/* Computational labs keep the atlas's editorial restraint while making the
+   algorithm—not a decorative chart—the main teaching object. */
+.computational-lab {
+  width: 100%;
+}
+
+.lab-stage {
+  width: 100%;
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  padding: 18px 0 8px;
+  overflow: hidden;
+}
+
+.lab-stage svg {
+  display: block;
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+}
+
+.lab-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px 12px;
+  padding: 15px 0 11px;
+  border-top: 1px solid var(--rule);
+}
+
+.lab-toolbar > button:first-child {
+  min-width: 76px;
+  border-color: var(--teal);
+  background: var(--teal);
+  color: white;
+}
+
+.lab-toolbar > button:first-child[aria-pressed="true"] {
+  border-color: var(--red);
+  background: var(--red);
+}
+
+.lab-step {
+  min-width: 125px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+}
+
+.lab-segmented {
+  display: inline-flex;
+  margin-left: auto;
+}
+
+.lab-segmented button {
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+.lab-segmented button:first-child { border-radius: 4px 0 0 4px; }
+.lab-segmented button:last-child { border-radius: 0 4px 4px 0; }
+
+.lab-parameter {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.lab-parameter output {
+  min-width: 32px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.lab-toolbar [hidden] {
+  display: none !important;
+}
+
+.lab-note {
+  min-height: 48px;
+  margin: 0;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--rule);
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.lab-disclosure {
+  margin: 9px 0 16px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 740px) {
+  .lab-stage { min-height: 0; padding-top: 10px; overflow-x: auto; }
+  .lab-stage svg { min-width: 560px; }
+  .lab-toolbar { align-items: stretch; }
+  .lab-toolbar > button { flex: 1 1 74px; }
+  .lab-step { flex: 1 0 100%; order: 4; min-width: 0; }
+  .lab-segmented { width: 100%; margin-left: 0; order: 5; }
+  .lab-segmented button { flex: 1; }
+  .lab-parameter { width: 100%; order: 6; white-space: normal; }
+  .lab-parameter input[type="range"] { flex: 1; max-width: none; }
+  .lab-note { min-height: 70px; }
+  #hero-visual { overflow-x: auto; }
+  #hero-visual svg { min-width: 560px; min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hero-visual *, .lab-stage * { animation: none !important; transition: none !important; }
+}
