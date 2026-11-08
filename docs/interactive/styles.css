@@ -943,3 +943,12 @@ body.condensed .topic-body { padding-top: 40px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Animated learning labs */
+.hero-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0}
+.hero-controls button,.hero-controls select{font:inherit;font-size:13px;padding:9px 13px;border:1px solid var(--rule-dark);border-radius:5px;background:var(--paper);color:var(--ink);cursor:pointer}
+.hero-controls button:hover,.hero-controls button[aria-pressed="true"]{background:var(--teal);color:white;border-color:var(--teal)}
+.hero-controls input[type="range"]{accent-color:var(--teal);max-width:160px}
+.hero-controls label{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+#hero-visual{width:100%;overflow:hidden}#hero-visual svg{width:100%;height:auto;min-height:270px;max-height:440px}
+@media(prefers-reduced-motion:reduce){#hero-visual *{animation:none!important;transition:none!important}}
