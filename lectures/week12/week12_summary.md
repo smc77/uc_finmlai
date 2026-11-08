@@ -134,4 +134,3 @@ You should be able to:
 - distinguish immediate reward, return, state value, and action value;
 - read one numerical Bellman backup; and
 - explain why simulator optimality is conditional on the environment contract.
-
