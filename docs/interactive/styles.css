@@ -893,7 +893,13 @@ body.condensed .topic-body { padding-top: 40px; }
   .wordmark-mark { width: 31px; height: 31px; font-size: 18px; }
   .wordmark strong { font-size: 0; }
   .wordmark strong::after { content: "Financial ML"; font-size: 14px; }
-  .wordmark small { display: none; }
+  .wordmark small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: .07em;
+  }
+  .wordmark-course,
+  .wordmark-context { display: none; }
   .header-actions { gap: 14px; }
   #reading-mode { display: none; }
   .mobile-only { display: inline-block; }
