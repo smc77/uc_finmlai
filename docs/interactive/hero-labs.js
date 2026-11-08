@@ -74,7 +74,7 @@ const play=document.getElementById("hero-play");if(play)play.textContent=timer?"
 function render(topic,target){
 const kind=ids[topic.id];if(!kind){stop();active=null;return false}
 stop();active=kind;step=0;mode="tree";bad=false;qty=500;urgency=50;
-target.innerHTML=`<div class="figure-stage" id="hero-visual"></div><div class="figure-controls"><div class="hero-controls"><button id="hero-play" type="button" data-hero="play">Play animation</button><button type="button" data-hero="step">Step →</button><button type="button" data-hero="reset">Reset</button><label>Scrub <input id="hero-step" type="range" min="0" max="${max[kind]}" value="0" data-hero-range="step"></label><small id="hero-step-label"></small></div><div class="hero-controls" id="hero-extras"></div><p class="figure-note" id="hero-note" aria-live="polite"></p></div>`;
+target.innerHTML=`<div class="figure-stage" id="hero-visual" tabindex="0" aria-label="Animated teaching visualization; use the controls below to advance it"></div><div class="figure-controls"><div class="hero-controls"><button id="hero-play" type="button" data-hero="play">Play animation</button><button type="button" data-hero="step">Step →</button><button type="button" data-hero="reset">Reset</button><label>Scrub <input id="hero-step" type="range" min="0" max="${max[kind]}" value="0" data-hero-range="step"></label><small id="hero-step-label"></small></div><div class="hero-controls" id="hero-extras"></div><p class="figure-note" id="hero-note" aria-live="polite"></p><p class="lab-disclosure">Deterministic teaching simulation · values are illustrative, not empirical estimates or investment advice.</p></div>`;
 const extra=document.getElementById("hero-extras");
 if(kind==="trees")extra.innerHTML='<button type="button" data-hero-mode="tree" aria-pressed="true">Decision tree</button><button type="button" data-hero-mode="forest">Random forest</button><button type="button" data-hero-mode="boost">Gradient boosting</button>';
 if(kind==="split")extra.innerHTML='<button type="button" data-hero="bad" aria-pressed="false">Show test reuse (bad workflow)</button>';
@@ -100,5 +100,5 @@ draw()
 document.addEventListener("change",event=>{if(!active||event.target.dataset.heroSelect!=="qty")return;stop();qty=+event.target.value;step=0;draw()});
 document.addEventListener("visibilitychange",()=>{if(document.hidden){stop();draw()}});
 window.addEventListener("hashchange",stop);
-window.FinmlHero={render};
+window.FinmlHero={render,stop};
 })();

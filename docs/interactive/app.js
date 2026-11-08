@@ -485,6 +485,7 @@
   function renderFigure(topic) {
     const target = document.getElementById("figure-content");
     if (!target) return;
+    if (window.FinmlLabs && window.FinmlLabs.render(topic, target)) return;
     if (window.FinmlHero && window.FinmlHero.render(topic, target)) return;
     const state = getVisualState(topic);
     target.innerHTML = `
