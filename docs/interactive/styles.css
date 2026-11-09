@@ -1420,6 +1420,49 @@ body.tour-active .topic-hero { padding-top: 55px; }
   text-transform: uppercase;
 }
 
+.code-approaches {
+  min-width: 0;
+  display: grid;
+  gap: 34px;
+}
+
+.code-approach > header {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 12px;
+}
+
+.code-approach > header > span {
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.code-approach h4 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.code-approach header p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.scratch-approach {
+  padding-top: 28px;
+  border-top: 1px solid var(--rule-dark);
+}
+
+.scratch-approach > header > span { color: var(--teal); }
+
 .code-sample {
   min-width: 0;
   overflow: hidden;

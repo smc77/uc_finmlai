@@ -407,11 +407,23 @@
       <div class="try-this-body">
         <div class="try-this-intro">
           <p>${esc(learning.tryIt.description)}</p>
-          <small>${esc(learning.tryIt.language)}</small>
+          <small>Two implementations · one idea</small>
         </div>
-        <div class="code-sample">
-          <div class="code-sample-header"><span>${esc(learning.tryIt.language)}</span><button type="button" data-copy-code>Copy</button></div>
-          <pre tabindex="0"><code>${esc(learning.tryIt.code)}</code></pre>
+        <div class="code-approaches">
+          <section class="code-approach">
+            <header><span>01</span><div><h4>Using a standard library</h4><p>${esc(learning.tryIt.library.label)}</p></div></header>
+            <div class="code-sample">
+              <div class="code-sample-header"><span>${esc(learning.tryIt.library.label)}</span><button type="button" data-copy-code>Copy</button></div>
+              <pre tabindex="0"><code>${esc(learning.tryIt.library.code)}</code></pre>
+            </div>
+          </section>
+          <section class="code-approach scratch-approach">
+            <header><span>02</span><div><h4>Build it from scratch</h4><p>${esc(learning.tryIt.scratch.label)}</p></div></header>
+            <div class="code-sample">
+              <div class="code-sample-header"><span>${esc(learning.tryIt.scratch.label)}</span><button type="button" data-copy-code>Copy</button></div>
+              <pre tabindex="0"><code>${esc(learning.tryIt.scratch.code)}</code></pre>
+            </div>
+          </section>
         </div>
         <a class="colab-button" href="${notebookUrl(learning.tryIt.notebook)}" target="_blank" rel="noopener">Run this lesson in Colab <span aria-hidden="true">↗</span></a>
         <p class="colab-note">Opens a focused notebook with simulated data. You can run it without changing the course repository.</p>
