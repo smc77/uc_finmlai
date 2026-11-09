@@ -262,7 +262,7 @@
 
       <section class="tour-reference-card">
         <p class="kicker">Need the syllabus view?</p>
-        <div><h2>The calendar is now a reference, not the front door.</h2><p>Browse all ${atlas.courseMap.length} weeks, ${courseSessionCount} sessions, due dates, and released materials in the complete course map.</p></div>
+        <div><h2>See the whole course outline.</h2><p>Browse all ${atlas.courseMap.length} weeks, ${courseSessionCount} sessions, due dates, and released materials in the complete course map.</p></div>
         <a href="#course-map">Open course map →</a>
       </section>
       <p class="site-credit">University of Cincinnati · Carl H. Lindner College of Business · Conceptual examples, not investment advice</p>`;
@@ -402,28 +402,25 @@
     const visibleTerms = relatedTerms.slice(0, 12);
     const learning = learningExtras[topic.id] || {};
     const understood = understoodTopics.has(topic.id);
+    const codeApproaches = learning.tryIt ? [
+      learning.tryIt.library ? { number: "01", title: "Using a standard library", ...learning.tryIt.library } : null,
+      learning.tryIt.scratch ? { number: learning.tryIt.library ? "02" : "01", title: "Build it from scratch", ...learning.tryIt.scratch } : null
+    ].filter(Boolean) : [];
     const tryItMarkup = learning.tryIt ? `<details class="try-this" id="try-this-${topic.id}">
       <summary><span class="try-this-heading"><span class="kicker">Try this in Python</span><strong>${esc(learning.tryIt.title)}</strong><small>Inspect the short example here, then run the complete lesson in Colab.</small></span><span class="try-this-toggle">Open code + notebook</span></summary>
       <div class="try-this-body">
         <div class="try-this-intro">
           <p>${esc(learning.tryIt.description)}</p>
-          <small>Two implementations · one idea</small>
+          <small>${codeApproaches.length === 1 ? "One focused implementation" : "Two implementations · one idea"}</small>
         </div>
         <div class="code-approaches">
-          <section class="code-approach">
-            <header><span>01</span><div><h4>Using a standard library</h4><p>${esc(learning.tryIt.library.label)}</p></div></header>
+          ${codeApproaches.map((approach, approachIndex) => `<section class="code-approach ${approachIndex > 0 ? "scratch-approach" : ""}">
+            <header><span>${approach.number}</span><div><h4>${approach.title}</h4><p>${esc(approach.label)}</p></div></header>
             <div class="code-sample">
-              <div class="code-sample-header"><span>${esc(learning.tryIt.library.label)}</span><button type="button" data-copy-code>Copy</button></div>
-              <pre tabindex="0"><code>${esc(learning.tryIt.library.code)}</code></pre>
+              <div class="code-sample-header"><span>${esc(approach.label)}</span><button type="button" data-copy-code>Copy</button></div>
+              <pre tabindex="0"><code>${esc(approach.code)}</code></pre>
             </div>
-          </section>
-          <section class="code-approach scratch-approach">
-            <header><span>02</span><div><h4>Build it from scratch</h4><p>${esc(learning.tryIt.scratch.label)}</p></div></header>
-            <div class="code-sample">
-              <div class="code-sample-header"><span>${esc(learning.tryIt.scratch.label)}</span><button type="button" data-copy-code>Copy</button></div>
-              <pre tabindex="0"><code>${esc(learning.tryIt.scratch.code)}</code></pre>
-            </div>
-          </section>
+          </section>`).join("")}
         </div>
         <a class="colab-button" href="${notebookUrl(learning.tryIt.notebook)}" target="_blank" rel="noopener">Run this lesson in Colab <span aria-hidden="true">↗</span></a>
         <p class="colab-note">Opens a focused notebook with simulated data. You can run it without changing the course repository.</p>

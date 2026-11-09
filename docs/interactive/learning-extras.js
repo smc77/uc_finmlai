@@ -9,7 +9,43 @@ window.COURSE_LEARNING_EXTRAS = {
   },
   "information-clock": {
     takeaway: "A value becomes usable when it was available to the decision process—not when the period it describes ended.",
-    analogy: "A newspaper may describe yesterday, but you cannot trade on its story before the paper is delivered. The delivery time, not the date inside the story, controls availability."
+    analogy: "A newspaper may describe yesterday, but you cannot trade on its story before the paper is delivered. The delivery time, not the date inside the story, controls availability.",
+    tryIt: {
+      title: "Build a point-in-time information set",
+      description: "Join each decision date only to records that had actually become available by then.",
+      library: {
+        label: "Python · pandas merge_asof",
+        code: `import pandas as pd
+
+releases = pd.DataFrame({
+    "available": pd.to_datetime(["2026-02-15", "2026-03-20", "2026-05-10"]),
+    "value": [10.0, 10.4, 11.1]
+}).sort_values("available")
+decisions = pd.DataFrame({
+    "decision": pd.to_datetime(["2026-02-01", "2026-03-01", "2026-04-01"])
+})
+
+point_in_time = pd.merge_asof(decisions, releases,
+                              left_on="decision", right_on="available",
+                              direction="backward")
+print(point_in_time)`
+      },
+      scratch: {
+        label: "Python · availability filtering with lists",
+        code: `from datetime import date
+
+releases = [(date(2026, 2, 15), 10.0),
+            (date(2026, 3, 20), 10.4),
+            (date(2026, 5, 10), 11.1)]
+decisions = [date(2026, 2, 1), date(2026, 3, 1), date(2026, 4, 1)]
+
+for decision in decisions:
+    eligible = [(stamp, value) for stamp, value in releases if stamp <= decision]
+    latest = max(eligible, default=None, key=lambda row: row[0])
+    print(decision, latest)`
+      },
+      notebook: "information-clock.ipynb"
+    }
   },
   "regression-classification": {
     takeaway: "Choose the model output for the decision: a magnitude, a ranking score, or a probability are not interchangeable.",
@@ -101,11 +137,86 @@ print(np.mean((y - prediction) ** 2))`
   },
   "train-validate-test": {
     takeaway: "Training learns parameters, validation chooses the procedure, and the final test judges that frozen procedure once.",
-    analogy: "Training is practice, validation is rehearsal, and testing is opening night. If opening-night feedback changes the performance, it has become another rehearsal."
+    analogy: "Training is practice, validation is rehearsal, and testing is opening night. If opening-night feedback changes the performance, it has become another rehearsal.",
+    tryIt: {
+      title: "Construct chronological validation splits",
+      description: "Create expanding training windows while preserving a final untouched block.",
+      library: {
+        label: "Python · finmlsim + scikit-learn",
+        code: `import numpy as np
+from finmlsim import simulate as sim
+from sklearn.model_selection import TimeSeriesSplit
+
+returns = sim.garch(n=120, seed=6)
+X = returns[:-1, None]
+y = returns[1:]
+
+splitter = TimeSeriesSplit(n_splits=3, test_size=20)
+for train, validation in splitter.split(X[:-20]):
+    print(train[[0, -1]], validation[[0, -1]])
+final_test = np.arange(len(X) - 20, len(X))
+print("untouched test", final_test[[0, -1]])`
+      },
+      scratch: {
+        label: "Python · expanding-window index construction",
+        code: `n_rows = 119
+test_size = 20
+development_end = n_rows - test_size
+validation_size = 20
+
+for validation_end in range(development_end, validation_size, -validation_size):
+    validation_start = validation_end - validation_size
+    train = list(range(validation_start))
+    validation = list(range(validation_start, validation_end))
+    print("train", train[0], train[-1], "validate", validation[0], validation[-1])
+
+test = list(range(development_end, n_rows))
+print("untouched test", test[0], test[-1])`
+      },
+      notebook: "chronological-splits.ipynb"
+    }
   },
   "metrics": {
     takeaway: "A metric is meaningful only when it measures the job the model output is supposed to perform.",
-    analogy: "A speedometer can be perfectly accurate and still tell you nothing about fuel economy. Likewise, low forecast error need not imply good ranking, calibrated probabilities, or profitable trading."
+    analogy: "A speedometer can be perfectly accurate and still tell you nothing about fuel economy. Likewise, low forecast error need not imply good ranking, calibrated probabilities, or profitable trading.",
+    tryIt: {
+      title: "Measure rank, turnover, and net performance",
+      description: "Score the same simulated panel at the prediction, position, and strategy levels.",
+      library: {
+        label: "Python · finmlsim metrics",
+        code: `import numpy as np
+from finmlsim import simulate as sim, metrics as met
+
+returns = sim.panel(n=260, n_assets=20, seed=6)
+prediction, actual = returns[:-1], returns[1:]
+rank_ic = np.mean([met.rank_ic(p, a) for p, a in zip(prediction, actual)])
+weights = prediction / np.abs(prediction).sum(axis=1, keepdims=True)
+strategy = (weights * actual).sum(axis=1)
+
+print("rank IC", round(rank_ic, 3))
+print("turnover", round(met.turnover(weights), 3))
+print("gross Sharpe", round(met.sharpe(strategy), 2))`
+      },
+      scratch: {
+        label: "Python · metric formulas with NumPy",
+        code: `import numpy as np
+from finmlsim import simulate as sim
+
+returns = sim.panel(n=260, n_assets=20, seed=6)
+prediction, actual = returns[:-1], returns[1:]
+rank = lambda x: np.argsort(np.argsort(x)).astype(float)
+ics = [np.corrcoef(rank(p), rank(a))[0, 1] for p, a in zip(prediction, actual)]
+weights = prediction / np.abs(prediction).sum(axis=1, keepdims=True)
+turnover = np.abs(np.diff(weights, axis=0)).sum(axis=1).mean()
+strategy = (weights * actual).sum(axis=1)
+sharpe = np.sqrt(252) * strategy.mean() / strategy.std(ddof=1)
+
+print("rank IC", round(np.mean(ics), 3))
+print("turnover", round(turnover, 3))
+print("gross Sharpe", round(sharpe, 2))`
+      },
+      notebook: "decision-metrics.ipynb"
+    }
   },
   "optimization-unsupervised": {
     takeaway: "An optimizer solves the objective it receives; PCA and clustering learn sample structure, not economic usefulness.",
@@ -114,26 +225,24 @@ print(np.mean((y - prediction) ** 2))`
       title: "Recover a common direction and two clusters",
       description: "Fit PCA and K-means to simulated correlated observations, then inspect what each procedure learned.",
       library: {
-        label: "Python · scikit-learn",
+        label: "Python · finmlsim + scikit-learn",
         code: `import numpy as np
+from finmlsim import simulate as sim
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
-rng = np.random.default_rng(4)
-factor = rng.normal(size=(200, 1))
-X = factor @ np.array([[1.0, 0.7]]) + rng.normal(0, 0.25, (200, 2))
+X = sim.panel(n=200, n_assets=2, seed=4)
 
 pca = PCA(n_components=1).fit(X)
 groups = KMeans(n_clusters=2, n_init=10, random_state=4).fit_predict(X)
 print(pca.explained_variance_ratio_[0], np.bincount(groups))`
       },
       scratch: {
-        label: "Python · PCA and Lloyd's algorithm with NumPy",
+        label: "Python · finmlsim data + NumPy algorithms",
         code: `import numpy as np
+from finmlsim import simulate as sim
 
-rng = np.random.default_rng(4)
-factor = rng.normal(size=(200, 1))
-X = factor @ np.array([[1.0, 0.7]]) + rng.normal(0, 0.25, (200, 2))
+X = sim.panel(n=200, n_assets=2, seed=4)
 centered = X - X.mean(axis=0)
 
 values, vectors = np.linalg.eigh(centered.T @ centered / len(X))
@@ -240,7 +349,54 @@ print(probability.ravel().round(3))`
   },
   "pricing-hedging": {
     takeaway: "Learning a static pricing map and learning a sequence of hedge actions are different problems with different evidence.",
-    analogy: "A map estimates where a destination is; driving chooses a new action after every turn, delay, and road condition. Pricing resembles the map, while hedging resembles the drive."
+    analogy: "A map estimates where a destination is; driving chooses a new action after every turn, delay, and road condition. Pricing resembles the map, while hedging resembles the drive.",
+    tryIt: {
+      title: "Price once, then hedge through time",
+      description: "Compare a Black–Scholes price and delta with the mechanics of a discrete hedge path.",
+      library: {
+        label: "Python · SciPy normal distribution",
+        code: `import numpy as np
+from scipy.stats import norm
+
+spot, strike, rate, volatility, maturity = 100, 100, .03, .20, 1.0
+d1 = (np.log(spot / strike) + (rate + volatility**2 / 2) * maturity) / (volatility * np.sqrt(maturity))
+d2 = d1 - volatility * np.sqrt(maturity)
+price = spot * norm.cdf(d1) - strike * np.exp(-rate * maturity) * norm.cdf(d2)
+delta = norm.cdf(d1)
+
+print("price", round(price, 2))
+print("initial hedge shares", round(delta, 3))`
+      },
+      scratch: {
+        label: "Python · normal CDF and hedge ledger from first principles",
+        code: `import math, random
+
+normal_cdf = lambda x: 0.5 * (1 + math.erf(x / math.sqrt(2)))
+spot, strike, rate, vol, steps = 100.0, 100.0, .03, .20, 52
+dt = 1 / steps
+random.seed(9)
+
+d1 = (math.log(spot / strike) + (rate + vol**2 / 2)) / vol
+d2 = d1 - vol
+price = spot * normal_cdf(d1) - strike * math.exp(-rate) * normal_cdf(d2)
+shares = normal_cdf(d1)
+cash = price - shares * spot
+
+for step in range(steps):
+    cash *= math.exp(rate * dt)
+    spot *= math.exp((rate - vol**2 / 2) * dt + vol * math.sqrt(dt) * random.gauss(0, 1))
+    if step < steps - 1:
+        time_left = 1 - (step + 1) * dt
+        d1 = (math.log(spot / strike) + (rate + vol**2 / 2) * time_left) / (vol * math.sqrt(time_left))
+        new_shares = normal_cdf(d1)
+        cash -= (new_shares - shares) * spot
+        shares = new_shares
+
+payoff = max(spot - strike, 0)
+print("hedge error", round(cash + shares * spot - payoff, 2))`
+      },
+      notebook: "pricing-and-hedging.ipynb"
+    }
   },
   "financial-text": {
     takeaway: "A text representation determines what the model can use, while the document clock determines when it may use it.",
@@ -289,33 +445,110 @@ print(1 / (1 + np.exp(-(test @ w)))[0])`
   },
   "llm-systems": {
     takeaway: "An LLM’s reliability depends on context, verification, tools, and authority—not only on the decoder.",
-    analogy: "Treat the model like an analyst inside a controlled research process. The reading room supplies evidence, calculators handle arithmetic, reviewers check claims, and an authority map limits action."
+    analogy: "Treat the model like an analyst inside a controlled research process. The reading room supplies evidence, calculators handle arithmetic, reviewers check claims, and an authority map limits action.",
+    tryIt: {
+      title: "Retrieve evidence before drafting an answer",
+      description: "Rank a small dated reading room and return the evidence that a generated claim would need to cite.",
+      library: {
+        label: "Python · scikit-learn retrieval",
+        code: `from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+documents = [
+    "2026-02-10 filing: revenue rose 8 percent.",
+    "2026-05-09 filing: operating margin fell to 14 percent.",
+    "2026-05-12 call: management expects lower capital spending."
+]
+query = "What happened to operating margin?"
+vectorizer = TfidfVectorizer().fit(documents + [query])
+matrix = vectorizer.transform(documents + [query])
+scores = cosine_similarity(matrix[-1], matrix[:-1]).ravel()
+best = scores.argmax()
+print("evidence:", documents[best])
+print("citation: document", best + 1)`
+      },
+      scratch: {
+        label: "Python · token-overlap retrieval and citation check",
+        code: `import re
+
+documents = ["2026-02-10 filing: revenue rose 8 percent.",
+             "2026-05-09 filing: operating margin fell to 14 percent.",
+             "2026-05-12 call: management expects lower capital spending."]
+query = "What happened to operating margin?"
+tokens = lambda text: set(re.findall(r"[a-z]+", text.lower()))
+query_tokens = tokens(query)
+scores = [len(query_tokens & tokens(document)) for document in documents]
+best = max(range(len(documents)), key=scores.__getitem__)
+
+answer = "Operating margin fell to 14 percent. [document 2]"
+has_citation = f"[document {best + 1}]" in answer
+print(documents[best])
+print(answer, "verified citation:", has_citation)`
+      },
+      notebook: "retrieval-and-verification.ipynb"
+    }
   },
   "execution": {
     takeaway: "A strategy is not implemented until desired positions become actual trades with impact, delay, and non-completion recorded.",
-    analogy: "A route on a map is not the trip. Traffic, speed, detours, and missed turns determine when—and whether—you arrive, just as execution determines the realized position."
+    analogy: "A route on a map is not the trip. Traffic, speed, detours, and missed turns determine when—and whether—you arrive, just as execution determines the realized position.",
+    tryIt: {
+      title: "Trade off impact against waiting risk",
+      description: "Generate an Almgren–Chriss schedule, then reconstruct its declining inventory path.",
+      library: {
+        label: "Python · finmlsim Almgren–Chriss",
+        code: `from finmlsim import simulate as sim
+
+schedule = sim.almgren_chriss(X=1_000_000, T=1, N=20,
+                              sigma=.02, eta=2.5e-6, lam=1e-6)
+print("first five trades", schedule["n_trades"][:5].round())
+print("expected cost", round(schedule["E_cost"]))
+print("cost risk", round(schedule["sd_cost"]))`
+      },
+      scratch: {
+        label: "Python · continuous-time schedule with NumPy",
+        code: `import numpy as np
+
+inventory, horizon, steps = 1_000_000, 1.0, 20
+sigma, eta, risk_aversion = .02, 2.5e-6, 1e-6
+kappa = np.sqrt(risk_aversion * sigma**2 / eta)
+times = np.linspace(0, horizon, steps + 1)
+holdings = inventory * np.sinh(kappa * (horizon - times)) / np.sinh(kappa * horizon)
+trades = holdings[:-1] - holdings[1:]
+
+print("first five trades", trades[:5].round())
+print("ending inventory", round(holdings[-1]))`
+      },
+      notebook: "optimal-execution.ipynb"
+    }
   },
   "reinforcement-learning": {
     takeaway: "Reinforcement learning values actions by both immediate reward and the future states those actions create.",
     analogy: "This is closer to chess than a slot machine. A move matters not only for what it wins now, but for the positions and choices it leaves available next.",
     tryIt: {
       title: "Learn action values in a tiny changing state",
-      description: "Run tabular Q-learning in a five-state environment and watch future value propagate backward.",
+      description: "Use Gymnasium for a standard environment, then expose the same Q-learning update in a five-state world built from scratch.",
       library: {
-        label: "Python · NumPy Q-table",
-        code: `import numpy as np
+        label: "Python · Gymnasium FrozenLake",
+        code: `import gymnasium as gym
+import numpy as np
 
 rng = np.random.default_rng(2)
-Q = np.zeros((5, 2))
-for episode in range(1000):
-    state = 0
-    while state < 4:
-        action = rng.integers(2) if rng.random() < 0.2 else Q[state].argmax()
-        next_state = min(4, state + (2 if action else 1))
-        reward = 1.0 if next_state == 4 else -0.02
-        Q[state, action] += 0.2 * (reward + 0.95 * Q[next_state].max() - Q[state, action])
+env = gym.make("FrozenLake-v1", is_slippery=False)
+env.action_space.seed(2)
+Q = np.zeros((env.observation_space.n, env.action_space.n))
+
+for episode in range(5000):
+    state, _ = env.reset(seed=episode)
+    done = False
+    while not done:
+        action = env.action_space.sample() if rng.random() < 0.3 else Q[state].argmax()
+        next_state, reward, terminated, truncated, _ = env.step(action)
+        target = reward + 0.95 * Q[next_state].max() * (not terminated)
+        Q[state, action] += 0.2 * (target - Q[state, action])
         state = next_state
-print(Q.round(3))`
+        done = terminated or truncated
+
+print("start-state values", Q[0].round(3))`
       },
       scratch: {
         label: "Python · Q-learning with lists and random",
