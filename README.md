@@ -1,7 +1,11 @@
-# Financial Machine Learning and AI — Course Materials
+# Financial Machine Learning & AI — Course Materials
 
-Student repository for **Financial Machine Learning and AI** (FIN 7057), Carl H.
+Student repository for **Financial Machine Learning & AI** (FIN 7057), Carl H.
 Lindner College of Business, University of Cincinnati.
+
+**Interactive course atlas:** [Financial Machine Learning & AI](https://smc77.github.io/uc_finmlai/interactive/)
+— browse the complete course map, interactive topic explanations, computational
+demonstrations, and searchable glossary.
 
 Everything you need to run the course code lives here: each week's reading
 guide, lecture notebook, and released homework assignment. Recorded lectures

@@ -355,7 +355,7 @@
   }
 
   function initReinforcement() {
-    return { mode: "bandit", step: 0, epsilon: .18, means: [.28, .50, .68], counts: [0, 0, 0], estimates: [0, 0, 0], regret: 0, regretHistory: [0], lastArm: -1, values: [0, 0, 0, 0], bellmanState: 2, gamma: .9, lastBackup: "Step to perform a Bellman backup." };
+    return { mode: "bellman", step: 0, epsilon: .18, means: [.28, .50, .68], counts: [0, 0, 0], estimates: [0, 0, 0], regret: 0, regretHistory: [0], lastArm: -1, values: [0, 0, 0, 0], bellmanState: 2, gamma: .9, lastBackup: "Step to perform a Bellman backup." };
   }
 
   function rlStep() {
@@ -478,7 +478,7 @@
     },
     "reinforcement-learning": {
       init: initReinforcement, step: rlStep, draw: drawReinforcement,
-      extras: `<span class="lab-segmented"><button type="button" data-lab-mode="bandit" aria-pressed="true">Bandit</button><button type="button" data-lab-mode="bellman" aria-pressed="false">Bellman updates</button></span><label class="lab-parameter bandit-only">Exploration ε <input type="range" min="0" max="0.5" step="0.05" value="0.18" data-lab-range="epsilon"><output data-lab-output="epsilon">0.18</output></label><label class="lab-parameter bellman-only">Discount γ <input type="range" min="0.5" max="0.99" step="0.01" value="0.9" data-lab-range="gamma"><output data-lab-output="gamma">0.90</output></label>`
+      extras: `<span class="lab-segmented"><button type="button" data-lab-mode="bellman" aria-pressed="true">MDP · Bellman updates</button><button type="button" data-lab-mode="bandit" aria-pressed="false">Bandit special case</button></span><label class="lab-parameter bellman-only">Discount γ <input type="range" min="0.5" max="0.99" step="0.01" value="0.9" data-lab-range="gamma"><output data-lab-output="gamma">0.90</output></label><label class="lab-parameter bandit-only">Exploration ε <input type="range" min="0" max="0.5" step="0.05" value="0.18" data-lab-range="epsilon"><output data-lab-output="epsilon">0.18</output></label>`
     },
     "causal-policy": {
       init: initCausal, step: causalStep, draw: drawCausal,

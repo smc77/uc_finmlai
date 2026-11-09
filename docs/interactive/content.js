@@ -842,15 +842,15 @@ window.COURSE_ATLAS = {
     },
     {
       id: "reinforcement-learning",
-      title: "A bandit is the one-state case of reinforcement learning",
+      title: "Reinforcement learning values actions over time",
       chapter: 3,
       week: "Week 12B",
       minutes: "7 min",
-      question: "Does an action merely reveal an immediate reward, or does it alter the state and the choices that follow?",
-      thesis: "Bandits trade exploration against exploitation in one recurring state; MDPs value actions through their immediate and future consequences.",
+      question: "How should an agent learn when today's action changes tomorrow's state, opportunities, and risk?",
+      thesis: "Reinforcement learning studies sequential decisions by connecting states, actions, rewards, transitions, and the continuation value of what becomes possible next.",
       essay: [
-        "A multi-armed bandit chooses among uncertain actions, observes an immediate reward, and returns to the same decision setting. Exploration buys information; exploitation chooses the action currently believed best. Too little exploration preserves early mistakes, while too much keeps paying for knowledge that may not be worth its cost.",
-        "A Markov decision process adds successor states. In execution, trading now changes remaining inventory and time, which changes later choices. A policy maps state to action; value functions summarize expected future return. Q-learning updates action values from observed reward plus the best estimated continuation. The algorithm is only as credible as the environment contract and the simulator's ability to answer alternative actions."
+        "Reinforcement learning begins with an environment contract. A state summarizes the information needed to act, an action changes the system, a reward scores an immediate consequence, and a transition determines the next state. A policy maps states to actions. A value function adds the rewards expected later, so an action can be unattractive now yet useful because of the state it creates.",
+        "A Markov decision process makes those relationships explicit. In execution, trading now changes remaining inventory, time, and later choices. Bellman equations connect immediate reward to continuation value; Q-learning estimates action values from observed transitions. A multi-armed bandit is the limiting one-state example: useful for introducing exploration and exploitation, but it omits the changing states that define most reinforcement-learning problems in finance."
       ],
       method: [
         ["State", "The information needed to make the current decision"],
@@ -860,12 +860,12 @@ window.COURSE_ATLAS = {
       ],
       figure: {
         type: "comparison",
-        title: "Explore a bandit, then propagate Bellman value",
-        description: "Compare one-state exploration and cumulative regret with value updates across changing states.",
-        modes: ["Bandit", "MDP"],
+        title: "Propagate value through a changing state",
+        description: "Start with Bellman updates in an MDP, then compare the one-state bandit special case.",
+        modes: ["MDP", "Bandit special case"],
         panels: [
-          ["Bandit", "choose → reward → repeat", "Actions reveal uncertain immediate rewards in a recurring decision state."],
-          ["MDP", "state → action → new state", "Actions change what becomes possible next; immediate reward is only part of value."]
+          ["MDP", "state → action → new state", "Actions change what becomes possible next; immediate reward is only part of value."],
+          ["Bandit", "choose → reward → repeat", "The state does not change, so the problem isolates exploration and exploitation."]
         ]
       },
       failures: [

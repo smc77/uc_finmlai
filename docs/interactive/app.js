@@ -74,13 +74,13 @@
   function renderOverview() {
     currentTopic = null;
     renderNavigation();
-    document.title = "Financial Machine Learning — A Course Atlas";
+    document.title = "Financial Machine Learning & AI — Course Atlas";
     const sessionCount = atlas.courseMap.reduce((total, week) => total + week.sessions.length, 0);
     const courseMapUrl = "https://github.com/smc77/uc_finmlai/blob/main/docs/course_map.md";
     app.innerHTML = `
       <section class="overview-hero">
         <div>
-          <p class="kicker">FIN 7057 · Financial Machine Learning and AI</p>
+          <p class="kicker">FIN 7057 · Financial Machine Learning &amp; AI</p>
           <h1 class="display-title">The course,<br>mapped from<br><em>data to decision.</em></h1>
           <p class="hero-deck">A week-by-week guide to the methods, decisions, and standards of evidence that make financial machine learning useful.</p>
         </div>
@@ -184,7 +184,7 @@
   function renderTopic(topic, index) {
     currentTopic = topic;
     renderNavigation(topic.id);
-    document.title = `${topic.title} — Financial Machine Learning`;
+    document.title = `${topic.title} — Financial Machine Learning & AI`;
     const previous = atlas.topics[index - 1];
     const next = atlas.topics[index + 1];
     const chapter = atlas.chapters[topic.chapter];
@@ -280,7 +280,7 @@
           </nav>
         </div>
       </article>
-      <p class="site-credit">FIN 7057 · Financial Machine Learning and AI · Conceptual examples, not investment advice</p>`;
+      <p class="site-credit">FIN 7057 · Financial Machine Learning &amp; AI · Conceptual examples, not investment advice</p>`;
 
     renderFigure(topic);
     window.scrollTo(0, 0);
