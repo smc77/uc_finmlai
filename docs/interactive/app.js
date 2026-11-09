@@ -249,10 +249,11 @@
                 const { topic, index } = topicById.get(id);
                 const current = !tourState.completed && index === resumeIndex && hasProgress;
                 const understood = understoodTopics.has(topic.id);
+                const hasNotebook = Boolean(learningExtras[topic.id]?.tryIt);
                 return `<button class="tour-stop ${current ? "current" : ""}" type="button" data-tour-start="${index}" ${current ? 'aria-current="step"' : ""}>
                   <span class="tour-stop-number">${String(index + 1).padStart(2, "0")}</span>
                   <span><strong>${esc(topic.title)}</strong><small>${esc(topic.question)}</small></span>
-                  <em>${tourDurations[index]} min${understood ? " · ✓" : ""}</em>
+                  <span class="tour-stop-meta"><em>${tourDurations[index]} min${understood ? " · ✓" : ""}</em>${hasNotebook ? '<span class="tour-try-badge">Try it</span>' : ""}</span>
                 </button>`;
               }).join("")}
             </div>
@@ -401,8 +402,8 @@
     const visibleTerms = relatedTerms.slice(0, 12);
     const learning = learningExtras[topic.id] || {};
     const understood = understoodTopics.has(topic.id);
-    const tryItMarkup = learning.tryIt ? `<details class="try-this">
-      <summary><span><span class="kicker">Try this</span><strong>${esc(learning.tryIt.title)}</strong></span><span class="try-this-toggle">Show code</span></summary>
+    const tryItMarkup = learning.tryIt ? `<details class="try-this" id="try-this-${topic.id}">
+      <summary><span class="try-this-heading"><span class="kicker">Try this in Python</span><strong>${esc(learning.tryIt.title)}</strong><small>Inspect the short example here, then run the complete lesson in Colab.</small></span><span class="try-this-toggle">Open code + notebook</span></summary>
       <div class="try-this-body">
         <div class="try-this-intro">
           <p>${esc(learning.tryIt.description)}</p>
@@ -464,6 +465,7 @@
             <span>${esc(topic.week)}</span>
             <span>${tourState.active ? `${tourDurations[index]} min tour stop` : `${esc(topic.minutes)} read`}</span>
             ${materialsLink}
+            ${learning.tryIt ? `<a class="topic-try-link" href="#try-this-${topic.id}" data-open-try>Try it in Python ↓</a>` : ""}
           </div>
           <h1 class="topic-title">${styledTitle}</h1>
           <p class="topic-thesis">${esc(topic.thesis)}</p>
@@ -964,6 +966,14 @@
         copyButton.textContent = "Copied";
         window.setTimeout(() => { copyButton.textContent = "Copy"; }, 1400);
       });
+      return;
+    }
+    const tryJump = event.target.closest("[data-open-try]");
+    if (tryJump) {
+      event.preventDefault();
+      const panel = document.querySelector(tryJump.getAttribute("href"));
+      panel.open = true;
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
     const courseMapJump = event.target.closest("[data-course-map-jump]");
