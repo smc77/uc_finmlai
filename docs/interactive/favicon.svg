@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" fill="#a94332"/>
-  <text x="32" y="45" text-anchor="middle" fill="#fcfbf7" font-family="Georgia,serif" font-size="42" font-style="italic">F</text>
+  <rect x="2" y="2" width="60" height="60" fill="none" stroke="#fcfbf7" stroke-opacity=".24" stroke-width="2"/>
+  <text x="32" y="28" text-anchor="middle" fill="#fcfbf7" font-family="Arial,sans-serif" font-size="16" font-weight="800" letter-spacing="1">FIN</text>
+  <text x="32" y="46" text-anchor="middle" fill="#fcfbf7" font-family="Arial,sans-serif" font-size="14" font-weight="800" letter-spacing=".5">MLAI</text>
 </svg>
