@@ -470,6 +470,297 @@ main {
   font-size: 10px;
 }
 
+.tour-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.tour-primary-button,
+.tour-text-button {
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.tour-primary-button {
+  min-height: 46px;
+  padding: 11px 17px;
+  border: 1px solid var(--red);
+  background: var(--red);
+  color: var(--white);
+}
+
+.tour-primary-button:hover { background: var(--ink); border-color: var(--ink); }
+
+.tour-primary-button:focus-visible,
+.tour-text-button:focus-visible,
+.tour-stop:focus-visible,
+.tour-guide > button:focus-visible,
+.tour-footer button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.tour-text-button {
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: var(--muted);
+}
+
+.tour-home-actions a {
+  color: var(--teal);
+  font-size: 11px;
+  text-underline-offset: 4px;
+}
+
+.tour-home-note {
+  padding: 21px 0 4px 22px;
+  border-left: 3px solid var(--red);
+}
+
+.tour-home-note ol {
+  margin: 17px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tour-home-note li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 7px;
+  padding: 7px 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--serif);
+  font-size: 14px;
+}
+
+.tour-home-note li span {
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 9px;
+}
+
+.tour-home-note small { color: var(--muted); font-size: 10px; }
+
+.tour-home-note h2 {
+  margin: 15px 0 11px;
+  font-family: var(--serif);
+  font-size: clamp(23px, 2.5vw, 34px);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  line-height: 1.08;
+}
+
+.tour-complete-note p:not(.kicker) {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.tour-route { padding: 12px 0 0; }
+
+.tour-route-intro,
+.tour-chapter-heading {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 30px;
+}
+
+.tour-route-intro {
+  padding: 48px 0 54px;
+  border-top: 1px solid var(--ink);
+}
+
+.tour-route-intro h2,
+.tour-reference-card h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(29px, 3.8vw, 47px);
+  font-weight: 500;
+  letter-spacing: -.03em;
+  line-height: 1.08;
+}
+
+.tour-route-intro p,
+.tour-reference-card p {
+  max-width: 700px;
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+.tour-chapter { margin-bottom: 48px; }
+
+.tour-chapter-heading {
+  padding: 25px 0 20px;
+  border-top: 2px solid var(--ink);
+}
+
+.tour-chapter-heading > span {
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.tour-chapter-heading h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 35px);
+  font-weight: 500;
+  letter-spacing: -.025em;
+}
+
+.tour-chapter-heading p {
+  max-width: 750px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.tour-stop-list {
+  margin-left: 200px;
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.tour-stop {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  padding: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--rule-dark);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.tour-stop:hover,
+.tour-stop.current {
+  padding-right: 14px;
+  padding-left: 14px;
+  background: var(--teal-soft);
+}
+
+.tour-stop-number {
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.tour-stop strong,
+.tour-stop small { display: block; }
+
+.tour-stop strong {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.tour-stop small {
+  max-width: 680px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.tour-stop em {
+  color: var(--faint);
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.tour-reference-card {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) auto;
+  gap: 30px;
+  align-items: end;
+  margin-top: 35px;
+  padding: 42px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.tour-reference-card h2 { font-size: clamp(25px, 3vw, 37px); }
+
+.tour-reference-card a {
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-underline-offset: 4px;
+}
+
+.tour-guide {
+  position: sticky;
+  z-index: 25;
+  top: var(--header-height);
+  display: grid;
+  grid-template-columns: auto minmax(180px, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  min-height: 70px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ink);
+  background: rgba(244, 241, 233, .96);
+  backdrop-filter: blur(12px);
+}
+
+.tour-guide-status {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0 12px;
+  align-items: baseline;
+}
+
+.tour-guide-status > span {
+  grid-column: 1 / -1;
+  color: var(--red);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.tour-guide-status strong { font-family: var(--serif); font-size: 16px; }
+.tour-guide-status small { color: var(--muted); font-size: 10px; }
+
+.tour-progress-track {
+  height: 5px;
+  overflow: hidden;
+  background: var(--rule);
+}
+
+.tour-progress-track span {
+  height: 100%;
+  display: block;
+  background: var(--teal);
+  transition: width .25s ease;
+}
+
+.tour-guide > button {
+  padding: 6px 9px;
+  border: 1px solid var(--rule-dark);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 10px;
+}
+
+body.tour-active .topic-hero { padding-top: 55px; }
+
 .course-map-home { padding-top: 12px; }
 
 .course-map-home [hidden] { display: none !important; }
@@ -1046,19 +1337,29 @@ main {
   border-bottom: 1px solid var(--ink);
 }
 
-.topic-footer a {
+.topic-footer a,
+.topic-footer button {
   min-height: 120px;
   padding: 20px 0;
   color: inherit;
   text-decoration: none;
 }
 
-.topic-footer a + a {
+.topic-footer button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.topic-footer a + a,
+.topic-footer button + button {
   padding-left: 28px;
   border-left: 1px solid var(--rule-dark);
 }
 
-.topic-footer a:last-child { text-align: right; }
+.topic-footer a:last-child,
+.topic-footer button:last-child { text-align: right; }
 
 .topic-footer small {
   display: block;
@@ -1337,6 +1638,11 @@ body.condensed .topic-body { padding-top: 40px; }
   .pipeline-step:nth-child(3) { border-right: 0; }
   .pipeline-step:nth-child(-n+3) { border-bottom: 1px solid var(--rule-dark); }
   .chapter-topic-list { grid-template-columns: 1fr; }
+  .tour-route-intro,
+  .tour-chapter-heading,
+  .tour-reference-card { grid-template-columns: 120px minmax(0, 1fr); }
+  .tour-stop-list { margin-left: 150px; }
+  .tour-reference-card a { grid-column: 2; }
   .course-map-intro,
   .course-map-toolbar,
   .course-phase-heading,
@@ -1393,6 +1699,29 @@ body.condensed .topic-body { padding-top: 40px; }
   .display-title { font-size: clamp(48px, 16vw, 70px); }
   .topic-title { font-size: clamp(43px, 13vw, 63px); }
   .topic-title em { display: block; }
+  .tour-home-actions { align-items: flex-start; flex-direction: column; }
+  .tour-home-note { margin-top: 12px; }
+  .tour-route-intro,
+  .tour-chapter-heading,
+  .tour-reference-card { grid-template-columns: 1fr; gap: 12px; }
+  .tour-route-intro { padding: 38px 0 44px; }
+  .tour-chapter { margin-bottom: 38px; }
+  .tour-chapter-heading { padding-top: 20px; }
+  .tour-stop-list { margin-left: 0; }
+  .tour-stop { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 9px; }
+  .tour-stop:hover,
+  .tour-stop.current { padding-right: 8px; padding-left: 8px; }
+  .tour-reference-card { align-items: start; }
+  .tour-reference-card a { grid-column: 1; }
+  .tour-guide {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 9px 14px;
+    min-height: 84px;
+  }
+  .tour-guide-status { grid-template-columns: 1fr; gap: 1px; }
+  .tour-guide-status > span { grid-column: 1; }
+  .tour-progress-track { grid-column: 1 / -1; grid-row: 2; }
+  body.tour-active .topic-hero { padding-top: 42px; }
   .section-heading,
   .chapter-overview,
   .lead-grid,
@@ -1424,8 +1753,10 @@ body.condensed .topic-body { padding-top: 40px; }
   .figure-note { width: 100%; flex-basis: 100%; text-align: left; }
   .deep-grid { grid-template-columns: 1fr; gap: 38px; }
   .topic-footer { grid-template-columns: 1fr; }
-  .topic-footer a + a { padding-left: 0; border-top: 1px solid var(--rule); border-left: 0; }
-  .topic-footer a:last-child { text-align: left; }
+  .topic-footer a + a,
+  .topic-footer button + button { padding-left: 0; border-top: 1px solid var(--rule); border-left: 0; }
+  .topic-footer a:last-child,
+  .topic-footer button:last-child { text-align: left; }
 }
 
 @media (prefers-reduced-motion: reduce) {

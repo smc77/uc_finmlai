@@ -30,6 +30,57 @@
     "Account for constraints, market frictions, fills, permissions, and the action actually taken.",
     "Judge the frozen procedure with later observations, relevant baselines, uncertainty, and limitations."
   ];
+  const tourDurations = [1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1];
+  const tourTotalMinutes = tourDurations.reduce((total, minutes) => total + minutes, 0);
+  const courseSessionCount = atlas.courseMap.reduce((total, week) => total + week.sessions.length, 0);
+  let tourState = loadTourState();
+
+  function loadTourState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem("finml-atlas-tour") || "null");
+      if (saved && Number.isInteger(saved.index) && saved.index >= 0 && saved.index < atlas.topics.length) {
+        return { index: saved.index, active: Boolean(saved.active), completed: Boolean(saved.completed) };
+      }
+    } catch (_) {
+      // A blocked or malformed local preference should never block the atlas.
+    }
+    return { index: 0, active: false, completed: false };
+  }
+
+  function saveTourState() {
+    try {
+      localStorage.setItem("finml-atlas-tour", JSON.stringify(tourState));
+    } catch (_) {
+      // The tour still works for the current page when storage is unavailable.
+    }
+  }
+
+  function applyTourMode(active) {
+    document.body.classList.toggle("tour-active", active);
+    if (active) {
+      document.body.classList.add("condensed");
+      readingMode.textContent = "Expand";
+      return;
+    }
+    const condensed = localStorage.getItem("finml-atlas-mode") === "condensed";
+    document.body.classList.toggle("condensed", condensed);
+    readingMode.textContent = condensed ? "Expand" : "Condense";
+  }
+
+  function beginTour(index = 0) {
+    const safeIndex = Math.max(0, Math.min(atlas.topics.length - 1, Number(index) || 0));
+    tourState = { index: safeIndex, active: true, completed: false };
+    saveTourState();
+    applyTourMode(true);
+    location.hash = atlas.topics[safeIndex].id;
+  }
+
+  function leaveTour(completed = false) {
+    tourState = { index: completed ? atlas.topics.length - 1 : tourState.index, active: false, completed };
+    saveTourState();
+    applyTourMode(false);
+    location.hash = "overview";
+  }
 
   function esc(value) {
     return String(value)
@@ -73,9 +124,106 @@
 
   function renderOverview() {
     currentTopic = null;
+    applyTourMode(false);
     renderNavigation();
-    document.title = "Financial Machine Learning & AI — Course Atlas";
-    const sessionCount = atlas.courseMap.reduce((total, week) => total + week.sessions.length, 0);
+    document.title = "Financial Machine Learning & AI — Guided Course Tour";
+    const resumeIndex = tourState.completed ? 0 : tourState.index;
+    const hasProgress = !tourState.completed && (tourState.active || tourState.index > 0);
+    const primaryLabel = tourState.completed
+      ? "Take the tour again"
+      : hasProgress
+        ? `Resume at stop ${String(resumeIndex + 1).padStart(2, "0")}`
+        : "Start the 30-minute tour";
+    const guideNote = tourState.completed
+      ? `<aside class="tour-home-note tour-complete-note">
+          <p class="kicker">Tour complete</p>
+          <h2>You followed the full path from information to evidence.</h2>
+          <p>Use the course map to revisit the calendar, or take the tour again whenever you want the argument in sequence.</p>
+          <small>${atlas.topics.length} stops · ${tourTotalMinutes} minutes · completed on this device</small>
+        </aside>`
+      : `<aside class="tour-home-note">
+          <p class="kicker">How the tour works</p>
+          <ol>
+            <li><span>01</span>Read one essential idea.</li>
+            <li><span>02</span>Change one interactive figure.</li>
+            <li><span>03</span>Carry its question to the next stop.</li>
+          </ol>
+          <small>${atlas.topics.length} stops · about ${tourTotalMinutes} minutes · progress saved on this device</small>
+        </aside>`;
+    app.innerHTML = `
+      <section class="overview-hero tour-home-hero">
+        <div>
+          <p class="kicker">FIN 7057 · Guided course tour</p>
+          <h1 class="display-title">See the course<br>as one connected<br><em>decision.</em></h1>
+          <p class="hero-deck">Eighteen short stops carry one financial question from dated information through models, action, evidence, and governance.</p>
+          <div class="tour-home-actions">
+            <button class="tour-primary-button" type="button" data-tour-start="${resumeIndex}">${primaryLabel} →</button>
+            ${hasProgress && !tourState.completed ? `<button class="tour-text-button" type="button" data-tour-start="0">Start over</button>` : ""}
+            <a href="#course-map">Open the full course map</a>
+          </div>
+        </div>
+        ${guideNote}
+      </section>
+
+      <section class="pipeline-section" aria-labelledby="pipeline-heading">
+        <div class="section-heading">
+          <p class="kicker">The thread you will follow</p>
+          <div>
+            <h2 id="pipeline-heading">A model never stands alone.</h2>
+            <p>Choose a stage. The tour returns to this path as information becomes a decision and later evidence becomes a defensible claim.</p>
+          </div>
+        </div>
+        <div class="pipeline" role="list" aria-label="Financial machine learning research path">
+          ${["Information", "Features", "Prediction", "Decision", "Implementation", "Evidence"].map((label, i) => `
+            <button class="pipeline-step ${i === overviewStage ? "active" : ""}" type="button" data-overview-stage="${i}" role="listitem">
+              <span>0${i + 1}</span><strong>${label}</strong>
+            </button>`).join("")}
+        </div>
+        <p class="pipeline-detail" id="pipeline-detail">${pipelineNotes[overviewStage]}</p>
+      </section>
+
+      <section class="tour-route" aria-labelledby="tour-route-heading">
+        <div class="tour-route-intro">
+          <p class="kicker">Your route</p>
+          <div>
+            <h2 id="tour-route-heading">Eighteen stops. Five chapters. One argument.</h2>
+            <p>Follow the sequence or enter at any stop. Tour mode keeps the reading concise and carries your progress forward.</p>
+          </div>
+        </div>
+        ${atlas.chapters.map((chapter) => `
+          <section class="tour-chapter">
+            <header class="tour-chapter-heading">
+              <span>${chapter.number}</span>
+              <div><h3>${esc(chapter.title)}</h3><p>${esc(chapter.description)}</p></div>
+            </header>
+            <div class="tour-stop-list">
+              ${chapter.topics.map((id) => {
+                const { topic, index } = topicById.get(id);
+                const current = !tourState.completed && index === resumeIndex && hasProgress;
+                return `<button class="tour-stop ${current ? "current" : ""}" type="button" data-tour-start="${index}" ${current ? 'aria-current="step"' : ""}>
+                  <span class="tour-stop-number">${String(index + 1).padStart(2, "0")}</span>
+                  <span><strong>${esc(topic.title)}</strong><small>${esc(topic.question)}</small></span>
+                  <em>${tourDurations[index]} min</em>
+                </button>`;
+              }).join("")}
+            </div>
+          </section>`).join("")}
+      </section>
+
+      <section class="tour-reference-card">
+        <p class="kicker">Need the syllabus view?</p>
+        <div><h2>The calendar is now a reference, not the front door.</h2><p>Browse all ${atlas.courseMap.length} weeks, ${courseSessionCount} sessions, due dates, and released materials in the complete course map.</p></div>
+        <a href="#course-map">Open course map →</a>
+      </section>
+      <p class="site-credit">University of Cincinnati · Carl H. Lindner College of Business · Conceptual examples, not investment advice</p>`;
+    window.scrollTo(0, 0);
+  }
+
+  function renderCourseMap() {
+    currentTopic = null;
+    applyTourMode(false);
+    renderNavigation();
+    document.title = "Course Map — Financial Machine Learning & AI";
     const courseMapUrl = "https://github.com/smc77/uc_finmlai/blob/main/docs/course_map.md";
     app.innerHTML = `
       <section class="overview-hero">
@@ -87,7 +235,7 @@
         <aside class="hero-note">
           <p>Start with the calendar below, then open an atlas topic when you want the larger argument, an interactive demonstration, or a project checklist.</p>
           <button class="hero-map-link" type="button" data-course-map-jump>Browse all weeks ↓</button>
-          <small>16 weeks including setup · ${sessionCount} sessions · ${atlas.topics.length} interactive deep dives</small>
+          <small>${atlas.courseMap.length} weeks including setup · ${courseSessionCount} sessions · ${atlas.topics.length} interactive deep dives</small>
         </aside>
       </section>
 
@@ -121,7 +269,7 @@
         <div class="course-map-toolbar">
           <div class="course-map-toolbar-label">
             <label class="kicker" for="course-topic-search">Find a topic</label>
-            <p id="course-search-status" aria-live="polite">${atlas.courseMap.length} weeks · ${sessionCount} sessions</p>
+            <p id="course-search-status" aria-live="polite">${atlas.courseMap.length} weeks · ${courseSessionCount} sessions</p>
           </div>
           <div>
             <input id="course-topic-search" class="course-topic-search" type="search" data-course-search aria-describedby="course-search-status" placeholder="Try “calibration,” “PCA,” or “governance”" autocomplete="off">
@@ -183,6 +331,11 @@
 
   function renderTopic(topic, index) {
     currentTopic = topic;
+    if (tourState.active) {
+      tourState.index = index;
+      saveTourState();
+      applyTourMode(true);
+    }
     renderNavigation(topic.id);
     document.title = `${topic.title} — Financial Machine Learning & AI`;
     const previous = atlas.topics[index - 1];
@@ -197,14 +350,35 @@
     const styledTitle = `${esc(titleParts.join(" "))} <em>${esc(lastWord)}</em>`;
     const relatedTerms = atlas.glossary.filter((entry) => entry.topics.includes(topic.id));
     const visibleTerms = relatedTerms.slice(0, 12);
+    const elapsedMinutes = tourDurations.slice(0, index + 1).reduce((total, minutes) => total + minutes, 0);
+    const tourProgress = elapsedMinutes / tourTotalMinutes * 100;
+    const tourBanner = tourState.active ? `
+      <section class="tour-guide" aria-label="Guided tour progress">
+        <div class="tour-guide-status">
+          <span>30-minute guided tour</span>
+          <strong>Stop ${String(index + 1).padStart(2, "0")} of ${atlas.topics.length}</strong>
+          <small>about ${elapsedMinutes} of ${tourTotalMinutes} minutes</small>
+        </div>
+        <div class="tour-progress-track" role="progressbar" aria-label="Course tour progress" aria-valuemin="0" aria-valuemax="${tourTotalMinutes}" aria-valuenow="${elapsedMinutes}"><span style="width:${tourProgress}%"></span></div>
+        <button type="button" data-tour-exit>Exit tour</button>
+      </section>` : "";
+    const topicFooter = tourState.active
+      ? `<nav class="topic-footer tour-footer" aria-label="Guided tour navigation">
+          ${index > 0 ? `<button type="button" data-tour-start="${index - 1}"><small>← Previous stop</small><strong>${esc(previous.title)}</strong></button>` : `<button type="button" data-tour-exit><small>← Back</small><strong>Tour home</strong></button>`}
+          ${index < atlas.topics.length - 1 ? `<button type="button" data-tour-start="${index + 1}"><small>Next stop →</small><strong>${esc(next.title)}</strong></button>` : `<button type="button" data-tour-finish><small>Complete</small><strong>Finish the tour →</strong></button>`}
+        </nav>`
+      : `<nav class="topic-footer" aria-label="Adjacent topics">
+          ${previous ? `<a href="#${previous.id}"><small>← Previous idea</small><strong>${esc(previous.title)}</strong></a>` : `<a href="#overview"><small>← Back</small><strong>Course overview</strong></a>`}
+          ${next ? `<a href="#${next.id}"><small>Next idea →</small><strong>${esc(next.title)}</strong></a>` : `<a href="#overview"><small>Return to</small><strong>Course overview →</strong></a>`}
+        </nav>`;
 
-    app.innerHTML = `
+    app.innerHTML = `${tourBanner}
       <article>
         <header class="topic-hero">
           <div class="topic-meta">
             <span>${chapter.number} · ${esc(chapter.title)}</span>
             <span>${esc(topic.week)}</span>
-            <span>${esc(topic.minutes)} read</span>
+            <span>${tourState.active ? `${tourDurations[index]} min tour stop` : `${esc(topic.minutes)} read`}</span>
             ${materialsLink}
           </div>
           <h1 class="topic-title">${styledTitle}</h1>
@@ -274,10 +448,7 @@
             </div>
           </div>
 
-          <nav class="topic-footer" aria-label="Adjacent topics">
-            ${previous ? `<a href="#${previous.id}"><small>← Previous idea</small><strong>${esc(previous.title)}</strong></a>` : `<a href="#overview"><small>← Back</small><strong>Course overview</strong></a>`}
-            ${next ? `<a href="#${next.id}"><small>Next idea →</small><strong>${esc(next.title)}</strong></a>` : `<a href="#overview"><small>Return to</small><strong>Course overview →</strong></a>`}
-          </nav>
+          ${topicFooter}
         </div>
       </article>
       <p class="site-credit">FIN 7057 · Financial Machine Learning &amp; AI · Conceptual examples, not investment advice</p>`;
@@ -648,11 +819,12 @@
 
   function route() {
     const id = location.hash.slice(1);
-    if (!id || id === "overview" || !topicById.has(id)) renderOverview();
-    else {
+    if (!id || id === "overview") renderOverview();
+    else if (id === "course-map") renderCourseMap();
+    else if (topicById.has(id)) {
       const { topic, index } = topicById.get(id);
       renderTopic(topic, index);
-    }
+    } else renderOverview();
     closeOverlays();
   }
 
@@ -662,6 +834,21 @@
   });
 
   app.addEventListener("click", (event) => {
+    const tourFinish = event.target.closest("[data-tour-finish]");
+    if (tourFinish) {
+      leaveTour(true);
+      return;
+    }
+    const tourExit = event.target.closest("[data-tour-exit]");
+    if (tourExit) {
+      leaveTour(false);
+      return;
+    }
+    const tourStart = event.target.closest("[data-tour-start]");
+    if (tourStart) {
+      beginTour(tourStart.dataset.tourStart);
+      return;
+    }
     const courseMapJump = event.target.closest("[data-course-map-jump]");
     if (courseMapJump) {
       document.getElementById("course-map-heading").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -751,6 +938,7 @@
     document.body.classList.add("condensed");
     readingMode.textContent = "Expand";
   }
+  if (tourState.active) applyTourMode(true);
 
   [...new Set(atlas.glossary.map((entry) => entry.category))].sort().forEach((category) => {
     glossaryCategory.insertAdjacentHTML("beforeend", `<option value="${esc(category)}">${esc(category)}</option>`);
