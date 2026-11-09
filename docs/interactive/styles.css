@@ -1209,6 +1209,294 @@ body.tour-active .topic-hero { padding-top: 55px; }
   accent-color: var(--red);
 }
 
+.learning-close {
+  margin: -22px 0 70px;
+}
+
+.takeaway-card {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+  padding: 28px 30px 30px;
+  border-left: 5px solid var(--red);
+  background: var(--red-soft);
+}
+
+.takeaway-card > p { margin: 0; }
+
+.takeaway-card > p:last-child {
+  max-width: 760px;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.7vw, 33px);
+  line-height: 1.25;
+}
+
+.understanding-check {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 14px 30px;
+  align-items: center;
+  padding: 23px 0;
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.understanding-check > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.understanding-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.understanding-actions button {
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid var(--rule-dark);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.understanding-actions button:hover,
+.understanding-actions .understood-button.active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: var(--white);
+}
+
+.alternate-explanation {
+  grid-column: 2;
+  max-width: 760px;
+  padding: 18px 20px;
+  border-left: 3px solid var(--teal);
+  background: var(--teal-soft);
+}
+
+.alternate-explanation[hidden] { display: none; }
+
+.alternate-explanation span {
+  color: var(--teal);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.alternate-explanation p {
+  margin: 8px 0 0;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.try-this {
+  border-bottom: 1px solid var(--ink);
+}
+
+.try-this summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  min-height: 82px;
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.try-this summary::-webkit-details-marker { display: none; }
+
+.try-this summary > span:first-child { display: grid; gap: 4px; }
+
+.try-this summary strong {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.try-this-toggle {
+  flex: none;
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.try-this[open] .try-this-toggle { font-size: 0; }
+.try-this[open] .try-this-toggle::after { content: "Hide code"; font-size: 10px; }
+
+.try-this-body {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 18px 30px;
+  padding: 4px 0 30px;
+}
+
+.try-this-intro p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.try-this-intro small {
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.code-sample {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--white);
+}
+
+.code-sample-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 38px;
+  padding: 6px 10px 6px 14px;
+  border-bottom: 1px solid rgba(252, 251, 247, .2);
+  color: #b9c7c3;
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.code-sample-header button {
+  padding: 3px 7px;
+  border: 1px solid rgba(252, 251, 247, .35);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 9px;
+}
+
+.code-sample pre {
+  max-height: 330px;
+  margin: 0;
+  padding: 18px;
+  overflow: auto;
+  font: 12px/1.65 var(--mono);
+  tab-size: 4;
+}
+
+.colab-button {
+  grid-column: 2;
+  justify-self: start;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 42px;
+  padding: 9px 14px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .07em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.colab-button:hover { background: var(--ink); }
+
+.colab-note {
+  grid-column: 2;
+  margin: -10px 0 0;
+  color: var(--faint);
+  font-size: 10px;
+}
+
+.course-recap {
+  margin: 78px 0 60px;
+  padding: 44px 0 0;
+  border-top: 2px solid var(--ink);
+}
+
+.course-recap header {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 8px 30px;
+  margin-bottom: 30px;
+}
+
+.course-recap header .kicker { grid-row: 1 / 3; }
+
+.course-recap h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(31px, 4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+
+.course-recap header > p:last-child {
+  max-width: 660px;
+  margin: 5px 0 0;
+  color: var(--muted);
+}
+
+.recap-path {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.recap-path a {
+  min-height: 175px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 13px 18px;
+  border-right: 1px solid var(--rule-dark);
+  text-decoration: none;
+}
+
+.recap-path a:last-child { border-right: 0; }
+
+.recap-path a:hover {
+  background: var(--teal);
+  color: var(--white);
+}
+
+.recap-path a > span {
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 9px;
+}
+
+.recap-path a:hover > span { color: var(--white); }
+
+.recap-path strong {
+  display: block;
+  margin-top: 18px;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.recap-path small {
+  display: block;
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.recap-path a:hover small { color: var(--white); }
+
 .figure-note {
   flex: 1 1 280px;
   margin-left: auto;
@@ -1647,6 +1935,13 @@ body.condensed .topic-body { padding-top: 40px; }
   .course-map-toolbar,
   .course-phase-heading,
   .course-week { grid-template-columns: 120px minmax(0, 1fr); }
+  .takeaway-card,
+  .understanding-check,
+  .try-this-body,
+  .course-recap header { grid-template-columns: 120px minmax(0, 1fr); }
+  .recap-path { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .recap-path a:nth-child(3) { border-right: 0; }
+  .recap-path a:nth-child(-n+3) { border-bottom: 1px solid var(--rule-dark); }
   .section-heading,
   .chapter-overview,
   .lead-grid,
@@ -1722,6 +2017,28 @@ body.condensed .topic-body { padding-top: 40px; }
   .tour-guide-status > span { grid-column: 1; }
   .tour-progress-track { grid-column: 1 / -1; grid-row: 2; }
   body.tour-active .topic-hero { padding-top: 42px; }
+  .learning-close { margin-top: -12px; }
+  .takeaway-card,
+  .understanding-check,
+  .try-this-body,
+  .course-recap header { grid-template-columns: 1fr; gap: 12px; }
+  .takeaway-card { padding: 23px 20px 25px; }
+  .understanding-check { align-items: start; }
+  .alternate-explanation,
+  .colab-button,
+  .colab-note { grid-column: 1; }
+  .try-this summary { align-items: flex-start; }
+  .course-recap header .kicker { grid-row: auto; }
+  .recap-path { grid-template-columns: 1fr; }
+  .recap-path a {
+    min-height: 110px;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .recap-path a:nth-child(3) { border-right: 0; }
+  .recap-path a:last-child { border-bottom: 0; }
+  .recap-path strong { margin-top: 8px; }
+  .recap-path small { margin-top: 10px; }
   .section-heading,
   .chapter-overview,
   .lead-grid,

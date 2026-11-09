@@ -16,6 +16,7 @@
   const glossaryCount = document.getElementById("glossary-count");
   const glossaryList = document.getElementById("glossary-list");
   const scrim = document.getElementById("scrim");
+  const learningExtras = window.COURSE_LEARNING_EXTRAS || {};
 
   const topicById = new Map(atlas.topics.map((topic, index) => [topic.id, { topic, index }]));
   const visualState = new Map();
@@ -33,7 +34,33 @@
   const tourDurations = [1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1];
   const tourTotalMinutes = tourDurations.reduce((total, minutes) => total + minutes, 0);
   const courseSessionCount = atlas.courseMap.reduce((total, week) => total + week.sessions.length, 0);
+  const recapStages = [
+    ["Information", "information-clock", "What could the system know, and when?"],
+    ["Features", "six-words", "How did dated records become model inputs?"],
+    ["Prediction", "regression-classification", "What exactly did the model estimate?"],
+    ["Decision", "portfolio", "How did the estimate change an action?"],
+    ["Implementation", "execution", "What happened when the action met the market?"],
+    ["Evidence", "evidence-chain", "What later result supports the final claim?"]
+  ];
   let tourState = loadTourState();
+  const understoodTopics = loadUnderstoodTopics();
+
+  function loadUnderstoodTopics() {
+    try {
+      const saved = JSON.parse(localStorage.getItem("finml-atlas-understood") || "[]");
+      return new Set(Array.isArray(saved) ? saved.filter((id) => topicById.has(id)) : []);
+    } catch (_) {
+      return new Set();
+    }
+  }
+
+  function saveUnderstoodTopics() {
+    try {
+      localStorage.setItem("finml-atlas-understood", JSON.stringify([...understoodTopics]));
+    } catch (_) {
+      // Understanding checks remain usable for the current visit without storage.
+    }
+  }
 
   function loadTourState() {
     try {
@@ -102,6 +129,27 @@
 
   function lectureUrl(path) {
     return `https://github.com/smc77/uc_finmlai/tree/main/${path}`;
+  }
+
+  function notebookUrl(filename) {
+    return `https://colab.research.google.com/github/smc77/uc_finmlai/blob/main/docs/interactive/notebooks/${encodeURIComponent(filename)}`;
+  }
+
+  function courseRecapMarkup() {
+    return `<section class="course-recap" aria-labelledby="course-recap-title">
+      <header>
+        <p class="kicker">The whole course, one last time</p>
+        <h2 id="course-recap-title">Keep the chain intact.</h2>
+        <p>Each stage asks a different question. Follow any link to revisit the idea that protects that handoff.</p>
+      </header>
+      <nav class="recap-path" aria-label="Review the six stages of the course">
+        ${recapStages.map(([label, id, question], index) => `<a href="#${id}">
+          <span>0${index + 1}</span>
+          <strong>${label}</strong>
+          <small>${question}</small>
+        </a>`).join("")}
+      </nav>
+    </section>`;
   }
 
   function renderNavigation(activeId = "") {
@@ -200,10 +248,11 @@
               ${chapter.topics.map((id) => {
                 const { topic, index } = topicById.get(id);
                 const current = !tourState.completed && index === resumeIndex && hasProgress;
+                const understood = understoodTopics.has(topic.id);
                 return `<button class="tour-stop ${current ? "current" : ""}" type="button" data-tour-start="${index}" ${current ? 'aria-current="step"' : ""}>
                   <span class="tour-stop-number">${String(index + 1).padStart(2, "0")}</span>
                   <span><strong>${esc(topic.title)}</strong><small>${esc(topic.question)}</small></span>
-                  <em>${tourDurations[index]} min</em>
+                  <em>${tourDurations[index]} min${understood ? " · ✓" : ""}</em>
                 </button>`;
               }).join("")}
             </div>
@@ -350,6 +399,41 @@
     const styledTitle = `${esc(titleParts.join(" "))} <em>${esc(lastWord)}</em>`;
     const relatedTerms = atlas.glossary.filter((entry) => entry.topics.includes(topic.id));
     const visibleTerms = relatedTerms.slice(0, 12);
+    const learning = learningExtras[topic.id] || {};
+    const understood = understoodTopics.has(topic.id);
+    const tryItMarkup = learning.tryIt ? `<details class="try-this">
+      <summary><span><span class="kicker">Try this</span><strong>${esc(learning.tryIt.title)}</strong></span><span class="try-this-toggle">Show code</span></summary>
+      <div class="try-this-body">
+        <div class="try-this-intro">
+          <p>${esc(learning.tryIt.description)}</p>
+          <small>${esc(learning.tryIt.language)}</small>
+        </div>
+        <div class="code-sample">
+          <div class="code-sample-header"><span>${esc(learning.tryIt.language)}</span><button type="button" data-copy-code>Copy</button></div>
+          <pre tabindex="0"><code>${esc(learning.tryIt.code)}</code></pre>
+        </div>
+        <a class="colab-button" href="${notebookUrl(learning.tryIt.notebook)}" target="_blank" rel="noopener">Run this lesson in Colab <span aria-hidden="true">↗</span></a>
+        <p class="colab-note">Opens a focused notebook with simulated data. You can run it without changing the course repository.</p>
+      </div>
+    </details>` : "";
+    const learningClose = learning.takeaway ? `<section class="learning-close" aria-labelledby="takeaway-${topic.id}">
+      <div class="takeaway-card">
+        <p class="kicker">What to remember</p>
+        <p id="takeaway-${topic.id}">${esc(learning.takeaway)}</p>
+      </div>
+      <div class="understanding-check">
+        <p>Does this idea make sense?</p>
+        <div class="understanding-actions">
+          <button class="understood-button ${understood ? "active" : ""}" type="button" data-understood-topic="${topic.id}" aria-pressed="${understood}">${understood ? "✓ Understood" : "I understand"}</button>
+          <button class="explain-button" type="button" data-explain-toggle aria-expanded="false" aria-controls="alternate-${topic.id}">Explain another way</button>
+        </div>
+        <div class="alternate-explanation" id="alternate-${topic.id}" hidden>
+          <span>Another way to see it</span>
+          <p>${esc(learning.analogy)}</p>
+        </div>
+      </div>
+      ${tryItMarkup}
+    </section>` : "";
     const elapsedMinutes = tourDurations.slice(0, index + 1).reduce((total, minutes) => total + minutes, 0);
     const tourProgress = elapsedMinutes / tourTotalMinutes * 100;
     const tourBanner = tourState.active ? `
@@ -424,6 +508,8 @@
             <div id="figure-content"></div>
           </section>
 
+          ${learningClose}
+
           <div class="deep">
             <section class="case-note">
               <div class="margin-label">Concrete example</div>
@@ -448,6 +534,7 @@
             </div>
           </div>
 
+          ${index === atlas.topics.length - 1 ? courseRecapMarkup() : ""}
           ${topicFooter}
         </div>
       </article>
@@ -847,6 +934,36 @@
     const tourStart = event.target.closest("[data-tour-start]");
     if (tourStart) {
       beginTour(tourStart.dataset.tourStart);
+      return;
+    }
+    const understoodButton = event.target.closest("[data-understood-topic]");
+    if (understoodButton) {
+      const id = understoodButton.dataset.understoodTopic;
+      const nowUnderstood = !understoodTopics.has(id);
+      if (nowUnderstood) understoodTopics.add(id);
+      else understoodTopics.delete(id);
+      saveUnderstoodTopics();
+      understoodButton.classList.toggle("active", nowUnderstood);
+      understoodButton.setAttribute("aria-pressed", String(nowUnderstood));
+      understoodButton.textContent = nowUnderstood ? "✓ Understood" : "I understand";
+      return;
+    }
+    const explainButton = event.target.closest("[data-explain-toggle]");
+    if (explainButton) {
+      const panel = document.getElementById(explainButton.getAttribute("aria-controls"));
+      const open = explainButton.getAttribute("aria-expanded") !== "true";
+      explainButton.setAttribute("aria-expanded", String(open));
+      explainButton.textContent = open ? "Hide alternate explanation" : "Explain another way";
+      panel.hidden = !open;
+      return;
+    }
+    const copyButton = event.target.closest("[data-copy-code]");
+    if (copyButton) {
+      const code = copyButton.closest(".code-sample").querySelector("code").textContent;
+      navigator.clipboard?.writeText(code).then(() => {
+        copyButton.textContent = "Copied";
+        window.setTimeout(() => { copyButton.textContent = "Copy"; }, 1400);
+      });
       return;
     }
     const courseMapJump = event.target.closest("[data-course-map-jump]");
