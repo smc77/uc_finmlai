@@ -7,6 +7,10 @@ Lindner College of Business, University of Cincinnati.
 — browse the complete course map, interactive topic explanations, computational
 demonstrations, and searchable glossary.
 
+**Core glossary:** [`docs/CORE_GLOSSARY.md`](docs/CORE_GLOSSARY.md) — the shared
+plain-English vocabulary used throughout the course, with a concrete example
+for every term.
+
 Everything you need to run the course code lives here: each week's reading
 guide, lecture notebook, and released homework assignment. Recorded lectures
 and their slides are delivered through Canvas; this repository holds the files
