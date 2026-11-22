@@ -6,6 +6,8 @@ from pathlib import Path
 import nbformat as nbf
 
 ROOT = Path(__file__).resolve().parent
+PATHWAY1 = ROOT / "pathway1_integrated_notebook"
+PATHWAY2 = ROOT / "pathway2_separate_paper"
 
 
 def md(text: str):
@@ -26,6 +28,10 @@ specific decision: which one third of releases receive scarce analyst review.
 
 The notebook uses committed model scores by default. The accompanying downloader
 and `analysis.py --score-finbert` recreate the primary-source and model pipeline.
+
+This notebook is **Pathway 1**: the prose, code, results, limitations, and
+references form one integrated report. Pathway 2 uses a shorter analysis notebook
+plus a separately rendered Quarto paper.
 """),
     md("""
 ## 1. Start with a question that can lose
@@ -46,6 +52,7 @@ from IPython.display import Image, display
 ROOT = Path.cwd()
 if not (ROOT / "analysis.py").exists():
     candidates = [
+        ROOT.parent,
         ROOT / "project" / "example_real_sec",
         Path("/content/uc_finmlai/project/example_real_sec"),
         Path("/content/aiinfinance/project/example_real_sec"),
@@ -64,7 +71,29 @@ summary = json.loads((ROOT / "data/derived/summary.json").read_text())
 print(f"{len(frame)} observations: {(frame.split == 'development').sum()} development, {(frame.split == 'test').sum()} test")
 """),
     md("""
-## 2. Inspect one source record before calculating anything
+## 2. Understand the source before calculating anything
+
+### What is an 8-K?
+
+A **Form 8-K** is a company's current report for specified events. It is not the
+regular quarterly 10-Q or annual 10-K. In our selected filings, **Item 2.02** says
+the report concerns results of operations and financial condition; **Item 9.01**
+lists the exhibits; and **Exhibit 99.1** is the attached earnings release we score.
+
+Open the exact Apple example:
+
+- [SEC filing-detail page](https://www.sec.gov/Archives/edgar/data/320193/000032019323000005/0000320193-23-000005-index.html)
+- [selected Exhibit 99.1](https://www.sec.gov/Archives/edgar/data/320193/000032019323000005/a8-kex991q1202312312022.htm)
+
+The filing page is the folder and index. The exhibit is the document the model
+reads. The future outcome comes from structured XBRL facts in a later filing.
+"""),
+    code("""
+display(Image(filename=str(ROOT / "figures/05_sec_filing_page.png")))
+display(Image(filename=str(ROOT / "figures/06_sec_exhibit.png")))
+"""),
+    md("""
+### Inspect the corresponding research record
 
 The feature is the selected EX-99 earnings release. The record also retains the
 8-K accession, SEC URL, acceptance time, exhibit hash, future label date, and future
@@ -72,9 +101,10 @@ XBRL accession.
 """),
     code("""
 columns = ["ticker", "accession_number", "decision_time_utc", "release_type",
-           "release_sha256", "outcome_quarter_end", "outcome_available_date",
+           "exhibit_url", "release_sha256", "outcome_quarter_end", "outcome_available_date",
            "outcome_accession_number", "split"]
-display(frame.loc[[46], columns].T.rename(columns={46: "recorded value"}))
+apple = frame.loc[frame.accession_number == "0000320193-23-000005", columns].iloc[0]
+display(apple.to_frame("recorded value"))
 """),
     md("""
 ### Pause 1 — Which information may the score use?
@@ -178,6 +208,79 @@ or a trading backtest. It estimates neither returns nor implementation costs.
 notebook = nbf.v4.new_notebook(cells=cells)
 notebook["metadata"]["kernelspec"] = {"display_name": "Python 3", "language": "python", "name": "python3"}
 notebook["metadata"]["language_info"] = {"name": "python", "version": "3"}
+PATHWAY1.mkdir(parents=True, exist_ok=True)
 nbf.write(notebook, ROOT / "analysis.ipynb")
-print(f"wrote {ROOT / 'analysis.ipynb'} with {len(cells)} cells")
+nbf.write(notebook, PATHWAY1 / "analysis.ipynb")
+
+pathway2_cells = [
+    md("""
+# Analysis companion for the separate Quarto paper
+
+This is **Pathway 2**. The notebook produces and audits the evidence. The paper in
+this folder carries the complete research narrative. Both pathways use the same
+root-level data, code, figures, and frozen conclusion.
+"""),
+    code("""
+from pathlib import Path
+import json, sys
+import pandas as pd
+from IPython.display import Image, display
+
+HERE = Path.cwd()
+candidates = [HERE, HERE.parent, HERE / "project" / "example_real_sec",
+              Path("/content/uc_finmlai/project/example_real_sec")]
+ROOT = next((p for p in candidates if (p / "analysis.py").exists()), None)
+if ROOT is None:
+    raise FileNotFoundError("Run from project/example_real_sec/pathway2_separate_paper or the project root.")
+sys.path.insert(0, str(ROOT))
+import analysis as A
+frame = pd.read_csv(ROOT / "data/derived/scored_events.csv", dtype={"cik": str})
+summary = json.loads((ROOT / "data/derived/summary.json").read_text())
+print(f"Project root: {ROOT}")
+print(f"Rows: {len(frame)}; later test: {(frame.split == 'test').sum()}")
+"""),
+    md("""
+## Audit one source record
+
+The feature is Apple's selected Exhibit 99.1, accepted with the February 2, 2023
+8-K. The label is next-quarter revenue growth computed from a later filing.
+"""),
+    code("""
+cols = ["ticker", "accession_number", "decision_time_utc", "exhibit_url",
+        "release_sha256", "outcome_available_date", "outcome_accession_number"]
+display(frame.loc[frame.accession_number == "0000320193-23-000005", cols].T)
+display(Image(filename=str(ROOT / "figures/01_information_clock.png")))
+"""),
+    md("""
+## Recreate the declared evidence
+
+`analysis.py` reads the committed score ledger, recomputes the later-test metrics,
+and rebuilds every result figure. Add `--score-finbert` only when intentionally
+re-scoring the raw releases with the pinned checkpoint.
+"""),
+    code("""
+A.run()
+display(Image(filename=str(ROOT / "figures/03_model_comparison.png")))
+display(Image(filename=str(ROOT / "figures/04_review_policy.png")))
+"""),
+    code("""
+print("Lexicon test rank IC:", round(summary["test"]["lexicon_ic"], 3))
+print("FinBERT test rank IC:", round(summary["test"]["finbert_ic"], 3))
+print("Paired difference:", round(summary["test"]["finbert_minus_lexicon_ic"], 3))
+print("Paired 90% interval:", [round(x, 3) for x in summary["test"]["finbert_minus_lexicon_ic_90"]])
+"""),
+    md("""
+## Hand the evidence to the paper
+
+The Quarto paper references the same root-level figures and reports the same
+metrics. It may improve explanation, but it may not change the model, population,
+threshold, or final test after seeing these results.
+"""),
+]
+
+pathway2_notebook = nbf.v4.new_notebook(cells=pathway2_cells)
+pathway2_notebook["metadata"] = notebook["metadata"]
+PATHWAY2.mkdir(parents=True, exist_ok=True)
+nbf.write(pathway2_notebook, PATHWAY2 / "analysis.ipynb")
+print(f"wrote root and pathway notebooks ({len(cells)} integrated cells; {len(pathway2_cells)} analysis cells)")
 

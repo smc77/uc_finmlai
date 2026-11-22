@@ -89,6 +89,13 @@
 | `data/derived/scored_events.csv` | Frozen scores joined to the SEC ledger. |
 | `data/derived/summary.json` | Exact reported metrics and intervals. |
 | `analysis.py` | Metrics, bootstrap, and figure construction. |
-| `analysis.ipynb` | Interactive explanatory report. |
-| `slides.qmd` | Recommended 14-slide research story. |
+| `figures/05_sec_filing_page.png` | Captured official SEC filing-detail page for the walked Apple example. |
+| `figures/06_sec_exhibit.png` | Captured official Exhibit 99.1 used as feature text. |
+| `pathway1_integrated_notebook/analysis.ipynb` | Integrated report: prose, code, source walkthrough, results, and limits. |
+| `pathway1_integrated_notebook/analysis.html` | Static export of the integrated report. |
+| `pathway2_separate_paper/analysis.ipynb` | Concise evidence-producing companion to the separate paper. |
+| `pathway2_separate_paper/paper.qmd` | Quarto paper source. |
+| `pathway2_separate_paper/paper.html`, `.docx`, `.pdf` | Readable and editable renderings of the same paper. |
+| `pathway2_separate_paper/slides.qmd`, `.html`, `.pdf` | Separate-paper presentation source and renderings. |
+| `analysis.ipynb` / `slides.qmd` | Root compatibility copies for existing links. |
 

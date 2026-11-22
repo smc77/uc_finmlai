@@ -2,6 +2,7 @@
 title: "Can FinBERT Improve Analyst Triage?"
 subtitle: "A real-SEC final-project example"
 author: "Shane Conway"
+bibliography: references.bib
 format:
   beamer:
     fontsize: 11pt
@@ -33,6 +34,30 @@ deeper analyst review.
 | role | analyst triage, not trading |
 
 Six large issuers are a teaching cohort, not a market universe.
+
+## What an 8-K contributes
+
+An **8-K** is a current report for specified events [@sec_form_8k].
+
+| Filing object | Role in this project |
+|---|---|
+| Item 2.02 | identifies results of operations and financial condition |
+| Item 9.01 | lists financial statements and exhibits |
+| Exhibit 99.1 | the earnings-release text supplied to both readers |
+
+The filing page is the folder and index; the exhibit is the document the model reads.
+
+## One actual SEC filing
+
+![](figures/05_sec_filing_page.png){width=96% fig-align="center" fig-alt="SEC EDGAR filing-detail page for Apple's February 2, 2023 Form 8-K."}
+
+Accepted **2023-02-02 16:30:33 ET** · Item **2.02** · Exhibit **99.1**
+
+## The selected source document
+
+![](figures/06_sec_exhibit.png){width=96% fig-align="center" fig-alt="Apple Exhibit 99.1 earnings release selected as the text feature."}
+
+The later XBRL revenue fact is a label—not text shown to FinBERT.
 
 ## One observation has two clocks
 

@@ -2,7 +2,8 @@
 
 This is the empirical companion to [`../example/`](../example/). It follows the
 Week 14 recommended project structure while replacing the synthetic filings with
-real SEC EDGAR evidence.
+real SEC EDGAR evidence. Like the simulated example, it now demonstrates both
+permitted final-report pathways.
 
 > **Question:** Does the pinned `ProsusAI/finbert` sentiment score rank
 > next-quarter year-over-year revenue growth better than a transparent word-count
@@ -31,6 +32,39 @@ that scarce follow-up. This is not presented as a trading strategy.
 The committed score table lets the notebook run without downloading a transformer.
 The downloader and scoring path remain available so every number can be recreated.
 
+## What the actual SEC data are
+
+The analytical table is assembled from two different public records:
+
+1. A company furnishes an earnings release with a **Form 8-K**. Item 2.02 says
+   the report concerns results of operations and financial condition; Item 9.01
+   lists the exhibits; and Exhibit 99.1 is the document converted to text and
+   scored in this example.
+2. A later SEC filing supplies structured **XBRL** revenue facts for the next
+   fiscal quarter and the same quarter one year earlier. Those facts create the
+   future year-over-year growth label.
+
+The worked Apple record is accession
+[`0000320193-23-000005`](https://www.sec.gov/Archives/edgar/data/320193/000032019323000005/0000320193-23-000005-index.html),
+accepted February 2, 2023 at 16:30:33 ET. The selected source document is its
+[`EX-99.1` earnings release](https://www.sec.gov/Archives/edgar/data/320193/000032019323000005/a8-kex991q1202312312022.htm).
+The project stores those URLs, identifiers, timestamps, and content hashes.
+
+## Two final-report pathways
+
+- **Pathway 1 — integrated Jupyter report:**
+  `pathway1_integrated_notebook/analysis.ipynb` contains the written argument,
+  code, source walkthrough, results, limitations, and references in one report.
+  `analysis.html` is its static, employer-readable export.
+- **Pathway 2 — analysis plus separate paper:**
+  `pathway2_separate_paper/analysis.ipynb` is the concise computational
+  companion. `paper.qmd` is a complete Quarto research paper rendered to HTML,
+  editable Word, and PDF. The folder also contains the presentation in Quarto.
+
+Both pathways use the same root-level downloader, analysis code, derived ledger,
+figures, and frozen conclusion. Quarto demonstrates the separate-paper route; it
+is not required for a student who chooses another writing tool.
+
 ## Files
 
 | File | Role |
@@ -38,8 +72,11 @@ The downloader and scoring path remain available so every number can be recreate
 | `cohort.json` | Fixed issuers, dates, revenue concepts, and test boundary. |
 | `download_sec_data.py` | Downloads SEC submissions, filing headers, selected EX-99 exhibits, and companyfacts; writes hashes and clocks. |
 | `analysis.py` | Re-scores the releases, computes the baseline, freezes the test comparison, bootstraps by issuer, and creates figures. |
-| `analysis.ipynb` | Interactive worked report with predict–pause–reveal checkpoints. |
-| `slides.qmd` | A 14-slide final-project presentation following the recommended structure. |
+| `pathway1_integrated_notebook/` | Integrated notebook report and static HTML export. |
+| `pathway2_separate_paper/` | Concise analysis notebook, Quarto paper in HTML/Word/PDF, and slides. |
+| `analysis.ipynb` | Root compatibility copy of the integrated worked report. |
+| `slides.qmd` | Root compatibility copy of the final-project presentation. |
+| `references.bib` / `LITERATURE_MAP.md` | Verified sources and the design consequence of each. |
 | `RESEARCH_RECORD.md` | Evidence, clock, model, split, result, limitations, and artifact ledger. |
 | `data/derived/sec_events.csv` | The real-SEC event/outcome ledger without model scores. |
 | `data/derived/scored_events.csv` | Frozen lexicon and FinBERT scores plus the real SEC ledger. |
@@ -56,7 +93,7 @@ The committed model outputs make the core analysis lightweight:
 ```bash
 pip install numpy pandas matplotlib
 python analysis.py
-jupyter lab analysis.ipynb
+jupyter lab pathway1_integrated_notebook/analysis.ipynb
 ```
 
 No SEC or Hugging Face connection is needed for that path.
@@ -72,7 +109,12 @@ python download_sec_data.py
 pip install -r requirements.txt
 python analysis.py --score-finbert
 python build_notebook.py
-jupyter nbconvert --to notebook --execute --inplace analysis.ipynb
+jupyter nbconvert --to notebook --execute --inplace pathway1_integrated_notebook/analysis.ipynb
+
+cd pathway2_separate_paper
+quarto render paper.qmd --to html
+quarto render paper.qmd --to docx
+quarto render paper.qmd --to pdf
 ```
 
 The downloader is conservative and cached. A fresh run downloads roughly 100 MB
