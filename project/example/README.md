@@ -13,6 +13,11 @@ and the committed offline run uses a deterministic stand-in, this is a model of
 research structure and timing discipline—not evidence about real SEC filings or
 FinBERT profitability.
 
+For the empirical classroom companion built from original SEC exhibits and
+later XBRL outcomes, see [`../example_real_sec/`](../example_real_sec/). It adds
+the complete SEC download script, a pinned FinBERT rebuild path, an interactive
+notebook, and a presentation organized around the Week 14 recommended story.
+
 ## How the two pathways appear here
 
 - **Pathway 1 — integrated Jupyter report:**

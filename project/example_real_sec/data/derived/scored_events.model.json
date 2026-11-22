@@ -1,0 +1,17 @@
+{
+  "model": "ProsusAI/finbert",
+  "revision": "0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031",
+  "license": "CC BY-NC-SA 4.0",
+  "window_tokens": 480,
+  "maximum_windows": 8,
+  "pooling": "mean class probabilities across evenly spaced windows",
+  "scoring_device": "mps",
+  "observations": 68,
+  "score_columns": [
+    "finbert_score",
+    "finbert_positive_probability",
+    "finbert_negative_probability",
+    "finbert_neutral_probability",
+    "finbert_windows"
+  ]
+}

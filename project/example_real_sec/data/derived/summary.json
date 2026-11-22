@@ -1,0 +1,63 @@
+{
+  "design": {
+    "observations": 68,
+    "development": 45,
+    "test": 23,
+    "test_start": "2024-01-01",
+    "outcome": "next-quarter year-over-year revenue growth from later SEC XBRL",
+    "decision": "send the top third of current earnings releases to scarce analyst review",
+    "bootstrap": "2000 issuer-block resamples; seed 20261122; 90% percentile intervals"
+  },
+  "model": {
+    "model": "ProsusAI/finbert",
+    "revision": "0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031",
+    "license": "CC BY-NC-SA 4.0",
+    "window_tokens": 480,
+    "maximum_windows": 8,
+    "pooling": "mean class probabilities across evenly spaced windows",
+    "scoring_device": "mps",
+    "observations": 68,
+    "score_columns": [
+      "finbert_score",
+      "finbert_positive_probability",
+      "finbert_negative_probability",
+      "finbert_neutral_probability",
+      "finbert_windows"
+    ]
+  },
+  "test": {
+    "lexicon_ic": 0.5011134180867645,
+    "finbert_ic": 0.6235177865612649,
+    "lexicon_ic_90": [
+      -0.04324882566803221,
+      0.8138702377971968
+    ],
+    "finbert_ic_90": [
+      -0.07068062827225131,
+      0.784909315227812
+    ],
+    "finbert_minus_lexicon_ic": 0.12240436847450042,
+    "finbert_minus_lexicon_ic_90": [
+      -0.35090122645569677,
+      0.5529856039741529
+    ],
+    "all_mean": 0.18345500589352157,
+    "all_mean_90": [
+      0.030284069938956538,
+      0.4301366726142775
+    ],
+    "lexicon_selected_mean": 0.44279870124013465,
+    "lexicon_selected_mean_90": [
+      0.03986277834748879,
+      0.835271465698562
+    ],
+    "finbert_selected_mean": 0.46546848062869806,
+    "finbert_selected_mean_90": [
+      0.02081313182971719,
+      0.7805142898888546
+    ],
+    "lexicon_selected_n": 8,
+    "finbert_selected_n": 8
+  },
+  "warranted_claim": "In this fixed six-issuer test, the pinned FinBERT score does not establish an incremental ranking advantage over a transparent lexicon for next-quarter revenue growth."
+}

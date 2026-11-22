@@ -1,0 +1,20 @@
+{
+  "cohort_id": "fin7057-sec-finbert-v1",
+  "start_date": "2020-01-01",
+  "end_date": "2025-12-31",
+  "test_start": "2024-01-01",
+  "issuers": [
+    {"ticker": "AAPL", "cik": 320193, "name": "Apple Inc."},
+    {"ticker": "MSFT", "cik": 789019, "name": "Microsoft Corp."},
+    {"ticker": "NVDA", "cik": 1045810, "name": "NVIDIA Corp."},
+    {"ticker": "CAT", "cik": 18230, "name": "Caterpillar Inc."},
+    {"ticker": "KO", "cik": 21344, "name": "The Coca-Cola Co."},
+    {"ticker": "IBM", "cik": 51143, "name": "International Business Machines Corp."}
+  ],
+  "revenue_concepts": [
+    "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "SalesRevenueNet",
+    "Revenues"
+  ],
+  "notes": "Fixed teaching cohort. Original Item 2.02 8-K earnings releases; financial issuers are absent by construction. Quarterly revenue labels come from later-filed SEC companyfacts."
+}

@@ -173,9 +173,14 @@ Four core artifacts are submitted together:
    index. This remains a separate inspectable file even when the report adapts parts of it.
 
 The worked repository in `project/example/` demonstrates both routes with the
-same analysis: its expanded notebook illustrates Pathway 1, while its Quarto
-paper and slide deck illustrate Pathway 2. Quarto is used for the demonstration
-because it works well, not because students are required to install it.
+same synthetic analysis: its expanded notebook illustrates Pathway 1, while its
+Quarto paper and slide deck illustrate Pathway 2. The companion
+[`example_real_sec/`](example_real_sec/) follows the same recommended research
+story using original SEC earnings-release exhibits, later XBRL outcomes, a
+transparent baseline, and pinned FinBERT scores. It includes the complete SEC
+download script and an interactive pause-and-reveal notebook. Quarto is used for
+the demonstrations because it works well, not because students are required to
+install it.
 
 ## Grading emphasis
 
