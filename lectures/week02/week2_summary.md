@@ -1,8 +1,37 @@
 # Week 2 Summary — What Could the Row Know?
 
-Use this as a short review map for Quiz 2. The lecture, slides, and demos remain
-the full source. The quiz is open-book and open-note, but individual and without
-AI assistance.
+This file begins with a short entry ramp for Quiz 2 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 2 asks one question about every historical row: **what could this row
+really have known at its decision time?** A feature and a target are not merely
+two columns. The feature must already be available; the target must occur later.
+
+| Word | Plain-English meaning | Week 2 example |
+|---|---|---|
+| **Feature** | An input constructed from information already available. | Volatility calculated from earlier returns. |
+| **Target / label** | The later quantity or event to predict. | Return during the next 21 trading days. |
+| **Decision time** | When the prediction or action is fixed. | The market close on 5 February. |
+| **Availability time** | When the system could first use a value. | When a filing was public and parsed. |
+| **Leakage** | Information crossing a boundary it should not cross. | A 2020 row uses a 2021 revision. |
+| **Point-in-time data** | Historical values and versions as they were known then. | The original filing, not today's corrected copy. |
+
+Think of the row as a photograph taken on that date, not a modern photograph
+with an old date written underneath it. See [Core Vocabulary](../../docs/CORE_GLOSSARY.md)
+for row, sample, fit, pipeline, training, validation, and test.
+
+## Required / explain / recognize
+
+| Level | What Week 2 expects |
+|---|---|
+| **USE** | Identify feature time, decision time, target interval, and the population used to fit transformations. |
+| **EXPLAIN** | Why a correctly lagged row can still leak through revisions, universe membership, or full-sample preprocessing. |
+| **RECOGNIZE** | Vintages, as-of joins, purging, embargoes, and future-invariance tests. |
+
+## Full reference
 
 Every modeling row makes a claim:
 
@@ -50,6 +79,16 @@ That claim has three boundaries:
    backward as-of joins, dated universe membership, timestamp assertions, and
    the Future-Invariance Test: change tomorrow and verify that yesterday does
    not move.
+
+### What a fold means
+
+In $k$-fold cross-validation, the development sample is divided into $k$
+groups. The model is fitted $k$ times: each group is held out once for
+validation while the other $k-1$ groups provide training data. An
+**out-of-fold prediction** for a row comes from the fit that did not train on
+that row. The final test set remains separate. For dated data, the groups must
+be formed in a way that matches the intended decision clock; the ordinary
+rotation is not itself a time rule.
 
 The course's six-field feature definition is:
 
@@ -100,6 +139,8 @@ For an as-of join, choose the latest value available **by** the decision:
 | **Survivorship bias** | Rebuilding the past with entities known today to have survived, while omitting failures and departures. |
 | **Fit / transform** | Fit learns parameters from a population; transform applies those frozen parameters to rows. |
 | **Pipeline** | A sequence that keeps fitted preprocessing and the model inside the correct training boundary. |
+| **Fold** | One group of development rows temporarily held out while a model is fitted on the other groups. |
+| **Out-of-fold prediction** | A prediction for a development row produced by a fit that did not train on that row. |
 | **Forward split** | Training on earlier dates and evaluating on later dates to reproduce the production clock. |
 | **Future invariance** | The requirement that changing data after a cutoff cannot alter correctly constructed pre-cutoff features. |
 
@@ -125,6 +166,8 @@ You should be able to:
 - identify which vintage is admissible for a stated historical decision;
 - distinguish a stateless calculation from a transformation fitted on a
   population;
+- explain the ordinary $k$-fold rotation and why the final test set is not one
+  of its folds;
 - explain why a random split answers a different question from repeated
   forecasting into the future; and
 - explain what an as-of join or Future-Invariance Test can establish—and what it

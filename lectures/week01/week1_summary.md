@@ -1,8 +1,37 @@
 # Week 1 Summary — Evidence Before Complexity
 
-Use this as a short review map for Quiz 1. The lecture, slides, and demos remain
-the full source. The quiz is open-book and open-note, but individual and without
-AI assistance.
+This file begins with a short entry ramp for Quiz 1 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+If this is your first pass, learn the small map below before reading the full
+reference. The course begins with one table: each **row** is one case, its
+**features** are the clues available now, and its **target** is the later answer
+we want to predict. A **model** learns a rule connecting the clues to the
+answer. A **baseline** tells us whether the rule added anything useful.
+
+| Word | Plain-English meaning | Week 1 example |
+|---|---|---|
+| **Row** | One case in the dataset. | One stock on one month-end date. |
+| **Feature** | Information the model receives before predicting. | Past return or volatility. |
+| **Target** | The future answer the model is asked to predict. | Next month's return. |
+| **Model** | A rule converting features into an output. | A rule forecasting next-month return. |
+| **Baseline** | A simple feasible prediction or decision to beat. | Predict zero excess return. |
+| **Test data** | Untouched observations opened after the procedure is fixed. | A later year not used to revise the model. |
+
+Foundational terms are collected in the [Core Vocabulary](../../docs/CORE_GLOSSARY.md).
+
+## Required / explain / recognize
+
+| Level | What Week 1 expects |
+|---|---|
+| **USE** | State a question, feature, target, baseline, and chronological test. |
+| **EXPLAIN** | Why a good fit or attractive backtest is not yet reliable evidence. |
+| **RECOGNIZE** | Unit roots, cointegration, AR/MA models, and heavy tails as time-series language whose detailed formulas are not the week's main burden. |
+
+## Full reference
 
 ## Core ideas
 
@@ -61,8 +90,10 @@ The two groups organize the ideas; both are part of Week 1.
 |---|---|
 | **Generalization** | Performing well on relevant observations that did not help choose or fit the procedure. |
 | **Backtest** | A replay asking what would have happened if a stated historical rule had been followed. |
+| **Training data** | Development observations used to fit coefficients, transformations, or other learned quantities. |
+| **Validation data** | Development observations used to compare features, hyperparameters, models, or decision rules. |
 | **Development data** | Data used to explore, fit, compare, and revise ideas. |
-| **Frozen test period** | Later data kept out of the research process until the procedure is fixed. |
+| **Test data / frozen test period** | Observations kept out of training and validation until the complete procedure is fixed; they test the selected procedure once. |
 | **Search overfitting** | Selecting a lucky winner after trying many otherwise reasonable alternatives. |
 | **Reproducibility** | Another researcher can recover the same result from identified code, data, settings, versions, and seeds. |
 | **Robustness** | The conclusion survives reasonable changes in sample, assumptions, costs, or design. |
@@ -93,7 +124,7 @@ The two groups organize the ideas; both are part of Week 1.
 - Declare the benchmark, metric, decision rule, and important implementation
   assumptions.
 - Record the search process and keep genuinely untouched observations for final
-  assessment.
+  test.
 - Translate any predictive result into positions, costs, risk, and the narrow
   conclusion the evidence supports.
 

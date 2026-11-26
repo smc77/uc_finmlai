@@ -1,8 +1,39 @@
 # Week 6 Summary — What Counts as a Result?
 
-Use this as a short review map for Week 6. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 6 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 6 asks what a reported number actually measures. Forecast accuracy,
+ranking skill, risk-adjusted return, tail loss, and capacity are different jobs.
+The metric must match the decision, and the reported result must include the
+search and trading costs that produced it.
+
+| Word | Plain-English meaning | Week 6 example |
+|---|---|---|
+| **Metric** | A numerical measure chosen for one specific job. | Rank IC measures ordering. |
+| **Rank IC** | Within-date rank agreement between scores and later outcomes. | Did high-score stocks rank above low-score stocks? |
+| **Sharpe ratio** | Average excess return relative to return volatility. | Reward per unit of observed return variability. |
+| **Capacity** | Scale a strategy can handle under liquidity and impact. | Results weaken as capital grows. |
+| **Multiple testing** | More trials give luck more chances to create a winner. | Keep the best of 500 strategies. |
+| **Effective information** | Independent evidence rather than the raw row count. | Correlated stocks are not independent bets. |
+
+Choosing the best result from many trials is like choosing the tallest person
+from a crowd: the relevant comparison changes with the size and dependence of
+the crowd. See [Core Vocabulary](../../docs/CORE_GLOSSARY.md) for metric-related
+foundations such as mean, volatility, rank, baseline, test, and uncertainty.
+
+## Required / explain / recognize
+
+| Level | What Week 6 expects |
+|---|---|
+| **USE** | Match a metric to a question and carry a result through turnover, costs, and a complete trial ledger. |
+| **EXPLAIN** | Why nominal rows, names, parameters, and trials can overstate effective information. |
+| **RECOGNIZE** | VaR, expected shortfall, deflated Sharpe, interpolation, double descent, and benign overfitting. |
+
+## Full reference
 
 Week 6 follows two connected questions:
 
@@ -223,3 +254,13 @@ development data, require a later test, question nominal breadth, demand
 turnover and cost evidence, separate parameter count from fitted freedom and
 effective information, and require mechanism controls before interpreting the
 second descent.
+
+
+## Demo distinctions to keep straight
+
+- Demos 1–2 measure ranks and a gross spread from the same scores. Their stable independent simulated dates are not a market-performance forecast.
+- Demo 4 uses full-path RMS position scaling for a teaching comparison; live sizing must use past information. Turnover is a target-change proxy, not a full drift-aware trade ledger.
+- Demo 6 floors near-zero training error only for display; the test peak and second descent remain computed values. A second descent does not prove the largest model is best.
+- Demo 7 uses common forecast dates. Its fixed sum-loss Ridge penalty has normalized strength 5 divided by window length, so this is a comparison of declared procedures, not memory isolated from shrinkage.
+- Optional Demos 8–10 distinguish current-state estimation from prediction. HMM parameters are supplied; the heatmap shows oracle predictive-density gain, not proof that hidden states can be recovered.
+- The volatility-overlay case is a retrospective exercise: selection uses data through 1999, evaluation runs January 2000–April 2026, and the protocol was written in July 2026. The declared minimum Sharpe gain is 0.05; the observed gain is 0.023, with a 90% interval spanning zero.

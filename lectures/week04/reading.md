@@ -37,7 +37,7 @@ Focus on:
 - the interaction of overlap, persistence, and learner capacity;
 - exact purging, pre-validation gaps, and post-test embargoes;
 - expanding versus rolling windows;
-- nested forward selection and later outer assessment; and
+- nested forward selection and later outer testing; and
 - validation clocks for time-series, panel, and event/document settings.
 
 Useful exercises: 1–7.
@@ -63,6 +63,12 @@ Useful exercises: 1–7.
 | after Section 2 | complete the threshold table from Demo 3 |
 | after Section 3 | freeze the policy in Demo 4 |
 | before Deck B | read the correlated-proxy and label-interval sections |
-| after Section 4 | inspect coefficient paths and selection frequencies |
+| after Section 4 | run Demo 4b and compare reported and fresh-period losses |
 | after Section 5 | draw one exact purge boundary |
 | after Section 6 | begin the ordered split and pipeline structure in HW2 |
+
+## Targeted explanations and teaching sources
+
+- [scikit-learn calibration guide](https://scikit-learn.org/stable/modules/calibration.html): reliability bins, held-out calibration, proper losses, and why isotonic ties can change ranking. Useful beside Section 3; lower Brier loss alone does not establish better calibration.
+- [Cawley and Talbot's original study](https://www.jmlr.org/papers/v11/cawley10a.html): selection can overfit its own criterion. Read beside the repeated search-width figure; a single inner/outer loss difference does not isolate the bias.
+- [IES practice guide](https://ies.ed.gov/ncee/wwc/PracticeGuide/1): supports pairing worked examples with practice and graphics with explanations (moderate evidence), and explanatory questions (strong evidence). The revised notebook applies those general principles; this is not a direct trial of these finance lessons. Pre-questions have weaker evidence in this guide, so prediction prompts are not presented as a proven substitute for instruction.

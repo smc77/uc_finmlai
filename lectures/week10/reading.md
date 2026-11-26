@@ -1,9 +1,5 @@
 # Week 10 — Reading
 
-The lecture, notebook, and weekly summary are self-contained. The papers named
-under optional supplementary reading provide routes for deeper study; they are
-not required and are not bundled in the public student repository.
-
 ## Before Lecture A — Ch 28 (Text as Data)
 
 **Read in full:**

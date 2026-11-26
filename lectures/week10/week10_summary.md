@@ -1,8 +1,38 @@
 # Week 10 Summary — Financial Text and Point-in-Time Documents
 
-Use this as a short review map for Week 10. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 10 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 10 turns language into numerical evidence. Every representation keeps some
+distinctions and discards others. Every document also needs an identity,
+version, and usable time before it can enter a historical decision.
+
+| Word | Plain-English meaning | Week 10 example |
+|---|---|---|
+| **Document** | One identifiable piece of text with a source and version. | One SEC filing. |
+| **Vocabulary** | The terms a text representation knows how to encode. | Terms learned from training filings. |
+| **TF-IDF** | A weight combining within-document frequency and corpus rarity. | Distinctive terms receive more weight. |
+| **Embedding** | A vector representing selected aspects of meaning or usage. | Similar passages receive nearby vectors. |
+| **Retrieval** | Finding and ranking relevant documents or passages. | Return filing spans relevant to revenue guidance. |
+| **Document passport** | A record of identity, version, subject period, and usable time. | Accession number plus availability and parser time. |
+
+A text representation is a measuring instrument: it highlights some
+distinctions and is blind to others. See [Core Vocabulary](../../docs/CORE_GLOSSARY.md)
+for feature, target, vector, fit, validation, point-in-time data, and incremental
+value.
+
+## Required / explain / recognize
+
+| Level | What Week 10 expects |
+|---|---|
+| **USE** | Fit a text representation on training documents and preserve document identity, version, and availability. |
+| **EXPLAIN** | Why semantic similarity is not factual agreement and why the period described is not the availability time. |
+| **RECOGNIZE** | Character n-grams, contextual embeddings, FinBERT variants, hybrid retrieval, MRR, and nDCG. |
+
+## Full reference
 
 Week 10 turns documents into measurements, then asks whether those
 measurements could have existed at the decision time:
@@ -208,7 +238,7 @@ Three principles organize the week:
 | **n-gram** | A run of *n* consecutive words (or characters, for character n-grams). |
 | **Representation collision** | Two texts with different meanings mapped to nearly the same features. |
 | **Lexical shift** | Later documents using terms absent from the fitted vocabulary. |
-| **Static embedding** | One dense vector per token type, whatever its context. |
+| **Static embedding** | One fixed list of numbers for each vocabulary item, regardless of the sentence in which it appears. “Bank” therefore receives the same base representation in “river bank” and “investment bank.” |
 | **Contextual embedding** | A vector for one occurrence of a token in its sentence. |
 | **Attention** | A mechanism that lets each token's representation draw on other tokens. |
 | **Finance-lexicon trap** | Generic sentiment words misreading neutral accounting language as negative. |

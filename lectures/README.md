@@ -4,6 +4,7 @@ One folder per week, released as the term progresses. Run `git pull` each week.
 
 Each week's folder holds what you use alongside the Canvas lecture:
 
+- the week's plain-English summary — core terms, ideas, and a compact review;
 - the week's Jupyter notebook — the demonstrations and mini-projects used during
   the lecture breaks;
 - `reading.md` — a short guide explaining which readings align with each lecture

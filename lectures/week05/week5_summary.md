@@ -1,8 +1,38 @@
 # Week 5 Summary — Flexible Models, Disciplined Evidence
 
-Use this as a short review map for Week 5. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 5 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 5 asks what flexible tree models can represent that a straight line cannot.
+A tree creates regions using if–then questions. A forest averages many unstable
+trees. Boosting builds a sequence in which each small tree tries to improve the
+current prediction.
+
+| Word | Plain-English meaning | Week 5 example |
+|---|---|---|
+| **Decision tree** | A prediction made by following learned if–then questions. | “Is momentum positive?” |
+| **Split** | A feature threshold dividing a group of rows. | Volatility below 20%. |
+| **Leaf** | A final region storing a prediction. | The average target in that region. |
+| **Interaction** | One feature matters differently depending on another. | Momentum helps only in low volatility. |
+| **Random forest** | An average of many randomized trees. | Trees see different rows and feature subsets. |
+| **Boosting** | A sequence of small models correcting earlier errors. | Each new tree improves the current ensemble. |
+
+A forest is a panel averaging separate opinions. Boosting is an editor revising
+one draft in stages. See [Core Vocabulary](../../docs/CORE_GLOSSARY.md) for model,
+feature, target, fit, loss, validation, and generalization.
+
+## Required / explain / recognize
+
+| Level | What Week 5 expects |
+|---|---|
+| **USE** | Follow a row through a tree and select complexity using validation rather than training fit. |
+| **EXPLAIN** | How forests stabilize trees, how boosting differs, and why importance is not causation. |
+| **RECOGNIZE** | Bootstrap samples, out-of-bag diagnostics, permutation importance, patience, and stochastic boosting. |
+
+## Full reference
 
 Week 5 asks one question:
 
@@ -37,9 +67,9 @@ path, feasible baseline, and final test matter more.
    bootstrap sample and a random subset of features. Averaging helps most when
    the trees' errors are not too correlated. More nearly identical trees add
    little new protection.
-6. **A forest learns an adaptive neighborhood.** Training cases receive more
-   weight when the fitted trees repeatedly place them in the same leaves as the
-   new case. The forest therefore learns which features define predictive
+6. **A forest learns an adaptive neighborhood.** Training cases receive weights from the leaves they share with the new case.
+   Each tree normalizes by its leaf’s total training weight, including bootstrap
+   multiplicities; sharing more leaves alone does not determine the final weight. The forest therefore learns which features define predictive
    similarity rather than starting from a fixed distance formula.
 7. **Out-of-bag evidence is convenient, but its clock must match the intended evaluation.** A
    row is out of bag for trees that did not sample it. That creates an internal
@@ -118,12 +148,12 @@ candidates evaluated during selection.
 | **Pruning** | Removing branches whose added complexity is not sufficiently useful. |
 | **Interaction** | A feature's effect depends on the value of another feature. |
 | **XOR** | A known-truth pattern in which exactly one of two conditions must hold; a simple additive line cannot represent it. |
-| **Held-out sample** | Rows drawn from the same population and never used to fit or select. Carries no dates; a held-out score estimates population risk. |
-| **Out-of-sample** | Evaluated on a *later* period than the one used to fit or select. Held-out plus a forward boundary. |
-| **Population risk** | Expected squared prediction error for a new observation from the target population, with the fitted model held fixed. Held-out rows estimate it; more rows sharpen the estimate, not the quantity. |
+| **Held-out sample** | Observations excluded from fitting or selection for the stated evaluation. They may be independent draws or later dated cases; the sampling design determines the claim. |
+| **Out-of-sample** | Evaluated on observations excluded from the relevant development process. The term alone does not guarantee a forward time boundary. |
+| **Population risk** | Expected loss under a declared loss function for a new observation from the target population, with the fitted model held fixed. Held-out rows estimate it; more rows sharpen the estimate, not the quantity. |
 | **Bootstrap sample** | A same-sized training sample drawn with replacement, so some rows repeat and some are omitted. |
 | **Random forest** | An average of trees fitted with row and feature randomization. |
-| **Adaptive neighborhood** | The training cases that repeatedly share forest leaves with a new case and therefore receive more prediction weight. |
+| **Adaptive neighborhood** | The training cases sharing forest leaves with a new case; weights account for each leaf’s size and bootstrap counts. |
 | **Out-of-bag (OOB) row** | A training row omitted from one tree's bootstrap sample. |
 | **Impurity importance** | Total training split improvement credited to a feature. |
 | **Permutation importance** | Score loss after a feature is shuffled on a declared test population. |

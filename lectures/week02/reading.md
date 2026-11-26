@@ -26,7 +26,8 @@ depends on completing them.
 
 - event, release, availability, decision, and vintage timestamps;
 - look-ahead, survivorship, point-in-time, and target leakage;
-- why a random split changes the estimand — you cannot shuffle financial data;
+- why a random temporal split changes the evaluation population; forward
+  deployment requires a matching time-aware evaluation;
 - the preprocessing boundary and information-set audit;
 - as-of joins, changing universes, and future-invariance tests.
 
@@ -53,3 +54,20 @@ depends on completing them.
 | Segment 4 (data biography & leakage) | Ch 5 on timestamps and the leakage taxonomy |
 | Segment 5 (the preprocessing boundary) | Ch 5 on fit/transform and the information-set audit |
 | Segment 6 (proving the boundary) | Ch 5 on PIT tables, universes, and future-invariance |
+
+## Short technical companions
+
+These primary sources were checked on November 12, 2026. Use them after the
+local worked example; the links are optional, not additional quiz prerequisites.
+
+- [scikit-learn: common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html):
+  after Demo 7, identify which rows teach `fit` and which only pass through
+  `transform`. Its feature-selection example is a useful additional leakage
+  exercise; a pipeline still needs a suitable temporal split.
+- [ALFRED: download formats](https://alfred.stlouisfed.org/help/downloaddata):
+  after Demo 8, distinguish an observation date from the lifetime of its
+  published version. Our GDP matrix uses release ages; it is not a calendar
+  vintage triangle.
+- [Kenneth French: book-to-market portfolio construction](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_form_btm.html):
+  identify the fiscal-year book equity, December market equity, June formation,
+  and later return interval before reading the formal portfolio description.

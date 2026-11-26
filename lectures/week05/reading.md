@@ -70,3 +70,13 @@ timing, selection, concentration, and fragility.*
 | Day 5      | Read Ch 14; run Demo 7 (forward early stopping)            |
 | Day 6      | Attend Lecture B                                        |
 | Day 7      | Run Demos 8–9; apply Rule 12 to a result you have seen   |
+
+## Worked examples and visual explanations
+
+Start with the course notebook's small example, explain its result, then try one change. These primary sources provide optional follow-up:
+
+- [Scikit-learn decision trees](https://scikit-learn.org/stable/modules/tree.html): partitions, leaf predictions, and complexity controls.
+- [Gradient-boosting regression worked example](https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html): inspect training and test loss by stage; its split is not the course's financial forecasting protocol.
+- [Permutation importance](https://scikit-learn.org/stable/modules/permutation_importance.html) and [correlated-feature example](https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html): compare reliance with split-based importance and consider substitutes.
+
+The teaching sequence pairs a worked example with a nearby student problem and explains the graphic aloud. This follows the [IES practice guide on organizing instruction](https://ies.ed.gov/ncee/wwc/PracticeGuide/1), which rates worked-example/problem interleaving and combining graphics with words as supported by moderate evidence. Prediction questions here are prompts for explanation, not a claim that this particular notebook has been experimentally validated.

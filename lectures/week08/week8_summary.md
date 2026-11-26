@@ -1,8 +1,38 @@
 # Week 8 Summary — Portfolio Decisions and Neural Networks
 
-Use this as a short review map for Week 8. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 8 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 8 separates the prediction from the amount of capital placed behind it.
+A sizing rule creates target positions; constraints and trading create actual
+holdings. Part B then asks whether a neural network adds useful representation
+power beyond simpler models using the same information.
+
+| Word | Plain-English meaning | Week 8 example |
+|---|---|---|
+| **Sizing rule** | The mapping from a forecast to a target position. | Stronger score receives a larger weight. |
+| **Portfolio weight** | A holding expressed as a share of capital. | 0.02 means 2% of the portfolio. |
+| **Volatility targeting** | Scaling exposure toward a chosen risk level. | Reduce exposure when forecast risk rises. |
+| **Neural network** | Layers of learned numerical transformations. | Inputs pass through hidden layers to a forecast. |
+| **Activation** | A nonlinear operation inside a network. | ReLU replaces negative values with zero. |
+| **Backpropagation** | Calculating how each parameter affected loss by working backward. | Compute gradients from output to earlier layers. |
+
+A forecast chooses a direction; sizing chooses speed; constraints and costs
+describe the road. See [Core Vocabulary](../../docs/CORE_GLOSSARY.md) for forecast,
+position, constraint, parameter, loss, optimization, and generalization.
+
+## Required / explain / recognize
+
+| Level | What Week 8 expects |
+|---|---|
+| **USE** | Separate forecast, target position, actual holding, trade, cost, and net return. |
+| **EXPLAIN** | Why inverse-covariance portfolios amplify estimation error and why approximation capacity does not guarantee learning. |
+| **RECOGNIZE** | Kelly sizing, Ledoit–Wolf shrinkage, HRP, finite-difference checks, universal approximation, and inductive bias. |
+
+## Full reference
 
 Week 8 follows two connected questions:
 
@@ -31,7 +61,9 @@ Three principles organize the week:
    strong baselines. Networks are strong candidates for expensive known
    functions, sequences with abundant data, and unstructured data such as text.
 
-## Core ideas — scores to positions (Part A)
+## Core ideas
+
+### Scores to positions (Part A)
 
 1. **A decision has three layers.** The forecast supplies a score, return,
    probability, or risk. Sizing turns it into a target position.
@@ -91,7 +123,7 @@ Three principles organize the week:
     forecast and varying the policy measures construction value; fixing the
     policy and varying the forecast measures information value.
 
-## Core ideas — neural networks (Part B)
+### Neural networks (Part B)
 
 15. **A network composes simple units.** Each layer computes
     $a = \phi(Wx + b)$. A perceptron makes one weighted decision; the
@@ -163,7 +195,7 @@ Three principles organize the week:
 | Term | Plain-English meaning |
 |---|---|
 | **Perceptron** | One unit making a weighted threshold decision. |
-| **Multilayer perceptron (MLP)** | Stacked layers of units with nonlinear activations. |
+| **Multilayer perceptron (MLP)** | A feed-forward neural network with an input layer, one or more hidden layers, and an output layer. Each hidden layer forms weighted combinations and applies a nonlinear activation before passing numbers forward. |
 | **Activation** | The nonlinear function, such as ReLU or tanh, applied inside each unit. |
 | **Backpropagation** | Computing parameter gradients by applying the chain rule backward through the network. |
 | **Finite-difference check** | Approximating a gradient by small parameter perturbations to verify an implementation. |
@@ -250,3 +282,8 @@ targets rather than holdings, missing turnover and costs, and the comparison
 against equal weight on gross rather than net performance. It should also ask
 whether the forecast or the construction produced the difference, by fixing
 one and varying the other.
+
+
+## Work through the code
+
+The demo code guide explains all 14 demonstrations and both guided companions beside their notebook cells. Predict a result, change one setting, then check the output. In particular, trace actual holdings and fees in Demos 3 and 14, verify the saved checkpoint in Demo 12, and distinguish Demo 10’s fixed hidden features from an end-to-end fitted network. The chapter figures and lecture demos use different declared fixtures; do not transfer their numerical results between experiments.

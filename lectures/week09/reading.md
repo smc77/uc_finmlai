@@ -1,8 +1,5 @@
 # Week 9 — Reading
 
-The local podcast research packet and source-status notes are indexed in
-[`papers/README.md`](papers/README.md).
-
 ## Before Lecture A — Ch 26 (Options Pricing and Volatility Modeling with ML)
 
 **Read in full:**

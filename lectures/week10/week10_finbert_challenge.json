@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "model": "ProsusAI/finbert",
+  "revision": "0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031",
+  "task": "three-class sequence classification",
+  "license": "CC BY-NC-SA 4.0",
+  "probability_order": [
+    "positive",
+    "negative",
+    "neutral"
+  ],
+  "note": "Six designed diagnostic cases; these results do not estimate production accuracy.",
+  "runs": [
+    {
+      "expected": "neutral",
+      "text": "tax depreciation increased the reported liability",
+      "probabilities": [0.539122, 0.427901, 0.032977]
+    },
+    {
+      "expected": "neutral",
+      "text": "foreign capital costs were disclosed",
+      "probabilities": [0.069897, 0.291030, 0.639073]
+    },
+    {
+      "expected": "negative",
+      "text": "weak demand caused a revenue decline",
+      "probabilities": [0.011227, 0.970496, 0.018277]
+    },
+    {
+      "expected": "negative",
+      "text": "management lowered guidance after orders softened",
+      "probabilities": [0.020149, 0.868449, 0.111402]
+    },
+    {
+      "expected": "negative",
+      "text": "guidance was lowered",
+      "probabilities": [0.034419, 0.022590, 0.942991]
+    },
+    {
+      "expected": "not negative",
+      "text": "guidance was not lowered",
+      "probabilities": [0.024729, 0.024896, 0.950375]
+    }
+  ]
+}

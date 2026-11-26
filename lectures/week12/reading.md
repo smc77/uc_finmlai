@@ -1,8 +1,5 @@
 # Week 12 — Reading
 
-The local podcast research packet is indexed in
-[`papers/README.md`](papers/README.md).
-
 ## Before Lecture A — Ch 32 (Microstructure and Execution)
 
 **Read in full:**
@@ -11,11 +8,11 @@ The local podcast research packet is indexed in
 
 **Required companion selections:**
 
-- Almgren and Chriss (2000), [“Optimal Execution of Portfolio
-  Transactions”](papers/Almgren_Chriss_2000_Optimal_Execution.pdf) — model,
+- Almgren and Chriss (2000), “Optimal Execution of Portfolio
+  Transactions” — model,
   objective, efficient frontier, and conclusion
-- Bouchaud, Farmer, and Lillo (2009), [“How Markets Slowly Digest Changes in
-  Supply and Demand”](papers/Bouchaud_Farmer_Lillo_2009_Market_Impact.pdf) —
+- Bouchaud, Farmer, and Lillo (2009), “How Markets Slowly Digest Changes in
+  Supply and Demand” —
   market-impact mechanism, square-root evidence, and limitations
 
 **Focus on (heavy chapter — prioritize):**
@@ -47,12 +44,12 @@ fill ledger.*
 
 **Required companion selections:**
 
-- Sutton and Barto (2018), [*Reinforcement Learning: An
-  Introduction*](papers/Sutton_Barto_2018_Reinforcement_Learning.pdf) — Chapter
+- Sutton and Barto (2018), *Reinforcement Learning: An
+  Introduction* — Chapter
   2 on multi-armed bandits, Chapter 3 on finite Markov decision processes, and
   the Q-learning portion of Chapter 6
-- Nevmyvaka, Feng, and Kearns (2006), [“Reinforcement Learning for Optimized
-  Trade Execution”](papers/Nevmyvaka_Feng_Kearns_2006_RL_Execution.pdf) —
+- Nevmyvaka, Feng, and Kearns (2006), “Reinforcement Learning for Optimized
+  Trade Execution” —
   problem formulation, state and action design, benchmark comparison, and
   limitations
 
@@ -91,7 +88,7 @@ cannot answer counterfactual actions. Read them in that order.
 - Cont, Stoikov & Talreja (2010) — the reduced-form LOB model behind §2.5.
 - Kyle (1985) and Glosten and Milgrom (1985) — foundational models of informed
   trading and the bid–ask spread; local PDFs are retained in
-  [`papers/`](papers/)
+  papers/
 - Lattimore & Szepesvári (2020), *Bandit Algorithms* — exploration,
   regret, and contextual-bandit foundations
 - Watkins & Dayan (1992) — convergence of Q-learning

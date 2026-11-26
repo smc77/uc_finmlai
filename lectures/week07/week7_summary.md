@@ -1,8 +1,38 @@
 # Week 7 Summary — From Mathematical Structure to Financial Decisions
 
-Use this as a short review map for Week 7. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 7 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 7 contains two kinds of search. Optimization searches for the best allowed
+choice under a written objective. PCA and clustering search for structure in
+the inputs without a target. Both can produce precise answers to poorly chosen
+questions, so the specification and later use remain visible.
+
+| Word | Plain-English meaning | Week 7 example |
+|---|---|---|
+| **Decision variable** | The quantity an optimizer may choose. | Portfolio weights. |
+| **Objective** | The numerical rule used to score choices. | Expected return minus a risk penalty. |
+| **Constraint** | A rule limiting permitted choices. | No weight above 5%. |
+| **Gradient** | The vector of local slopes of an objective. | Direction of fastest local increase. |
+| **PCA** | A fitted summary of shared directions of variation. | Common movements across yields. |
+| **Clustering** | Grouping cases using a declared measure of similarity. | Stocks grouped by return behavior. |
+
+The optimizer is a literal navigator: it finds the best route on the map it is
+given, even if the map is wrong. See [Core Vocabulary](../../docs/CORE_GLOSSARY.md) for
+parameter, objective, optimization, variance, covariance, fit, and test.
+
+## Required / explain / recognize
+
+| Level | What Week 7 expects |
+|---|---|
+| **USE** | Identify variables, objective, constraints, fit period, and later evaluation. |
+| **EXPLAIN** | Why solver convergence differs from decision stability and why unsupervised does not mean unfitted. |
+| **RECOGNIZE** | Convexity, conditioning, eigenvectors, eigenvalues, scree plots, noise spectra, centroids, and linkage. |
+
+## Full reference
 
 Week 7 follows two connected questions:
 
@@ -190,7 +220,7 @@ can be stable but irrelevant to the downstream decision.
 
 | Term | Plain-English meaning |
 |---|---|
-| **Principal component analysis (PCA)** | A fitted rotation that orders sample directions by explained variance. |
+| **Principal component analysis (PCA)** | A method that replaces many possibly correlated variables with new summaries. The first summary captures the direction of greatest variation in the fitted sample; later summaries capture remaining perpendicular directions. |
 | **Eigenvector / component direction** | A weighted direction through the feature space. |
 | **Eigenvalue** | Sample variance along its component direction. |
 | **Loading** | Weight of an original variable in a component direction. |
@@ -296,3 +326,16 @@ return prediction, include the search over K, distinguish the retrospective
 crisis description from a usable state, stress the small-variance direction,
 compare the resulting action with a feasible baseline, and require turnover,
 cost, stability, and later-decision evidence in addition to convergence.
+
+
+## Demo interpretation checks
+
+- Demo 2 includes a real scaling comparison: the original rate diverges after a 20-fold feature-unit change, a smaller rate converges slowly, and training-only scaling restores fast convergence. Compare predictions after converting units, not raw coefficients.
+- Demo 3 audits three prespecified search budgets. Selecting a budget from the audit outcomes would require a new final test.
+- Demo 4 solves an unconstrained quadratic. Target change and modeled-objective regret have different units; no realized returns or constraints are evaluated.
+- Demo 5 uses covariance PCA on centered log returns. Its 31% first share is not a majority, and its 0.998 correlation is with an equal-weight same-panel proxy, not the hidden factor.
+- Demo 6 rebuilds both cutoff-respecting pipelines; only the global fit lets future observations change earlier scores.
+- The Marchenko–Pastur band is an asymptotic noise benchmark, not a finite-sample confidence interval. A few noise eigenvalues can exceed it.
+- Demo 9 compares frozen versus full-sample fitting with the same lagged features. It measures disagreement, not hidden-state accuracy or a guaranteed detection delay.
+- The separate textbook regime simulation plants equal positive means and different volatilities. Negative realized stretches do not imply negative population drift.
+- The industry allocation chart uses raw-return mean divided by volatility, zero cash/financing return, and absolute target-change costs. It is not a risk-free-adjusted Sharpe or a complete holdings-based trading ledger.

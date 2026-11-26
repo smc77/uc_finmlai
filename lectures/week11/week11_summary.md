@@ -1,8 +1,39 @@
 # Week 11 Summary — LLM Systems, Adaptation, and Inference Economics
 
-Use this as a short review map for Week 11. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 11 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 11 treats the language model as one component of a larger system. Four
+questions stay separate: did it generate fluent text, did permitted evidence
+support the claim, did the system have authority to act, and was the complete
+procedure worth its cost?
+
+| Word | Plain-English meaning | Week 11 example |
+|---|---|---|
+| **Token** | A word, word part, or punctuation unit processed by the model. | “Profitability” may use several tokens. |
+| **Decoder** | The component predicting the next token from the current context. | Continue an answer one token at a time. |
+| **Context** | Instructions, examples, evidence, and prior turns supplied now. | A question plus dated filing passages. |
+| **RAG** | Generation supplied with retrieved evidence. | Answer from a fixed document packet. |
+| **Fine-tuning** | Additional training that changes model parameters. | Train on labeled extraction examples. |
+| **Inference** | Using the fitted system to answer a new request. | Run the frozen model, retriever, tools, and checks. |
+
+Think of the model as a reader in a library. Retrieval chooses the books,
+verification checks the claims, and an authority desk controls side effects.
+See [Core Vocabulary](../../docs/CORE_GLOSSARY.md) for token, context, vector, parameter,
+fit, inference, probability, and expected loss.
+
+## Required / explain / recognize
+
+| Level | What Week 11 expects |
+|---|---|
+| **USE** | Bind material claims to recoverable evidence or refuse, and record the complete routed procedure. |
+| **EXPLAIN** | Why retrieval is not verification, a supported proposal is not authority, and more reasoning is not independent evidence. |
+| **RECOGNIZE** | Parametric memory, context-position effects, atomic claims, LoRA rank, routers, and inference economics. |
+
+## Full reference
 
 Week 10 established which financial documents were historically admissible.
 Week 11 asks what happens when a language model receives that evidence:
@@ -280,7 +311,7 @@ Four properties must not be collapsed:
 
 | Term | Plain-English meaning |
 |---|---|
-| **Decoder** | The component that predicts the next token from the preceding context. |
+| **Decoder** | The language-model component that generates an answer one token at a time by predicting what token should come next from the supplied context. |
 | **Parametric memory** | Associations encoded in model weights rather than recoverable source records. |
 | **Working context** | Instructions, examples, evidence, tool results, and prior turns supplied for the current request. |
 | **RAG** | Retrieval-augmented generation: supplying retrieved evidence to a generator at inference time. |

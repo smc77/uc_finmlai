@@ -11,10 +11,10 @@ demonstrations, and searchable glossary.
 plain-English vocabulary used throughout the course, with a concrete example
 for every term.
 
-Everything you need to run the course code lives here: each week's reading
-guide, lecture notebook, and released homework assignment. Recorded lectures
-and their slides are delivered through Canvas; this repository holds the files
-you read or run alongside them.
+Everything you need to run the course code lives here: each week's plain-English
+summary, reading guide, lecture notebook, and released homework assignment.
+Recorded lectures and their slides are delivered through Canvas; this repository
+holds the files you read or run alongside them.
 
 **Start here — Week 0.** Before the first lecture:
 

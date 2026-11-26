@@ -62,3 +62,10 @@ only for readers who want another treatment.
 | Segment 4 (baselines and predictive R-squared) | Ch 7; Campbell and Thompson (2008) |
 | Segment 5 (order, calibration, rank correlation) | Ch 7 on rank IC and metrics |
 | Segment 6 (the first trading ledger) | Ch 7 on the score-to-position ledger and costs |
+
+## Runnable explanations and visual practice
+
+- [scikit-learn's quantile-regression example](https://scikit-learn.org/stable/auto_examples/linear_model/plot_quantile_regression.html): after Segment 3, compare the mean with conditional percentiles as noise changes. Predict whether the upper/lower lines separate before running. Prerequisites: residuals and percentiles. Demo 3 supplies the local version.
+- [HuberRegressor documentation](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.HuberRegressor.html): check `epsilon`, fitted scale, and the default coefficient penalty against Demo 3.
+- [Ridge](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html) and [Lasso](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html): check the different loss normalizations before comparing `alpha` values.
+- [Seeing Theory, Regression Analysis](https://seeing-theory.brown.edu/regression-analysis/index.html), by the Seeing Theory team: after the OLS residual picture, predict the effect of dragging a point vertically versus horizontally. Prerequisite: slope and residual. This archived external exercise is optional; the local plots and notebook explain the core without an external player.

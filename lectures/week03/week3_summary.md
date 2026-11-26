@@ -1,8 +1,39 @@
 # Week 3 Summary — From a Line to a Trading Ledger
 
-Use this as a short review map for Week 3. The lecture, slides, and demos remain
-the full source. The quiz is open-book and open-note, but individual and without
-AI assistance.
+This file begins with a short entry ramp for Week 3 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 3 follows one forecast all the way into a financial result. A regression
+predicts a number. A policy converts that prediction into a position. The
+position earns a later return, and changing the position creates turnover and
+cost. Do not skip any arrow.
+
+| Word | Plain-English meaning | Week 3 example |
+|---|---|---|
+| **Regression** | A model that predicts a numerical target. | Predict next-month return. |
+| **Coefficient** | A fitted weight attached to one feature. | The weight on momentum. |
+| **Residual** | Actual target minus predicted target. | Realized return minus forecast return. |
+| **Regularization** | A penalty or limit used to stabilize fitted weights. | Ridge discourages very large coefficients. |
+| **Position** | The exposure chosen from the forecast. | Hold +1, 0, or −1. |
+| **Turnover** | How much the position changes through trading. | Moving from 0 to +1 creates one unit of turnover. |
+
+The simplest memory aid is: the forecast is the weather report; the position
+is the decision to carry an umbrella; the ledger records whether that decision
+helped and what it cost. See [Core Vocabulary](../../docs/CORE_GLOSSARY.md) for feature,
+target, parameter, loss, fit, and baseline.
+
+## Required / explain / recognize
+
+| Level | What Week 3 expects |
+|---|---|
+| **USE** | Interpret a transparent forecast and reconcile gross return, turnover, cost, and net return. |
+| **EXPLAIN** | Why training fit, forecast quality, ranking quality, and trading value are different claims. |
+| **RECOGNIZE** | Ridge, lasso, elastic net, Huber loss, quantile regression, and robust standard errors. |
+
+## Full reference
 
 Week 3 follows one complete chain:
 
@@ -29,31 +60,36 @@ only be evaluated **ex post**, after the outcome arrives.
    creates capacity, not information. When features are numerous or strongly
    correlated, training fit can improve while future performance becomes less
    stable.
-3. **Selection and shrinkage solve related but different problems.** Selection
+3. **Validation reveals the practical bias–variance trade-off.** A model with
+   too little capacity can miss recurring structure; one with too much can
+   follow sample-specific noise. Training error generally keeps falling, so
+   validation selects a low, stable error region before the final test is used.
+4. **Selection and shrinkage solve related but different problems.** Selection
    chooses columns and therefore creates a search. A norm is a rule for measuring
    the size of the coefficient vector. Ridge penalizes squared $L_2$ size and
    smoothly pulls coefficients toward zero; lasso penalizes $L_1$ size and can
    set some coefficients exactly to zero; elastic net combines both penalties.
    Validation chooses complexity. A final untouched test assesses the complete
    procedure.
-4. **Sparsity is not discovery.** A lasso coefficient of zero does not prove that
+5. **Sparsity is not discovery.** A lasso coefficient of zero does not prove that
    a feature is useless, and a nonzero coefficient does not prove a stable
    mechanism. Correlated features can substitute for one another, so selected
    sets may change even when predictions remain similar.
-5. **Changing the estimator changes the question.** OLS targets a conditional mean
-   under squared loss. Huber limits the pull of extreme residuals. Quantile
+6. **Changing the estimator changes the question.** OLS targets a conditional mean
+   under squared loss. Huber limits the pull of extreme residuals and estimates a robust center,
+   which need not equal the mean under asymmetric errors. Quantile
    regression targets a stated percentile, such as the median or 90th
    percentile. WLS, GLS, and robust standard errors address other assumptions;
    they are not interchangeable repairs.
-6. **Every forecast needs a feasible opponent.** Predictive R² compares the
+7. **Every forecast needs a feasible opponent.** Predictive R² compares the
    model's squared error with a named baseline on the same held-out rows. Its
    denominator is part of the result. A negative value means the challenger lost
    to that baseline on that sample—not that forecasting is impossible.
-7. **Order and scale are different kinds of accuracy.** Predictive R² cares about numerical
+8. **Order and scale are different kinds of accuracy.** Predictive R² cares about numerical
    forecast errors. Pearson measures linear association. Spearman replaces
    values with ranks and measures ordering. Positive rescaling preserves both
    correlations but can ruin a magnitude forecast.
-8. **A score becomes financial only through a declared policy and ledger.** The
+9. **A score becomes financial only through a declared policy and ledger.** The
    policy maps the forecast to a position. The position must earn a later return,
    turnover begins from cash, and cost is charged using an explicit convention.
    Every reported net return should reconcile row by row.
@@ -67,11 +103,16 @@ only be evaluated **ex post**, after the outcome arrives.
 | **Test** | Assesses the complete frozen procedure once all choices are fixed. |
 
 If test results influence a later choice, that period has become development
-data. The next honest assessment needs new untouched observations.
+data. The next honest test needs new untouched observations.
 
 ## Reading the first trading ledger
 
-For a decision made at date \(t\):
+Demo 6 decides after close, enters at the next open, and exits at the
+following open. Training uses only labels completed before the first test
+decision: 799 of the first 800 feature rows. The 400 test holdings use a frozen
+model and position scale. These are synthetic weekday sessions.
+
+For a nonterminal holding chosen at date \(t\):
 
 \[
 \text{gross return}_{t+1}=w_t r_{t+1},
@@ -88,6 +129,10 @@ For a decision made at date \(t\):
 The first previous position is cash, \(w_{t-1}=0\). The Week 3 cost model is a
 simple symmetric linear convention. Real implementation may also require
 spreads, nonlinear market impact, financing, borrow, and capacity limits.
+The final row also pays to liquidate the last position. Cumulative sums here
+are P&L per fixed initial notional, not compounded wealth. Demos 1 and 4 are
+separate close-to-close statistical forecasts and do not assume execution at
+an already observed closing price.
 
 ## Terms and vocabulary
 
@@ -105,6 +150,8 @@ spreads, nonlinear market impact, financing, borrow, and capacity limits.
 | **Fitted value / residual** | The model's prediction / the observed target minus that prediction. |
 | **Multicollinearity** | Features carry very similar information, making their individual coefficient allocation unstable. |
 | **Ill-conditioned design** | Small changes in data can create large coefficient changes because some feature directions are weakly supported. |
+| **Forward stepwise selection** | Starts from the intercept and repeatedly admits the feature that most reduces training loss. Greedy: an early choice is never reconsidered, so it can miss the best subset. |
+| **Selection path** | The ordered sequence of models a stepwise search produces. Training error falls at every step, so the size is chosen from validation error, not from the path itself. |
 | **Regularization** | Constraining coefficients to reduce the damage caused by noisy estimation. |
 | **Norm** | A rule for measuring the size of a vector. For coefficients, $L_1$ adds absolute values and $L_2$ is ordinary Euclidean length. |
 | **Ridge** | Penalizes squared $L_2$ size, $\sum_j\beta_j^2$, and smoothly shrinks coefficients toward zero. |
@@ -129,7 +176,7 @@ spreads, nonlinear market impact, financing, borrow, and capacity limits.
 | Term | Plain-English meaning |
 |---|---|
 | **Feasible baseline** | A forecast that could really have been produced at the same time and on the same rows as the challenger. |
-| **Predictive R²** | Improvement in held-out squared error relative to a named baseline. |
+| **Predictive R²** | How much the model reduces squared forecasting error relative to a named baseline on rows that did not fit the model. Positive is better than that baseline; negative is worse. |
 | **Pearson correlation** | Linear association that uses the distances among values. |
 | **Spearman correlation** | Pearson correlation of the ranks; it keeps ordering and discards distances. |
 | **Time-series Spearman** | Rank association across dates for one series. |

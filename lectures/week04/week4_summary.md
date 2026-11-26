@@ -1,14 +1,45 @@
 # Week 4 Summary — Probabilities, Decisions, and Forward Evidence
 
-Use this as a short review map for Week 4. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 4 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 4 separates five objects that are often blurred together: a model produces
+a **score**; the score may be converted into a **probability**; a **threshold**
+turns that output into an action; the action creates benefits and costs; and
+later data judge the complete rule.
+
+| Word | Plain-English meaning | Week 4 example |
+|---|---|---|
+| **Classification** | Predicting which category or event applies. | Default or no default. |
+| **Score** | A number that orders cases but may not state odds. | 0.8 ranks above 0.4. |
+| **Probability** | A claimed chance between zero and one. | A 20% chance of default. |
+| **Calibration** | Whether stated probabilities match observed frequencies. | About 20 of 100 comparable 20% cases default. |
+| **Threshold** | The cutoff that changes the action. | Review cases above 15%. |
+| **Forward validation** | Fit on earlier rows and evaluate on later rows. | Choose using 2022, test in 2023. |
+
+A smoke detector is a useful analogy: the sensor can remain unchanged while
+moving the sensitivity threshold changes alarms and misses. See
+[Core Vocabulary](../../docs/CORE_GLOSSARY.md) for target, model, training, validation,
+test, loss, and decision rule.
+
+## Required / explain / recognize
+
+| Level | What Week 4 expects |
+|---|---|
+| **USE** | Read a confusion matrix, distinguish score from probability, and choose a threshold from declared consequences. |
+| **EXPLAIN** | Why ranking, calibration, and decision value can disagree, and why validation must reproduce the deployment clock. |
+| **RECOGNIZE** | ROC-AUC, Brier score, log loss, reliability diagrams, purging, gaps, embargoes, and nested forward validation. |
+
+## Full reference
 
 Week 4 follows two connected chains:
 
 > **features → score → probability → threshold → action → realized cost**
 
-> **fit candidates → select earlier → freeze the procedure → assess later**
+> **fit candidates → select earlier → freeze the procedure → test later**
 
 Each arrow changes the claim. A model can rank cases well without producing
 trustworthy probabilities. A trustworthy probability can support several
@@ -42,25 +73,25 @@ to show whether the complete selection procedure travels.
    no-skill precision baseline is the event prevalence, so average precision
    must be read beside the population's base rate.
 7. **The probability baseline must be feasible.** Estimate the event rate from
-   training data and freeze its update rule before assessment. Using the test
+   training data and freeze its update rule before testing. Using the test
    event rate gives later outcomes to the competitor retroactively.
 8. **Calibration belongs to a population and a date.** A model calibrated over
    all history can misstate risk for a later vintage, product, score band, or
    subgroup. Any recalibration step must be fitted without consuming final
-   assessment data.
+   test data.
 9. **A saved fitted object is not the whole research procedure.** The candidate
    models, fitted preprocessing, selection rule, threshold rule, refit schedule,
-   and baseline all contribute to the result that later data assess.
+   and baseline all contribute to the result that later test data evaluate.
 10. **Validation should reproduce the deployment clock.** If production fits on
     the past and predicts the future, shuffled folds answer a different
     historical-mixture question. Every fitted input and matured training label
     must be available before the validation decision.
 11. **Label overlap and time dependence are not the same problem.** Exact
-    purging removes training rows whose outcome intervals cross an assessment
+    purging removes training rows whose outcome intervals cross an test
     boundary. Blocking can reduce neighbor overlap. Neither action by itself
     proves independence or fixes every source of leakage.
-12. **Select inside; assess outside.** Inner earlier folds choose features,
-    hyperparameters, calibration, and thresholds. Outer later blocks assess the
+12. **Select inside; test outside.** Inner earlier folds choose features,
+    hyperparameters, calibration, and thresholds. Outer later test blocks evaluate the
     complete selected procedure. The outer result—not the best inner score—is
     the evidence about travel.
 
@@ -95,7 +126,7 @@ may need more than one universal threshold.
 |---|---|
 | **Training** | Fit coefficients, scalers, imputers, calibrators, and other learned state. |
 | **Inner validation** | Choose candidate features, models, hyperparameters, thresholds, and stopping rules. |
-| **Outer assessment** | Judge the complete frozen selection procedure on later observations. |
+| **Outer test** | Judge the complete frozen selection procedure on later observations. |
 
 If an outer result changes the procedure, that block becomes development data.
 A fresh confirmatory claim needs later outcomes or another defensible untouched
@@ -109,7 +140,7 @@ population.
 |---|---|
 | **Binary classification** | Predicting which of two outcomes will occur, such as default or repayment. |
 | **Logistic regression** | A linear score passed through a sigmoid to produce an event probability. |
-| **Log-odds** | \(\log(p/(1-p))\); logistic regression is linear on this scale. |
+| **Log-odds** | A way to express probability as the logarithm of “chance of the event divided by chance of no event.” Logistic regression adds feature effects on this scale and then converts back to probability. |
 | **Base rate / prevalence** | The fraction of the relevant population experiencing the event. |
 | **Threshold** | The policy cutoff that converts a probability or score into a class or action. |
 | **Confusion matrix** | Counts of true positives, false positives, true negatives, and false negatives for one frozen threshold. |
@@ -138,14 +169,14 @@ population.
 | **Validation estimand** | The population, horizon, loss, baseline, and production procedure the validation score is intended to describe. |
 | **Forward validation** | Fitting on earlier eligible observations and evaluating on later decisions. |
 | **Label interval** | The full future period used to determine one outcome, not merely the row's feature date. |
-| **Purging** | Removing training rows whose label intervals overlap the assessment interval. |
-| **Gap** | Prespecified separation before an assessment block, often used for latency or dependence beyond exact label overlap. |
+| **Purging** | Removing training rows whose label intervals overlap the test interval. |
+| **Gap** | Prespecified separation before an test block, often used for latency or dependence beyond exact label overlap. |
 | **Embargo** | In a non-forward design with later observations in training, exclusion of a post-test margin before those later rows re-enter training. |
 | **Expanding window** | Training history grows as time advances. |
 | **Rolling window** | A fixed-length recent training history moves through time. |
 | **Refit cadence** | How often production re-estimates the model or policy. |
-| **Nested forward validation** | Inner earlier folds select; outer later folds assess the complete selected procedure. |
-| **Lockbox / final assessment** | Untouched evidence used once; after it influences a change, it becomes development history. |
+| **Nested forward validation** | Inner earlier folds select; outer later test folds evaluate the complete selected procedure. |
+| **Lockbox / final test** | Untouched evidence used once; after it influences a change, it becomes development history. |
 | **Distribution shift** | The later population differs from the population that produced the earlier evidence. |
 
 ## Rules earned this week
@@ -153,7 +184,7 @@ population.
 > **Rule 8 — The metric and the threshold must follow the decision.**
 
 Score ranking, probability quality, and policy value separately. Choose the
-operating rule from declared consequences before final assessment.
+operating rule from declared consequences before final test.
 
 > **Rule 10 — Validate forward in time.**
 
@@ -194,11 +225,11 @@ You should be able to:
 - interpret AUC as a pairwise ranking probability;
 - explain why prevalence changes precision and majority-class accuracy;
 - compute a simple cost-ratio threshold and state its assumptions;
-- identify which rows cross a fixed-horizon assessment boundary;
+- identify which rows cross a fixed-horizon test boundary;
 - explain why a shuffled fold and forward split answer different questions;
 - distinguish blocking, purging, a gap, and an embargo;
 - choose expanding or rolling windows to match a deployment procedure; and
-- explain why outer assessment judges the selection procedure rather than its
+- explain why outer test judges the selection procedure rather than its
   best inner score.
 
 Then audit this procedure:
@@ -212,5 +243,5 @@ Then audit this procedure:
 A strong answer should identify the full-sample fitted-state leakage, the
 unjustified 0.50 and accuracy objective, the mismatch between shuffled folds and
 prospective deployment, the crossing label intervals, the missing later outer
-assessment, and the need for a capacity-aware policy such as a validation-frozen
+test, and the need for a capacity-aware policy such as a validation-frozen
 top-5% queue.

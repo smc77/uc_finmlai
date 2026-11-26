@@ -1,10 +1,5 @@
 # Week 8 — Reading
 
-The local research PDFs used to generate the two optional Week 8 podcasts are
-catalogued in [`papers/README.md`](papers/README.md). This packet is separate
-from the student reading assignment below; its role is to give the podcast
-generator the primary sources named in the episode briefs.
-
 ## Before Lecture A — Ch 22 + Ch 23 (Sizing and MV Fragility)
 
 **Read in full:**

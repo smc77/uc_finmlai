@@ -40,11 +40,11 @@ next-day return (regression); Part F reuses the same rows with a direction targe
 
 ### Part C — Why shuffled CV is wrong (20 pts) — *the point of this assignment*
 1. For one model (say Ridge), estimate performance two ways on the **training** data:
-   shuffled `KFold` vs. `TimeSeriesSplit`. Report both. (10)
+   shuffled `KFold` vs. `TimeSeriesSplit`. Report both. (8)
 2. Compare the estimates without requiring a particular ordering or gap. Explain which design
    matches the deployment task and, for overlapping labels, why an exact purge or gap may still
-   be needed even with a time-ordered splitter. (10)
-3. State which CV you used to choose your final hyperparameters, and why. (5)
+   be needed even with a time-ordered splitter. (8)
+3. State which CV you used to choose your final hyperparameters, and why. (4)
 
 ### Part D — In-sample vs. out-of-sample (15 pts)
 Produce a table for all four models with **train** and **test** R² and Spearman correlation:
@@ -123,7 +123,7 @@ The tasks above are the **required core** — that is what is graded, and the se
 - This assignment has one instrument, so report a time-series Spearman correlation. HW5 uses
   per-date cross-sectional rank IC.
 - A negative test R² is a *finding*, not a failure. Report it honestly.
-- Once you inspect this test period, it is spent. HW3 must use a later forward assessment window.
+- Once you inspect this test period, it is spent. HW3 must use a later forward test window.
 - In Part F, the threshold is a *policy*, not a parameter of the model. Select it on validation,
   freeze it, then apply it once. Choosing it on the test block is the same error as tuning `alpha`
   there.

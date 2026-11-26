@@ -45,7 +45,7 @@
 - HMM mechanics — Baum-Welch, forward-backward, Viterbi (§4)
 - **Filtered vs. smoothed posteriors** — the leakage specific to sequential models (§4)
 - The regime-overfitting trap, three pathologies (§6)
-- **§7 — when is a regime recoverable?** The (Δ, p) heatmap is the lecture's centerpiece
+- **§7 — when is a regime recoverable?** The (Δ, p) heatmap is an optional frontier illustration; predictive-density gain is not a test of state-label accuracy
 - Connection to clustering (§8)
 
 **Focus on (Ch 18):**
@@ -83,5 +83,13 @@ show what it contributes under the same information and evaluation.
 | Day 3      | Attend Lecture A; apply the 6-question checklist        |
 | Day 4      | Read Ch 18 and attend Lecture B                         |
 | Day 5      | Read Ch 17 as frontier exposure                         |
-| Day 6      | Run `week6_demos.ipynb` Demos 6–10 (complexity sweep, Kalman beta, and HMM audit) |
-| Day 7      | Follow the [Week 6 project checkpoint](https://github.com/smc77/uc_finmlai/blob/main/project/WEEK6_CHECKPOINT.md); review the [two final-report pathways](https://github.com/smc77/uc_finmlai/blob/main/project/REPORT_PATHWAYS.md); submit Quiz 5, the project paragraph, and an initialized `RESEARCH_RECORD.md` |
+| Day 6      | Run `week6_demos.ipynb` Demos 6–7 (complexity and window sweeps); optionally explore Demos 8–10 (Kalman beta and known-parameter HMM filtering) |
+| Day 7      | Follow the [Week 6 project checkpoint](https://github.com/smc77/uc_finmlai/blob/main/project/WEEK6_CHECKPOINT.md); review the [two final-report pathways](https://github.com/smc77/uc_finmlai/blob/main/project/REPORT_PATHWAYS.md); submit Quiz 5 and the project paragraph; initialize your `RESEARCH_RECORD.md` now, though it is not collected until HW6 |
+
+## Visual practice and source notes
+
+For double descent, compare the two curves in Figure 1 of [Belkin et al. (2019), author-hosted paper](https://www.cs.columbia.edu/~djhsu/papers/biasvariance-pnas.pdf) after learning training versus test error. Predict which errors can fall after exact training fit, then test that prediction in Demo 6. The paper's diagram explains a possible pattern; our runnable example shows why a second descent need not beat the smaller model. The local diagram and notebook remain usable without an external player.
+
+The notebook pairs short worked calculations with a student change and an explanation of the output. This follows the [IES practice guide](https://ies.ed.gov/ncee/wwc/PracticeGuide/1), which rates worked-example/problem alternation and coordinated graphics/verbal explanations as supported by moderate evidence, and explanatory questions by strong evidence. Prediction prompts are useful teaching choices here; they are not claimed to have the same evidence rating. No added video is required to follow the core argument.
+
+For the selection adjustment, [Bailey and López de Prado (2014)](https://davidhbailey.com/dhbpapers/deflated-sharpe.pdf) is the primary reference. Demo 5 uses its declared-search comparison under independent simulated returns and candidates. The state-model extensions supply parameters rather than learn them; do not infer fitted-model success from their plots.

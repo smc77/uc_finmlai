@@ -18,7 +18,8 @@ additional worked examples.
 - What the major model families add, and the problems each can represent
 - The four-backtest case study: judge the development evidence before seeing
   the later period
-- The insurance example: flexible interactions in a higher-signal setting
+- The insurance example: comparing fitted procedures on held-out policies,
+  while distinguishing that result from a test of interactions or later years
 - The research path: *data → features → models → evaluation → decisions → risk*
 - The manifest, versioned environment, and test-set protocol that make a
   result reproducible

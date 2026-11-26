@@ -1,8 +1,51 @@
 # Week 9 Summary — Learning a Pricing Function and a Hedging Policy
 
-Use this as a short review map for Week 9. The lecture, slides, demos, and book
-chapters remain the full source. The quiz is open-book and open-note, but
-individual and without AI assistance.
+This file begins with a short entry ramp for Week 9 and continues with a
+complete review reference. The quiz is open-book and open-note, but individual
+and without AI assistance.
+
+## Start here
+
+Week 9 contrasts two learning jobs. A pricing surrogate copies a trusted but
+slow calculation. A hedging policy chooses a sequence of trades under risk and
+cost. Accuracy against a reference evaluator and the terminal result of a
+trading policy are not the same contest.
+
+| Word | Plain-English meaning | Week 9 example |
+|---|---|---|
+| **Option** | A contract giving a right tied to an underlying asset. | A call can buy a stock at a strike price. |
+| **Reference evaluator** | The trusted calculation a surrogate tries to copy. | A high-accuracy numerical option pricer. |
+| **Surrogate** | A fast learned approximation of a slower calculation. | A network approximates option prices. |
+| **Calibration** | Choosing model inputs so prices match market quotes. | Fit volatility-model parameters. |
+| **Hedge** | A position intended to offset part of a risk. | Hold stock against a written call. |
+| **Policy** | A rule choosing actions from the current state. | Rebalance the hedge when exposure leaves a band. |
+
+A surrogate is a fast copy of a calculator. A hedging policy is a driver making
+repeated decisions as the road changes. See
+[Core Vocabulary](../../docs/CORE_GLOSSARY.md) for model, error, validation, policy,
+state, action, risk, and transaction cost.
+
+## Required / explain / recognize
+
+| Level | What Week 9 expects |
+|---|---|
+| **USE** | Keep model, numerical, surrogate, and calibration errors separate; write a hedging ledger with costs. |
+| **EXPLAIN** | Why a strong pricing approximation does not prove a good hedge or a correct economic model. |
+| **RECOGNIZE** | Implied volatility, static arbitrage, Longstaff–Schwartz, entropic risk, and changed-world stress. |
+
+## Read the notebook results carefully
+
+Demos 1–2 are small Black–Scholes exercises, not the chapter's Heston network.
+Demo 1's close scatter includes negative call predictions; Demo 2 measures errors
+inside and above its own volatility training range. Neither plot certifies deployment.
+
+Demos 3–5 count turnover as absolute traded dollars / initial spot, including entry
+and exit. The band acts on entry too. Demo 4 returns both a policy picture and a
+loss table. Demo 5 returns selected widths, test improvements, and frozen-world
+stress: a relative improvement can still breach the preset illustrative $15 limit.
+See the code guide for inputs, operations, and checks.
+
+## Full reference
 
 Week 9 is a case study in options, built around two different learning
 targets:
@@ -62,8 +105,8 @@ Three principles organize the week:
 6. **Declare the box before sampling.** Moneyness, maturity, volatility state,
    and model parameters each need an interior and a boundary region. A random
    train/test split inside one box does not test its edge.
-7. **Interior accuracy does not authorize extrapolation.** Wing values are
-   small and sparsely sampled, and activations extrapolate by architecture,
+7. **Interior accuracy does not authorize extrapolation.** High-strike call values can be
+   small, and either wing can be sparsely sampled, and activations extrapolate by architecture,
    not by finance. The declared deployment box must travel with the fitted
    surrogate.
 8. **Report a distribution of errors, not one RMSE.** Absolute price error,
@@ -79,7 +122,7 @@ Three principles organize the week:
 11. **Rescore with the reference.** A surrogate may propose parameters, but the
     reported calibration loss should come from the reference evaluator.
     Otherwise surrogate error is silently reported as model fit.
-12. **Static arbitrage is a shape audit.** For European calls, price should
+12. **Static arbitrage is a shape audit.** For European calls, with zero dividends and a nonnegative constant rate, price should
     fall with strike, be convex in strike, and rise with maturity. These
     restrictions connect nearby predictions, so pointwise accuracy cannot test
     them: a surrogate can be close to every price and still produce an illegal
@@ -87,7 +130,7 @@ Three principles organize the week:
 13. **American exercise changes the target.** In Longstaff–Schwartz, the fitted
     continuation value matters only through the stopping rule it induces.
     Judge the frozen policy's value on independent paths, not the
-    continuation regression score; training-path value is optimistic.
+    continuation regression score; reused training paths can overstate value.
 
 ### Learning a hedging policy (Part B)
 
@@ -98,8 +141,9 @@ Three principles organize the week:
     or position-dependent financing.
 15. **Write the self-financing ledger.** Terminal P&L is the premium, plus
     trading gains, minus transaction costs, minus the option settlement. State
-    sign and unit conventions; this week reports loss as positive, so lower is
-    better.
+    sign and unit conventions; this week defines loss as negative P&L, so lower is
+    better and a negative loss is a gain. Turnover is absolute traded dollars
+    divided by initial spot, including entry and exit.
 16. **Rebalancing frequency changes two ledgers at once.** Without costs, more
     frequent hedging reduces dispersion and tail loss. With costs, it pays more
     for that control. The best frequency depends on the declared objective and

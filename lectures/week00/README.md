@@ -1,20 +1,8 @@
-# Week 0 — Course Setup
+# Week 0 — Course toolchain
 
-Start with [`setup.ipynb`](setup.ipynb). It checks the Python environment,
-loads a small financial dataset, and establishes the reproducibility routine
-used throughout the course.
+Use these files alongside the Week 0 recordings and slides in Canvas:
 
-Read [`STARTUP_GUIDE.md`](STARTUP_GUIDE.md) for a plain-English walkthrough of
-the complete research setup, including GitHub, Colab, local Python, research
-records, Codex, Claude Code, and safe use of coding agents. A typeset
-[`STARTUP_GUIDE.pdf`](STARTUP_GUIDE.pdf) is available for reading or printing;
-it is generated directly from the same Markdown source with Quarto.
+- [`setup.ipynb`](setup.ipynb) — demonstrations and mini-projects for both lecture parts;
+- [`reading.md`](reading.md) — the aligned textbook chapters and supplementary reading route.
 
-The [`examples/`](examples/) folder contains matching `AGENTS.md` and
-`CLAUDE.md` templates for a quantitative-research repository. Copy them to the
-root of your own project and customize the purpose and verification commands.
-
-[`reading.md`](reading.md) contains the current links for GitHub, Colab, Python,
-and optional coding-agent setup. Week 0 is ungraded, but you should finish with
-a clean top-to-bottom notebook run and a successful push to your own private
-course repository.
+The lectures, demonstrations, and summary are the core course materials. Further readings provide additional depth unless Canvas says otherwise.

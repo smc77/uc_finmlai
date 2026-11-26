@@ -3,7 +3,7 @@
 This file begins with a short entry ramp. The later sections are the complete
 reference for review. Foundational terms such as feature, target, policy, state,
 action, reward, and test are defined in the
-[Core Vocabulary](../CORE_GLOSSARY.md).
+[Core Vocabulary](../../docs/CORE_GLOSSARY.md).
 
 ## Start here
 
